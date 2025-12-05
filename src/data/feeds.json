@@ -1,0 +1,32 @@
+[
+  {
+    "id": "dev-blog-001",
+    "name": "NAVER D2",
+    "rssUrl": "https://d2.naver.com/d2.atom",
+    "category": "dev-blog"
+  },
+  {
+    "id": "dev-blog-002",
+    "name": "Kakao Tech",
+    "rssUrl": "https://tech.kakao.com/feed/",
+    "category": "dev-blog"
+  },
+  {
+    "id": "dev-blog-003",
+    "name": "Toss Tech",
+    "rssUrl": "https://toss.tech/rss.xml",
+    "category": "dev-blog"
+  },
+  {
+    "id": "ai-trend-001",
+    "name": "OpenAI Blog",
+    "rssUrl": "https://openai.com/blog/rss",
+    "category": "ai-trend"
+  },
+  {
+    "id": "ai-trend-002",
+    "name": "Google AI Blog",
+    "rssUrl": "https://ai.googleblog.com/feeds/posts/default",
+    "category": "ai-trend"
+  }
+]
