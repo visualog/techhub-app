@@ -18,15 +18,9 @@
     "category": "dev-blog"
   },
   {
-    "id": "ai-trend-001",
-    "name": "OpenAI Blog",
-    "rssUrl": "https://openai.com/blog/rss",
-    "category": "ai-trend"
-  },
-  {
     "id": "ai-trend-002",
     "name": "Google AI Blog",
-    "rssUrl": "https://ai.googleblog.com/feeds/posts/default",
+    "rssUrl": "https://research.google/blog/rss",
     "category": "ai-trend"
   }
 ]

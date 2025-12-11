@@ -10,6 +10,7 @@ export interface Article {
   pubDate: string; // Using string for simplicity in mock data
   tags: string[];
   bookmarked?: boolean;
+  isVideo?: boolean;
 }
 
 export const mockArticles: Article[] = [

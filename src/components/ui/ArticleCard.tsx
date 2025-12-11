@@ -1,17 +1,34 @@
-'use client'; // Added use client
+'use client';
 
 import { Article } from "@/data/mock-articles";
 import Image from "next/image";
 import Link from "next/link";
-import { useBookmarks } from "@/lib/hooks/useBookmarks"; // Import useBookmarks hook
+import { useBookmarks } from "@/lib/hooks/useBookmarks";
 
 interface ArticleCardProps {
   article: Article;
 }
 
+// Play icon component
+const PlayIcon = () => (
+  <svg
+    className="absolute top-1/2 left-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2 text-white opacity-80 group-hover:opacity-100 transition-opacity"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path
+      fillRule="evenodd"
+      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
+
 export function ArticleCard({ article }: ArticleCardProps) {
-  const { addBookmark, removeBookmark, isBookmarked } = useBookmarks(); // Use the hook
-  const bookmarked = isBookmarked(article.id); // Check if current article is bookmarked
+  const { addBookmark, removeBookmark, isBookmarked } = useBookmarks();
+  const bookmarked = isBookmarked(article.id);
 
   const formattedDate = new Date(article.pubDate).toLocaleDateString("ko-KR", {
     year: "numeric",
@@ -20,7 +37,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
   });
 
   const handleBookmarkToggle = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent navigating to the article link
+    e.preventDefault();
     if (bookmarked) {
       removeBookmark(article.id);
     } else {
@@ -29,7 +46,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
   };
 
   return (
-    <div className="relative block h-full group"> {/* Added relative and group */}
+    <div className="relative block h-full group">
       <Link href={article.link} target="_blank" rel="noopener noreferrer" className="block h-full">
         <div className="flex flex-col h-full rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 bg-white dark:bg-gray-800 overflow-hidden">
           {article.image && (
@@ -40,8 +57,9 @@ export function ArticleCard({ article }: ArticleCardProps) {
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 style={{ objectFit: "cover" }}
-                className="transition-transform duration-300 group-hover:scale-105" // Added group-hover
+                className="transition-transform duration-300 group-hover:scale-105"
               />
+              {article.isVideo && <PlayIcon />}
             </div>
           )}
           {!article.image && (
@@ -73,7 +91,6 @@ export function ArticleCard({ article }: ArticleCardProps) {
           </div>
         </div>
       </Link>
-      {/* Bookmark Button */}
       <button
         onClick={handleBookmarkToggle}
         className={`absolute top-4 right-4 p-2 rounded-full bg-white dark:bg-gray-700 shadow-md transition-colors duration-200

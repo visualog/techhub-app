@@ -1,6 +1,18 @@
 import { NextResponse } from 'next/server';
 import { db, admin } from '@/lib/firebaseAdmin';
-import { Article } from '@/data/mock-articles'; // Re-use the interface
+import { Article } from '@/data/mock-articles';
+
+// Source-specific fallbacks
+const FALLBACK_IMAGE_MAP: { [key: string]: string } = {
+  'NAVER D2': 'https://upload.wikimedia.org/wikipedia/commons/2/23/Naver_Logotype.svg',
+  'Kakao Tech': 'https://upload.wikimedia.org/wikipedia/commons/e/e3/KakaoTalk_logo.svg',
+  'Toss Tech': 'https://static.toss.im/ipd-tcs/toss_core/live/10b20142-d908-424a-95a9-4b36d655f464/image.png',
+  'Google AI Blog': 'https://static.cdnlogo.com/logos/g/3/google-ai.svg',
+};
+
+// Correct "image-off" icon
+const GENERIC_FALLBACK_IMAGE_URL = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-image-off'%3E%3Cline x1='2' x2='22' y1='2' y2='22'/%3E%3Cpath d='M10.4 10.4L3.4 3.4c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l7 7'/%3E%3Cpath d='M22 12.5V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7.5'/%3E%3Cpath d='m20 7-3.5 3.5-2.5-2.5L14 10'/%3E%3C/svg%3E";
+
 
 export async function GET(request: Request) {
   if (!db) {
@@ -9,18 +21,15 @@ export async function GET(request: Request) {
 
   const { searchParams } = new URL(request.url);
   const category = searchParams.get('category') || 'all';
-  // Search term is handled client-side for the MVP as per the PRD.
 
   try {
     const articlesCollection = db.collection('articles');
     let query: admin.firestore.Query = articlesCollection;
 
-    // Filter by category
     if (category !== 'all') {
       query = query.where('category', '==', category);
     }
 
-    // Order by publication date, descending
     query = query.orderBy('pubDate', 'desc');
 
     const snapshot = await query.get();
@@ -28,13 +37,20 @@ export async function GET(request: Request) {
 
     snapshot.forEach(doc => {
       const data = doc.data();
-      // Convert Firestore Timestamps to ISO strings for JSON serialization
+      
       const articleData = {
         ...data,
-        id: doc.id, // Use Firestore document ID
+        id: doc.id,
         pubDate: data.pubDate.toDate().toISOString(),
         createdAt: data.createdAt?.toDate().toISOString() || new Date().toISOString(),
       } as Article;
+
+      if (!articleData.image) {
+        // Use source-specific fallback, or generic one if not found
+        articleData.image = FALLBACK_IMAGE_MAP[articleData.source] || GENERIC_FALLBACK_IMAGE_URL;
+        articleData.isVideo = false; // It's a fallback, not a video
+      }
+
       articles.push(articleData);
     });
 
