@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
+import { BookmarksProvider } from "@/context/BookmarksContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,16 +19,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${inter.className} bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100`}>
-        <div className="flex flex-col min-h-screen">
+      <body className={`${inter.className} bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100`}>
+        <BookmarksProvider>
           <Header />
-          <div className="flex flex-1 flex-col md:flex-row">
-            <Sidebar />
-            <div className="flex-1">
-              {children}
+          <div className="max-w-screen-xl mx-auto flex flex-col">
+            <div className="flex flex-1 flex-col md:flex-row">
+              <Sidebar />
+              <main className="flex-1">
+                {children}
+              </main>
             </div>
           </div>
-        </div>
+        </BookmarksProvider>
       </body>
     </html>
   );

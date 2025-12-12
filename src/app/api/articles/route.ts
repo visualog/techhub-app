@@ -21,6 +21,7 @@ export async function GET(request: Request) {
 
   const { searchParams } = new URL(request.url);
   const category = searchParams.get('category') || 'all';
+  const searchTerm = searchParams.get('search') || '';
 
   try {
     const articlesCollection = db.collection('articles');
@@ -33,7 +34,7 @@ export async function GET(request: Request) {
     query = query.orderBy('pubDate', 'desc');
 
     const snapshot = await query.get();
-    const articles: Article[] = [];
+    let articles: Article[] = [];
 
     snapshot.forEach(doc => {
       const data = doc.data();
@@ -46,13 +47,22 @@ export async function GET(request: Request) {
       } as Article;
 
       if (!articleData.image) {
-        // Use source-specific fallback, or generic one if not found
         articleData.image = FALLBACK_IMAGE_MAP[articleData.source] || GENERIC_FALLBACK_IMAGE_URL;
-        articleData.isVideo = false; // It's a fallback, not a video
+        articleData.isVideo = false;
       }
 
       articles.push(articleData);
     });
+
+    // Server-side search filtering
+    if (searchTerm) {
+      const lowercasedTerm = searchTerm.toLowerCase();
+      articles = articles.filter(article => 
+        article.title.toLowerCase().includes(lowercasedTerm) ||
+        article.summary.toLowerCase().includes(lowercasedTerm) ||
+        article.source.toLowerCase().includes(lowercasedTerm)
+      );
+    }
 
     return NextResponse.json(articles);
 

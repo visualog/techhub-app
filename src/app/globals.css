@@ -1,17 +1,1 @@
 @import "tailwindcss";
-
-@theme {
-  /* Custom theme values can be added here */
-}
-
-body {
-  background-color: theme(colors.white);
-  color: theme(colors.black);
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: theme(colors.zinc.900);
-    color: theme(colors.zinc.100);
-  }
-}

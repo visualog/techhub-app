@@ -9,7 +9,6 @@ export function SearchBar() {
   const initialSearch = searchParams.get('search') || '';
   const [searchTerm, setSearchTerm] = useState(initialSearch);
 
-  // Sync internal state with URL params if URL changes
   useEffect(() => {
     setSearchTerm(initialSearch);
   }, [initialSearch]);
@@ -33,10 +32,10 @@ export function SearchBar() {
         placeholder="검색어를 입력하세요 (제목, 요약, 출처)"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full p-2 pl-10 rounded-md bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+        className="w-full p-2 pl-10 rounded-md bg-neutral-100 dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 dark:placeholder-neutral-400"
       />
       <svg
-        className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 dark:text-gray-400"
+        className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-500 dark:text-neutral-400"
         width="20" 
         height="20" 
         fill="none"
