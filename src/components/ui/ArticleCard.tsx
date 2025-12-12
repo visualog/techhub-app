@@ -2,14 +2,14 @@
 
 import { Article } from "@/data/mock-articles";
 import Image from "next/image";
-import Link from "next/link";
 import { useBookmarks } from "@/lib/hooks/useBookmarks";
 
 interface ArticleCardProps {
   article: Article;
+  onArticleClick: (article: Article) => void;
 }
 
-// Play icon component
+// 비디오 재생 아이콘 컴포넌트 - 이미지 위에 중앙 배치되는 재생 버튼
 const PlayIcon = () => (
   <svg
     className="absolute top-1/2 left-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2 text-white opacity-80 group-hover:opacity-100 transition-opacity"
@@ -26,7 +26,7 @@ const PlayIcon = () => (
 );
 
 
-export function ArticleCard({ article }: ArticleCardProps) {
+export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks();
   const bookmarked = isBookmarked(article.id);
 
@@ -37,7 +37,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
   });
 
   const handleBookmarkToggle = (e: React.MouseEvent) => {
-    e.preventDefault();
+    e.stopPropagation(); // Prevent card click event from firing
     if (bookmarked) {
       removeBookmark(article.id);
     } else {
@@ -46,9 +46,15 @@ export function ArticleCard({ article }: ArticleCardProps) {
   };
 
   return (
-    <div className="relative block h-full group">
-      <Link href={article.link} target="_blank" rel="noopener noreferrer" className="block h-full">
-        <div className="flex flex-col h-full rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 bg-white dark:bg-gray-800 overflow-hidden">
+    <>
+      {/* 메인 카드 컨테이너 - relative positioning으로 북마크 버튼 배치 */}
+      <div 
+        className="relative block h-full group cursor-pointer"
+        onClick={() => onArticleClick(article)}
+      >
+        {/* 카드 내부 컨테이너 - 그림자 효과와 호버 애니메이션 */}
+        <div className="flex flex-col h-full rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 bg-white dark:bg-neutral-900 overflow-hidden">
+          {/* 아티클 이미지 영역 - 이미지가 있을 경우 */}
           {article.image && (
             <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden">
               <Image
@@ -59,59 +65,68 @@ export function ArticleCard({ article }: ArticleCardProps) {
                 style={{ objectFit: "cover" }}
                 className="transition-transform duration-300 group-hover:scale-105"
               />
+              {/* 비디오 아티클인 경우 재생 아이콘 표시 */}
               {article.isVideo && <PlayIcon />}
             </div>
           )}
+          {/* 이미지 없을 경우 표시되는 플레이스홀더 */}
           {!article.image && (
-            <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <span className="text-gray-500 dark:text-gray-400 text-sm">No Image</span>
+            <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center">
+              <span className="text-neutral-500 dark:text-neutral-400 text-sm">No Image</span>
             </div>
           )}
+          {/* 카드 콘텐츠 영역 - 제목, 요약, 태그, 메타 정보 */}
           <div className="p-4 flex flex-col flex-grow">
-            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white leading-tight">
+            {/* 아티클 제목 */}
+            <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-white leading-tight">
               {article.title}
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 text-sm mb-3 flex-grow line-clamp-3">
+            {/* 아티클 요약 - 최대 3줄까지 표시 (line-clamp-3) */}
+            <p className="text-neutral-700 dark:text-neutral-300 text-sm mb-3 flex-grow line-clamp-3">
               {article.summary}
             </p>
+            {/* 태그 목록 */}
             <div className="flex flex-wrap gap-2 mb-3">
               {article.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs text-gray-600 dark:text-gray-400"
+                  className="px-2 py-1 bg-neutral-100 dark:bg-neutral-700 rounded-full text-xs text-neutral-600 dark:text-neutral-400"
                 >
                   {tag}
                 </span>
               ))}
             </div>
-            <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
+            {/* 메타 정보 영역 - 출처와 발행일 */}
+            <div className="flex justify-between items-center text-xs font-light text-neutral-500 dark:text-neutral-400 mt-auto">
               <span>{article.source}</span>
               <span>{formattedDate}</span>
             </div>
           </div>
         </div>
-      </Link>
-      <button
-        onClick={handleBookmarkToggle}
-        className={`absolute top-4 right-4 p-2 rounded-full bg-white dark:bg-gray-700 shadow-md transition-colors duration-200
-                    ${bookmarked ? 'text-red-500' : 'text-gray-400 hover:text-red-400'}`}
-        aria-label={bookmarked ? "북마크 해제" : "북마크 추가"}
-      >
-        <svg
-          className="w-5 h-5"
-          fill={bookmarked ? "currentColor" : "none"}
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
+        {/* 북마크 토글 버튼 - 우측 상단 고정 위치 */}
+        <button
+          onClick={handleBookmarkToggle}
+          className={`absolute top-4 right-4 p-2 rounded-full bg-white dark:bg-neutral-700 shadow-md transition-colors duration-200
+                      ${bookmarked ? 'text-indigo-500' : 'text-neutral-400 hover:text-indigo-400'}`}
+          aria-label={bookmarked ? "북마크 해제" : "북마크 추가"}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-          ></path>
-        </svg>
-      </button>
-    </div>
+          {/* 북마크 아이콘 - 채워짐/비어있음으로 상태 표시 */}
+          <svg
+            className="w-5 h-5"
+            fill={bookmarked ? "currentColor" : "none"}
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </>
   );
 }

@@ -1,11 +1,15 @@
 'use client';
 
 import { ArticleCard } from "@/components/ui/ArticleCard";
-import { Article } from "@/data/mock-articles"; // Still need Article interface
+import { Article } from "@/data/mock-articles";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
-export function ArticleList() {
+interface ArticleListProps {
+  onArticleClick: (article: Article) => void;
+}
+
+export function ArticleList({ onArticleClick }: ArticleListProps) {
   const searchParams = useSearchParams();
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -65,7 +69,11 @@ export function ArticleList() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.length > 0 ? (
           articles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
+            <ArticleCard 
+              key={article.id} 
+              article={article} 
+              onArticleClick={onArticleClick}
+            />
           ))
         ) : (
           <p className="col-span-full text-center text-gray-500 dark:text-gray-400">
