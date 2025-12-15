@@ -3,7 +3,6 @@ import { parseRssFeed } from '@/lib/rss-parser';
 import feedsConfig from '@/data/feeds.json';
 import { db } from '@/lib/firebaseAdmin'; // Import Firestore instance
 
-require('dotenv').config(); // Load environment variables from .env.local
 
 // Helper to create a Firestore-safe ID from a URL
 function createDocId(link: string): string {
