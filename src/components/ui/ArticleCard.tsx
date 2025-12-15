@@ -105,7 +105,7 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
             {/* 메타 정보 영역 - 출처와 발행일 */}
             <div className="flex justify-start items-center text-xs font-normal text-neutral-500 dark:text-neutral-400 mb-2">
               <span>{article.source}</span>
-              <span className="mx-1">|</span>
+              <span className="mx-2 opacity-50">|</span>
               <span>{formattedDate}</span>
             </div>
             {/* 아티클 제목 */}
