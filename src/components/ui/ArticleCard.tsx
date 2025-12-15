@@ -48,11 +48,10 @@ function formatRelativeDate(dateString: string): string {
     const days = Math.floor(diffInSeconds / secondsInDay);
     return `${days}일 전`;
   } else {
-    return pubDate.toLocaleDateString("ko-KR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const year = pubDate.getFullYear();
+    const month = String(pubDate.getMonth() + 1).padStart(2, '0');
+    const day = String(pubDate.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
   }
 }
 
