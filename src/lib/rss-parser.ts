@@ -36,7 +36,8 @@ async function getArticleText(link: string): Promise<string | null> {
   try {
     const { data } = await axios.get(link, { 
       timeout: 10000, 
-      headers: browserHeaders
+      headers: browserHeaders,
+      httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }),
     });
     const $ = cheerio.load(data);
     $('script, style, noscript, iframe, header, footer, nav').remove();
@@ -61,7 +62,8 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
     
     const feedHostname = new URL(feed.link || feedUrl).origin;
 
-    const articlesPromises = feed.items.map(async (item: any) => {
+    const articles: Article[] = [];
+    for (const item of feed.items) {
       let imageUrl: string | null = null;
 
       imageUrl = item.media?.content?.$?.url || item.media?.thumbnail?.$?.url || item.enclosure?.url || null;
@@ -107,10 +109,8 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
         bookmarked: false,
         isVideo: false,
       };
-      return article;
-    });
-
-    const articles = await Promise.all(articlesPromises);
+      articles.push(article);
+    }
     
     return articles.filter(article => article.title && article.link);
 
