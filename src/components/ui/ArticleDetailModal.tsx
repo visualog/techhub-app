@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Article } from '@/data/mock-articles';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,39 +10,6 @@ interface ArticleDetailModalProps {
 }
 
 export function ArticleDetailModal({ article, onClose }: ArticleDetailModalProps) {
-  const [summary, setSummary] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchSummary = async () => {
-      try {
-        setIsLoading(true);
-        setError('');
-        const response = await fetch('/api/summarize', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ url: article.link }),
-        });
-
-        if (!response.ok) {
-          throw new Error('요약을 불러오는데 실패했습니다.');
-        }
-
-        const data = await response.json();
-        setSummary(data.summary);
-      } catch (e: any) {
-        setError(e.message || '요약을 불러오는 중 오류가 발생했습니다.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchSummary();
-  }, [article.link]);
-
   return (
     <div 
       className="fixed inset-0 bg-black/40 z-50 flex justify-center items-center p-4"
@@ -74,20 +40,10 @@ export function ArticleDetailModal({ article, onClose }: ArticleDetailModalProps
 
           <div className="border-t border-neutral-200 dark:border-neutral-700 my-4"></div>
 
-          <h3 className="text-lg font-semibold mb-2 text-neutral-800 dark:text-neutral-200">AI 요약</h3>
-          {isLoading && (
-            <div className="animate-pulse space-y-2">
-              <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-full"></div>
-              <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-5/6"></div>
-              <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4"></div>
-            </div>
-          )}
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-          {!isLoading && !error && (
-            <p className="text-neutral-700 dark:text-neutral-300 whitespace-pre-line leading-relaxed">
-              {summary}
-            </p>
-          )}
+          <h3 className="text-lg font-semibold mb-2 text-neutral-800 dark:text-neutral-200">요약</h3>
+          <p className="text-neutral-700 dark:text-neutral-300 whitespace-pre-line leading-relaxed">
+            {article.summary}
+          </p>
 
           <div className="border-t border-neutral-200 dark:border-neutral-700 my-4"></div>
           

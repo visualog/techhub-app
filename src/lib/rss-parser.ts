@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { Article } from '@/data/mock-articles';
 import { URL } from 'url';
+import { generateSummary } from './gemini';
 
 const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36';
 
@@ -30,31 +31,19 @@ function getImageFromContent(content: string): string | null {
   return imageUrl || null;
 }
 
-function getVideoFrameFromContent(content: string): string | null {
-    if (!content) return null;
-    const match = content.match(/<iframe[^>]+src="([^">]+)"/);
-    return match ? match[1] : null;
-}
-
-async function getThumbnailFromUrl(link: string): Promise<string | null> {
+async function getArticleText(link: string): Promise<string | null> {
   if (!link) return null;
   try {
     const { data } = await axios.get(link, { 
-      timeout: 5000, 
+      timeout: 10000, 
       headers: browserHeaders
     });
     const $ = cheerio.load(data);
-    
-    // 1. Try standard meta tags
-    let imageUrl = $('meta[property="og:image"]').attr('content') || $('meta[name="twitter:image"]').attr('content');
-    
-    // 2. If no meta tags, try the first prominent image in the body
-    if (!imageUrl) {
-        imageUrl = $('article img, .post-content img, .entry-content img, .main-content img').first().attr('src');
-    }
-
-    return imageUrl || null;
+    $('script, style, noscript, iframe, header, footer, nav').remove();
+    const articleText = $('body').text().replace(/\s\s+/g, ' ').trim();
+    return articleText;
   } catch (error: any) {
+    console.error(`- Failed to fetch article text from ${link}:`, error.message);
     return null;
   }
 }
@@ -74,7 +63,6 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
 
     const articlesPromises = feed.items.map(async (item: any) => {
       let imageUrl: string | null = null;
-      let isVideo = false;
 
       imageUrl = item.media?.content?.$?.url || item.media?.thumbnail?.$?.url || item.enclosure?.url || null;
 
@@ -86,27 +74,24 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
           imageUrl = imgFromContent.startsWith('http') ? imgFromContent : new URL(imgFromContent, feedHostname).href;
         }
       }
-
-      if (!imageUrl && content) {
-        const videoFrameUrl = getVideoFrameFromContent(content);
-        if (videoFrameUrl) {
-            const thumb = await getThumbnailFromUrl(videoFrameUrl);
-            if (thumb) {
-              imageUrl = thumb.startsWith('http') ? thumb : new URL(thumb, new URL(videoFrameUrl).origin).href;
-              isVideo = true;
-            }
-        }
-      }
-
-      if (!imageUrl && item.link) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-        const thumb = await getThumbnailFromUrl(item.link);
-        if (thumb) {
-            imageUrl = thumb.startsWith('http') ? thumb : new URL(thumb, item.link).href;
-        }
-      }
       
-      const summary = item.contentSnippet?.substring(0, 200) || item.summary?.substring(0, 200) || '';
+      let summary = item.contentSnippet?.substring(0, 200) || item.summary?.substring(0, 200) || '';
+
+      // AI Summary Generation
+      if (item.link) {
+        console.log(`- Generating summary for: ${item.title}`);
+        const articleText = await getArticleText(item.link);
+        if (articleText) {
+          const aiSummary = await generateSummary(articleText);
+          if (aiSummary) {
+            summary = aiSummary;
+          } else {
+            console.log(`  - Failed to generate AI summary, using snippet instead.`);
+          }
+        } else {
+          console.log(`  - Could not fetch article text, using snippet instead.`);
+        }
+      }
 
       const article: Article = {
         id: item.guid || item.link,
@@ -120,7 +105,7 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
         pubDate: item.isoDate || new Date().toISOString(),
         tags: item.categories || [],
         bookmarked: false,
-        isVideo: isVideo,
+        isVideo: false,
       };
       return article;
     });

@@ -11,6 +11,7 @@
     "migrate:categories": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"/Users/im_018/Documents/GitHub/TecHub/techhub-app/serviceAccountKey.json\" node dist/scripts/migrate-categories.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@tailwindcss/line-clamp": "^0.4.4",
     "autoprefixer": "^10.4.22",
     "axios": "^1.13.2",
