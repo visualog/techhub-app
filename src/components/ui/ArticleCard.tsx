@@ -12,7 +12,7 @@ interface ArticleCardProps {
 // 비디오 재생 아이콘 컴포넌트 - 이미지 위에 중앙 배치되는 재생 버튼
 const PlayIcon = () => (
   <svg
-    className="absolute top-1/2 left-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2 text-white opacity-80 group-hover:opacity-100 transition-opacity"
+    className="absolute top-1/2 left-1/2 w-12 h-12 -translate-x-1/2 -translate-y-12 text-white opacity-80 group-hover:opacity-100 transition-opacity"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
@@ -25,16 +25,42 @@ const PlayIcon = () => (
   </svg>
 );
 
+// 날짜 포매팅 헬퍼 함수
+function formatRelativeDate(dateString: string): string {
+  const now = new Date();
+  const pubDate = new Date(dateString);
+  const diffInSeconds = Math.floor((now.getTime() - pubDate.getTime()) / 1000);
+
+  const secondsInMinute = 60;
+  const secondsInHour = secondsInMinute * 60;
+  const secondsInDay = secondsInHour * 24;
+  const secondsInWeek = secondsInDay * 7;
+
+  if (diffInSeconds < secondsInMinute) {
+    return "방금 전";
+  } else if (diffInSeconds < secondsInHour) {
+    const minutes = Math.floor(diffInSeconds / secondsInMinute);
+    return `${minutes}분 전`;
+  } else if (diffInSeconds < secondsInDay) {
+    const hours = Math.floor(diffInSeconds / secondsInHour);
+    return `${hours}시간 전`;
+  } else if (diffInSeconds < secondsInWeek) {
+    const days = Math.floor(diffInSeconds / secondsInDay);
+    return `${days}일 전`;
+  } else {
+    return pubDate.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  }
+}
 
 export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks();
   const bookmarked = isBookmarked(article.id);
 
-  const formattedDate = new Date(article.pubDate).toLocaleDateString("ko-KR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = formatRelativeDate(article.pubDate);
 
   const handleBookmarkToggle = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent card click event from firing
@@ -105,11 +131,6 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
                   +{article.tags.length - 2}
                 </span>
               )}
-            </div>
-            {/* 메타 정보 영역 - 출처와 발행일 */}
-            <div className="flex justify-between items-center text-xs font-light text-neutral-500 dark:text-neutral-400 mt-auto">
-              <span>{article.source}</span>
-              <span>{formattedDate}</span>
             </div>
           </div>
         </div>
