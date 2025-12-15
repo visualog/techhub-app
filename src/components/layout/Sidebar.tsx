@@ -28,14 +28,14 @@ export function Sidebar() {
             <li key={category.id} className="flex-shrink-0">
               <Link
                 href={category.id === 'all' ? '/' : `/?category=${category.id}`}
-                className={`flex justify-between items-center py-2 px-4 rounded-xl whitespace-nowrap ${
+                className={`flex items-center gap-x-2 py-2 px-4 rounded-xl whitespace-nowrap ${
                   currentCategory === category.id
                     ? 'font-medium bg-neutral-200 dark:bg-neutral-700'
                     : 'hover:bg-neutral-100 dark:hover:bg-neutral-800'
                 }`}
               >
                 <span>{category.name}</span>
-                <span className="ml-2 text-xs text-neutral-500 dark:text-neutral-400">
+                <span className="px-2 py-0.5 rounded-full bg-neutral-300 dark:bg-neutral-600 text-neutral-800 dark:text-neutral-200 text-xs">
                   {counts[category.id] || 0}
                 </span>
               </Link>
