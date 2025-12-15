@@ -38,7 +38,7 @@ jobs:
         env:
           # The GOOGLE_APPLICATION_CREDENTIALS env var needs to be set for this step too
           GOOGLE_APPLICATION_CREDENTIALS: ./serviceAccountKey.json
-        run: npx ts-node --esm -r tsconfig-paths/register --project tsconfig.json scripts/collect-feeds.ts
+        run: npx swc-node scripts/collect-feeds.ts
         id: run_script
         continue-on-error: true # Allow job to finish even if script fails
 
