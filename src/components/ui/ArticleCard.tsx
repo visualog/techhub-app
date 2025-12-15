@@ -77,6 +77,11 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
           )}
           {/* 카드 콘텐츠 영역 - 제목, 요약, 태그, 메타 정보 */}
           <div className="p-4 flex flex-col flex-grow">
+            {/* 메타 정보 영역 - 출처와 발행일 */}
+            <div className="flex justify-between items-center text-xs font-light text-neutral-500 dark:text-neutral-400 mb-2">
+              <span>{article.source}</span>
+              <span>{formattedDate}</span>
+            </div>
             {/* 아티클 제목 */}
             <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-white leading-tight">
               {article.title}
