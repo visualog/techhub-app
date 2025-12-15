@@ -25,8 +25,9 @@ const parser = new Parser({
 
 function getImageFromContent(content: string): string | null {
   if (!content) return null;
-  const match = content.match(/<img[^>]+src=(["']?)([^"'>\s]+)\1/);
-  return match ? match[2] : null;
+  const $ = cheerio.load(content);
+  const imageUrl = $('img').first().attr('src');
+  return imageUrl || null;
 }
 
 function getVideoFrameFromContent(content: string): string | null {
