@@ -1,0 +1,52 @@
+name: Collect RSS Feeds
+
+on:
+  workflow_dispatch: # Allows manual triggering
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Authenticate with Firebase
+        env:
+          FIREBASE_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+        run: |
+          echo "Authenticating with Firebase..."
+          if [ -z "$FIREBASE_KEY" ]; then
+            echo "FIREBASE_SERVICE_ACCOUNT_KEY secret is not set. Aborting."
+            exit 1
+          fi
+          echo "$FIREBASE_KEY" > ./serviceAccountKey.json
+          export GOOGLE_APPLICATION_CREDENTIALS=./serviceAccountKey.json
+          echo "Authentication file created."
+
+      - name: Run Feed Collector Script
+        env:
+          # The GOOGLE_APPLICATION_CREDENTIALS env var needs to be set for this step too
+          GOOGLE_APPLICATION_CREDENTIALS: ./serviceAccountKey.json
+        run: npx ts-node --project tsconfig.json scripts/collect-feeds.ts
+        id: run_script
+        continue-on-error: true # Allow job to finish even if script fails
+
+      - name: Report Status
+        run: |
+          if [ ${{ steps.run_script.outcome }} == 'success' ]; then
+            echo "Feed collection script completed successfully."
+          else
+            echo "Feed collection script failed."
+            exit 1
+          fi

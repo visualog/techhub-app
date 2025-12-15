@@ -18,6 +18,12 @@
     "category": "dev-blog"
   },
   {
+    "id": "design-ux-001",
+    "name": "pxd story",
+    "rssUrl": "https://story.pxd.co.kr/feed/",
+    "category": "design-ux"
+  },
+  {
     "id": "ai-trend-002",
     "name": "Google AI Blog",
     "rssUrl": "https://research.google/blog/rss",

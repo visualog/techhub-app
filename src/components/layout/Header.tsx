@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { SearchBar } from '@/components/ui/SearchBar';
+import { Avatar } from '@/components/ui/Avatar';
+import { DropdownMenu, DropdownMenuItem } from '@/components/ui/DropdownMenu';
 
 export function Header() {
   return (
@@ -13,9 +15,11 @@ export function Header() {
         <SearchBar />
       </div>
       <div className="flex items-center gap-4">
-        <Link href="/bookmarks" className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">
-          내 저장
-        </Link>
+        <DropdownMenu trigger={<Avatar />}>
+          <DropdownMenuItem>
+            <Link href="/bookmarks">북마크</Link>
+          </DropdownMenuItem>
+        </DropdownMenu>
       </div>
     </header>
   );

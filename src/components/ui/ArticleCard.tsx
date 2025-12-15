@@ -53,17 +53,17 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
         onClick={() => onArticleClick(article)}
       >
         {/* 카드 내부 컨테이너 - 그림자 효과와 호버 애니메이션 */}
-        <div className="flex flex-col h-full rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 bg-white dark:bg-neutral-900 overflow-hidden">
+        <div className="flex flex-col h-full rounded-xl shadow-2xs hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-neutral-900 overflow-hidden">
           {/* 아티클 이미지 영역 - 이미지가 있을 경우 */}
           {article.image && (
-            <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden">
+            <div className="relative w-full overflow-hidden aspect-video">
               <Image
                 src={article.image}
                 alt={article.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 style={{ objectFit: "cover" }}
-                className="transition-transform duration-300 group-hover:scale-105"
+                className="transition-transform duration-300 group-hover:scale-125"
               />
               {/* 비디오 아티클인 경우 재생 아이콘 표시 */}
               {article.isVideo && <PlayIcon />}
@@ -71,7 +71,7 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
           )}
           {/* 이미지 없을 경우 표시되는 플레이스홀더 */}
           {!article.image && (
-            <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center">
+            <div className="relative w-full overflow-hidden bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center aspect-video">
               <span className="text-neutral-500 dark:text-neutral-400 text-sm">No Image</span>
             </div>
           )}
