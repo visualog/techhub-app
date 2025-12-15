@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "build:script": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json",
-    "migrate:categories": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && node -r dotenv/config dist/scripts/migrate-categories.js"
+    "migrate:categories": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"/Users/im_018/Documents/GitHub/TecHub/techhub-app/serviceAccountKey.json\" node dist/scripts/migrate-categories.js"
   },
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
