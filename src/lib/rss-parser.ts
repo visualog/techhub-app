@@ -112,7 +112,7 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
         title: item.title,
         link: item.link,
         summary: summary,
-        image: imageUrl,
+        image: imageUrl || undefined,
         source: feed.title || 'Unknown Source',
         sourceId: '',
         category: '',
