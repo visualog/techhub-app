@@ -31,6 +31,10 @@ if (!admin.apps.length) {
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
     });
+    // Apply settings only once, right after initialization
+    admin.firestore().settings({
+      ignoreUndefinedProperties: true,
+    });
   } else if (process.env.NODE_ENV !== 'production') {
     // This part is to prevent crashing the client-side build process which might still try to evaluate this file.
     // In a real app, you'd use dynamic imports or ensure this file is strictly server-only.
@@ -39,11 +43,5 @@ if (!admin.apps.length) {
 }
 
 const db = admin.apps.length ? admin.firestore() : null;
-
-if (db) {
-  db.settings({
-    ignoreUndefinedProperties: true,
-  });
-}
 
 export { db, admin };
