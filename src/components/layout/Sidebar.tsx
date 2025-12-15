@@ -35,7 +35,7 @@ export function Sidebar() {
                 }`}
               >
                 <span>{category.name}</span>
-                <span className="px-2 py-0.5 rounded-full bg-neutral-300 dark:bg-neutral-600 text-neutral-800 dark:text-neutral-200 text-xs">
+                <span className="px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 text-xs">
                   {counts[category.id] || 0}
                 </span>
               </Link>
