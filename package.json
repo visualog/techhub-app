@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build:script": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json"
+    "build:script": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json",
+    "migrate:categories": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && node dist/scripts/migrate-categories.js"
   },
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
