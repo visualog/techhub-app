@@ -3,10 +3,18 @@
 import { categories } from "@/data/categories";
 import Link from "next/link";
 import { useSearchParams, usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 export function Sidebar() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const [counts, setCounts] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    fetch('/api/articles/counts')
+      .then(res => res.json())
+      .then(data => setCounts(data));
+  }, []);
   
   // Only determine category if we are on the homepage
   const currentCategory = pathname === '/' ? (searchParams.get('category') || 'all') : null;
@@ -20,13 +28,16 @@ export function Sidebar() {
             <li key={category.id} className="flex-shrink-0">
               <Link
                 href={category.id === 'all' ? '/' : `/?category=${category.id}`}
-                className={`block py-2 px-4 rounded-xl whitespace-nowrap ${
+                className={`flex justify-between items-center py-2 px-4 rounded-xl whitespace-nowrap ${
                   currentCategory === category.id
                     ? 'font-medium bg-neutral-200 dark:bg-neutral-700'
                     : 'hover:bg-neutral-100 dark:hover:bg-neutral-800'
                 }`}
               >
-                {category.name}
+                <span>{category.name}</span>
+                <span className="ml-2 text-xs text-neutral-500 dark:text-neutral-400">
+                  {counts[category.id] || 0}
+                </span>
               </Link>
             </li>
           ))}
