@@ -2,11 +2,14 @@
 
 import { categories } from "@/data/categories";
 import Link from "next/link";
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 
 export function Sidebar() {
   const searchParams = useSearchParams();
-  const currentCategory = searchParams.get('category') || 'all';
+  const pathname = usePathname();
+  
+  // Only determine category if we are on the homepage
+  const currentCategory = pathname === '/' ? (searchParams.get('category') || 'all') : null;
 
   return (
     <aside className="w-full md:w-64 p-8 border-b md:border-b-0 border-neutral-200 dark:border-neutral-800 md:sticky md:top-16 md:h-[calc(100vh-4rem)]">
