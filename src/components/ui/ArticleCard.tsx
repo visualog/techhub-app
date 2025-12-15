@@ -82,19 +82,24 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
               {article.title}
             </h3>
             {/* 아티클 요약 - 최대 3줄까지 표시 (line-clamp-3) */}
-            <p className="text-neutral-700 dark:text-neutral-300 text-sm mb-3 flex-grow line-clamp-3">
+            <p className="text-neutral-400 dark:text-neutral-600 text-sm mb-3 line-clamp-3">
               {article.summary}
             </p>
             {/* 태그 목록 */}
-            <div className="flex flex-wrap gap-2 mb-3">
-              {article.tags.map((tag, index) => (
+            <div className="flex items-center gap-2 mb-3">
+              {article.tags.slice(0, 2).map((tag, index) => (
                 <span
                   key={index}
-                  className="px-2 py-1 bg-neutral-100 dark:bg-neutral-700 rounded-full text-xs text-neutral-600 dark:text-neutral-400"
+                  className="px-2 py-1 bg-neutral-100 dark:bg-neutral-700 rounded-full text-xs text-neutral-600 dark:text-neutral-400 whitespace-nowrap"
                 >
                   {tag}
                 </span>
               ))}
+              {article.tags.length > 2 && (
+                <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                  +{article.tags.length - 2}
+                </span>
+              )}
             </div>
             {/* 메타 정보 영역 - 출처와 발행일 */}
             <div className="flex justify-between items-center text-xs font-light text-neutral-500 dark:text-neutral-400 mt-auto">
