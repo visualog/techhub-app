@@ -78,7 +78,7 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
         onClick={() => onArticleClick(article)}
       >
         {/* 카드 내부 컨테이너 - 그림자 효과와 호버 애니메이션 */}
-        <div className="flex flex-col h-full rounded-3xl transition-shadow duration-300 overflow-hidden">
+        <div className="flex flex-col h-full rounded-3xl transition-shadow duration-300">
           {/* 아티클 이미지 영역 - 이미지가 있을 경우 */}
           {article.image && (
             <div className="relative w-full overflow-hidden aspect-video rounded-3xl group-hover:shadow-xl transition-shadow duration-300">
