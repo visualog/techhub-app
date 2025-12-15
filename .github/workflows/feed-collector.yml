@@ -41,7 +41,7 @@ jobs:
         env:
           # The GOOGLE_APPLICATION_CREDENTIALS env var needs to be set for this step too
           GOOGLE_APPLICATION_CREDENTIALS: ./serviceAccountKey.json
-        run: node dist/scripts/collect-feeds.js
+        run: node -r tsconfig-paths/register dist/scripts/collect-feeds.js
         id: run_script
         continue-on-error: true # Allow job to finish even if script fails
 
