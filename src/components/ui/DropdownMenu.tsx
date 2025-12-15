@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, ReactNode } from 'react';
+import Link from 'next/link';
 
 interface DropdownMenuProps {
   trigger: ReactNode;
@@ -46,11 +47,22 @@ export function DropdownMenu({ trigger, children }: DropdownMenuProps) {
 
 interface DropdownMenuItemProps {
   children: ReactNode;
+  href?: string;
 }
 
-export function DropdownMenuItem({ children }: DropdownMenuItemProps) {
+export function DropdownMenuItem({ children, href }: DropdownMenuItemProps) {
+    const classes = "block px-4 py-2 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer";
+
+    if (href) {
+        return (
+            <Link href={href} className={classes}>
+                {children}
+            </Link>
+        );
+    }
+
     return (
-        <div className="block px-4 py-2 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700">
+        <div className={classes}>
             {children}
         </div>
     );

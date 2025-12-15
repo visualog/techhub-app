@@ -16,8 +16,8 @@ export function Header() {
       </div>
       <div className="flex items-center gap-4">
         <DropdownMenu trigger={<Avatar />}>
-          <DropdownMenuItem>
-            <Link href="/bookmarks">북마크</Link>
+          <DropdownMenuItem href="/bookmarks">
+            북마크
           </DropdownMenuItem>
         </DropdownMenu>
       </div>
