@@ -31,7 +31,6 @@ jobs:
             exit 1
           fi
           echo "$FIREBASE_KEY" > ./serviceAccountKey.json
-          export GOOGLE_APPLICATION_CREDENTIALS=./serviceAccountKey.json
           echo "Authentication file created."
 
       - name: Build Script
@@ -39,8 +38,7 @@ jobs:
 
       - name: Run Feed Collector Script
         env:
-          # The GOOGLE_APPLICATION_CREDENTIALS env var needs to be set for this step too
-          GOOGLE_APPLICATION_CREDENTIALS: ./serviceAccountKey.json
+          FIREBASE_SERVICE_ACCOUNT_KEY_PATH: ./serviceAccountKey.json
         run: node dist/scripts/collect-feeds.js
         id: run_script
         continue-on-error: true # Allow job to finish even if script fails
