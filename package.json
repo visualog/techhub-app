@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "build:script": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json",
-    "migrate:categories": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"/Users/im_018/Documents/GitHub/TecHub/techhub-app/serviceAccountKey.json\" node dist/scripts/migrate-categories.js"
+    "migrate:categories": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"/Users/im_018/Documents/GitHub/TecHub/techhub-app/serviceAccountKey.json\" node dist/scripts/migrate-categories.js",
+    "collect-feeds": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"/Users/im_018/Documents/GitHub/TecHub/techhub-app/serviceAccountKey.json\" GEMINI_API_KEY=\"AIzaSyCMzL4Py8kkNwkvNkeUPKfoSTLvkrhy000\" node dist/scripts/collect-feeds.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
