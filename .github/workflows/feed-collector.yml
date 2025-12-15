@@ -34,11 +34,14 @@ jobs:
           export GOOGLE_APPLICATION_CREDENTIALS=./serviceAccountKey.json
           echo "Authentication file created."
 
+      - name: Build Script
+        run: npm run build:script
+
       - name: Run Feed Collector Script
         env:
           # The GOOGLE_APPLICATION_CREDENTIALS env var needs to be set for this step too
           GOOGLE_APPLICATION_CREDENTIALS: ./serviceAccountKey.json
-        run: node -r @swc/register scripts/collect-feeds.ts
+        run: node dist/scripts/collect-feeds.js
         id: run_script
         continue-on-error: true # Allow job to finish even if script fails
 
