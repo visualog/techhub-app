@@ -34,7 +34,7 @@ export function Sidebar() {
                     : 'hover:bg-neutral-100 dark:hover:bg-neutral-800'
                 }`}
               >
-                <span>{category.name}</span>
+                <span>{category.name.replace('블로그', '').replace('인사이트', '').replace('리포트', '').trim()}</span>
                 <span className="px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 text-xs opacity-75">
                   {counts[category.id] || 0}
                 </span>
