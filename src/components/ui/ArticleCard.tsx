@@ -137,7 +137,7 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
         {/* 북마크 토글 버튼 - 우측 상단 고정 위치 */}
         <button
           onClick={handleBookmarkToggle}
-          className={`absolute top-4 right-4 p-2 rounded-full bg-white/50 dark:bg-neutral-700/50 backdrop-blur-md transition-colors duration-200
+          className={`absolute top-4 right-4 p-2 rounded-full bg-white/50 dark:bg-neutral-700/50 backdrop-blur-md transition-colors duration-200 cursor-pointer
                       ${bookmarked ? 'text-indigo-500' : 'text-neutral-400 hover:text-indigo-400'}`}
           aria-label={bookmarked ? "북마크 해제" : "북마크 추가"}
         >
