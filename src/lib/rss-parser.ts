@@ -84,7 +84,7 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
         console.log(`- Generating summary for: ${item.title}`);
         const articleText = await getArticleText(item.link);
         if (articleText) {
-          const aiSummary = await generateSummary(articleText);
+          const aiSummary = await summarize(articleText);
           if (aiSummary) {
             summary = aiSummary;
           } else {
