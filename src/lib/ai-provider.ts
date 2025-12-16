@@ -46,7 +46,7 @@ ${text}`;
 class HuggingFaceSummarizerProvider implements AISummarizerProvider {
   private apiKey: string;
   private modelUrl: string;
-  private maxInputLength = 1024; // A common limit for summarization models like BART
+  private maxInputLength = 512; // A safer limit for summarization models like DistilBART
 
   constructor(apiKey: string, modelUrl: string) {
     if (!apiKey) {
@@ -122,7 +122,7 @@ export function getAISummarizer(): AISummarizerProvider {
       break;
     case "HUGGINGFACE":
       // For Hugging Face, we'll need a model URL. This can also come from env or be hardcoded.
-      const hfModelUrl = process.env.HUGGING_FACE_MODEL_URL || "https://router.huggingface.co/hf-inference/models/facebook/bart-large-cnn"; // Example model
+      const hfModelUrl = process.env.HUGGING_FACE_MODEL_URL || "https://router.huggingface.co/hf-inference/models/sshleifer/distilbart-cnn-12-6"; // Example model
       activeSummarizer = new HuggingFaceSummarizerProvider(huggingFaceApiKey!, hfModelUrl);
       console.log(`Using HuggingFaceSummarizerProvider with model URL: ${hfModelUrl}.`);
       break;
