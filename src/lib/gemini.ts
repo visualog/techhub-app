@@ -37,3 +37,17 @@ ${text}`;
     return null;
   }
 }
+
+/**
+ * Lists all available Gemini models for the current API key.
+ */
+export async function listAvailableModels(): Promise<any[]> {
+  try {
+    const { models } = await genAI.listModels();
+    return models;
+  } catch (error) {
+    console.error("Error listing Gemini models:", error);
+    return [];
+  }
+}
+
