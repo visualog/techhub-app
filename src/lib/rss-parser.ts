@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { Article } from '@/data/mock-articles';
 import { URL } from 'url';
-import { generateSummary } from './gemini';
+import { summarize } from './ai-provider';
 
 const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36';
 
@@ -66,7 +66,7 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
     for (const item of feed.items) {
       let imageUrl: string | null = null;
 
-      imageUrl = item.media?.content?.$?.url || item.media?.thumbnail?.$?.url || item.enclosure?.url || null;
+      imageUrl = (item as any).media?.content?.$?.url || (item as any).media?.thumbnail?.$?.url || item.enclosure?.url || null;
 
       const content = item['content:encoded'] || item.content;
 
@@ -96,9 +96,9 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
       }
 
       const article: Article = {
-        id: item.guid || item.link,
-        title: item.title,
-        link: item.link,
+        id: item.guid || item.link || '',
+        title: item.title || '',
+        link: item.link || '',
         summary: summary,
         image: imageUrl || undefined,
         source: feed.title || 'Unknown Source',
