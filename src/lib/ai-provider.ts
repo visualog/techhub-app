@@ -56,14 +56,39 @@ class HuggingFaceSummarizerProvider implements AISummarizerProvider {
   }
 
   async summarize(text: string): Promise<string | null> {
-    // This is a placeholder. Actual Hugging Face integration will go here.
-    console.warn("HuggingFaceSummarizerProvider is a placeholder. No actual summarization will occur.");
-    
-    // Simulate API call or simply return snippet for now
-    if (text.length > 200) {
-      return text.substring(0, 200) + "... (Hugging Face Placeholder Summary)";
+    if (!text) {
+      return null;
     }
-    return text + " (Hugging Face Placeholder Summary)";
+
+    try {
+      const response = await axios.post(
+        this.modelUrl,
+        { inputs: text },
+        {
+          headers: {
+            Authorization: `Bearer ${this.apiKey}`,
+            "Content-Type": "application/json",
+          },
+          timeout: 30000, // 30 seconds timeout
+        }
+      );
+
+      // Hugging Face summarization API often returns an array of summaries
+      const summaries = response.data;
+      if (Array.isArray(summaries) && summaries.length > 0 && summaries[0].summary_text) {
+        return summaries[0].summary_text;
+      } else {
+        console.warn("Hugging Face API returned an unexpected response format.", summaries);
+        return null;
+      }
+    } catch (error: any) {
+      console.error("Error generating summary with Hugging Face:", error.message);
+      if (error.response) {
+        console.error("Hugging Face API Response Status:", error.response.status);
+        console.error("Hugging Face API Response Data:", error.response.data);
+      }
+      return null;
+    }
   }
 }
 
