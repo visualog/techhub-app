@@ -114,7 +114,7 @@ export function getAISummarizer(): AISummarizerProvider {
       break;
     case "HUGGINGFACE":
       // For Hugging Face, we'll need a model URL. This can also come from env or be hardcoded.
-      const hfModelUrl = process.env.HUGGING_FACE_MODEL_URL || "https://router.huggingface.co/models/sshleifer/distilbart-cnn-12-6"; // Example model
+      const hfModelUrl = process.env.HUGGING_FACE_MODEL_URL || "https://router.huggingface.co/facebook/bart-large-cnn"; // Example model
       activeSummarizer = new HuggingFaceSummarizerProvider(huggingFaceApiKey!, hfModelUrl);
       console.log(`Using HuggingFaceSummarizerProvider with model URL: ${hfModelUrl}.`);
       break;
