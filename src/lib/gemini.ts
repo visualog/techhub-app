@@ -43,7 +43,7 @@ ${text}`;
  */
 export async function listAvailableModels(): Promise<any[]> {
   try {
-    const { models } = await genAI.listModels();
+    const { models } = await (genAI as any).listModels();
     return models;
   } catch (error) {
     console.error("Error listing Gemini models:", error);
