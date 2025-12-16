@@ -45,7 +45,8 @@ ${text}`;
 // 3. Implement HuggingFaceSummarizerProvider (Placeholder for now)
 class HuggingFaceSummarizerProvider implements AISummarizerProvider {
   private apiKey: string;
-  private modelUrl: string; // e.g., "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
+  private modelUrl: string;
+  private maxInputLength = 1024; // A common limit for summarization models like BART
 
   constructor(apiKey: string, modelUrl: string) {
     if (!apiKey) {
@@ -60,16 +61,23 @@ class HuggingFaceSummarizerProvider implements AISummarizerProvider {
       return null;
     }
 
+    // Truncate text if it's too long for the model
+    let inputText = text;
+    if (inputText.length > this.maxInputLength) {
+      console.warn(`Input text truncated from ${inputText.length} to ${this.maxInputLength} characters for Hugging Face summarization.`);
+      inputText = inputText.substring(0, this.maxInputLength);
+    }
+
     try {
       const response = await axios.post(
         this.modelUrl,
-        { inputs: text },
+        { inputs: inputText }, // Use truncated text
         {
           headers: {
             Authorization: `Bearer ${this.apiKey}`,
             "Content-Type": "application/json",
           },
-          timeout: 30000, // 30 seconds timeout
+          timeout: 60000, // Increase timeout to 60 seconds
         }
       );
 
