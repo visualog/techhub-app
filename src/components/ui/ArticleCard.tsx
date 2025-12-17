@@ -85,7 +85,10 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
               <Image
                 src={article.image}
                 alt={article.title}
+                width={500} // Dummy width to satisfy Next.js
+                height={300} // Dummy height to satisfy Next.js
                 className="w-full h-auto transition-transform duration-300 group-hover:scale-125"
+                style={{ objectFit: "contain" }}
               />
               {/* 비디오 아티클인 경우 재생 아이콘 표시 */}
               {article.isVideo && <PlayIcon />}
