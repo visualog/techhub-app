@@ -87,7 +87,7 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
                 alt={article.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "contain" }}
                 className="transition-transform duration-300 group-hover:scale-125"
               />
               {/* 비디오 아티클인 경우 재생 아이콘 표시 */}
