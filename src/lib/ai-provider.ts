@@ -46,7 +46,7 @@ ${text}`;
 class HuggingFaceSummarizerProvider implements AISummarizerProvider {
   private apiKey: string;
   private modelUrl: string;
-  private maxInputLength = 512; // A safer limit for summarization models like DistilBART
+  private maxInputLength = 1024; // Increased limit for better summary context
 
   constructor(apiKey: string, modelUrl: string) {
     if (!apiKey) {
