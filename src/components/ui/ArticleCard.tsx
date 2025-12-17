@@ -81,14 +81,11 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
         <div className="flex flex-col h-full rounded-3xl transition-shadow duration-300">
           {/* 아티클 이미지 영역 - 이미지가 있을 경우 */}
           {article.image && (
-            <div className="relative w-full overflow-hidden aspect-video rounded-3xl group-hover:shadow-xl transition-shadow duration-300">
+            <div className="relative w-full overflow-hidden rounded-3xl group-hover:shadow-xl transition-shadow duration-300">
               <Image
                 src={article.image}
                 alt={article.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                style={{ objectFit: "contain" }}
-                className="transition-transform duration-300 group-hover:scale-125"
+                className="w-full h-auto transition-transform duration-300 group-hover:scale-125"
               />
               {/* 비디오 아티클인 경우 재생 아이콘 표시 */}
               {article.isVideo && <PlayIcon />}
