@@ -1,6 +1,6 @@
 // src/lib/ai-provider.ts
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import axios from "axios"; // Will be needed for HuggingFace
+import axios from "axios";
 
 // 1. Define the AISummarizerProvider Interface
 interface AISummarizerProvider {
@@ -42,7 +42,7 @@ ${text}`;
   }
 }
 
-// 3. Implement HuggingFaceSummarizerProvider (Placeholder for now)
+// 3. Implement HuggingFaceSummarizerProvider
 class HuggingFaceSummarizerProvider implements AISummarizerProvider {
   private apiKey: string;
   private modelUrl: string;
@@ -100,6 +100,67 @@ class HuggingFaceSummarizerProvider implements AISummarizerProvider {
   }
 }
 
+// NEW: 3.1 Implement OllamaSummarizerProvider
+class OllamaSummarizerProvider implements AISummarizerProvider {
+  private ollamaApiUrl: string;
+  private modelName: string;
+
+  constructor(ollamaApiUrl: string, modelName: string) {
+    if (!ollamaApiUrl) {
+      throw new Error("OLLAMA_API_URL environment variable is not set for OllamaSummarizerProvider.");
+    }
+    if (!modelName) {
+      throw new Error("OLLAMA_MODEL_NAME environment variable is not set for OllamaSummarizerProvider.");
+    }
+    this.ollamaApiUrl = ollamaApiUrl;
+    this.modelName = modelName;
+  }
+
+  async summarize(text: string): Promise<string | null> {
+    if (!text) {
+      return null;
+    }
+
+    // Ollama typically has a chat or completion endpoint
+    // We'll use the 'generate' endpoint for simplicity and control over prompt
+    const prompt = `다음 텍스트를 한국어로 요약해줘. 원문의 핵심 내용을 중심으로 3~4문장의 간결한 요약문을 만들어줘:
+
+${text}`;
+
+    try {
+      const response = await axios.post(
+        `${this.ollamaApiUrl}/api/generate`,
+        {
+          model: this.modelName,
+          prompt: prompt,
+          stream: false, // We want the full response at once
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          timeout: 120000, // Increased timeout for local LLM inference (2 minutes)
+        }
+      );
+
+      // Ollama's /api/generate endpoint returns data.response for the generated text
+      if (response.data && response.data.response) {
+        return response.data.response.trim();
+      } else {
+        console.warn("Ollama API returned an unexpected response format.", response.data);
+        return null;
+      }
+    } catch (error: any) {
+      console.error("Error generating summary with Ollama:", error.message);
+      if (error.response) {
+        console.error("Ollama API Response Status:", error.response.status);
+        console.error("Ollama API Response Data:", error.response.data);
+      }
+      return null;
+    }
+  }
+}
+
 
 // 4. Factory function to select the provider
 let activeSummarizer: AISummarizerProvider | null = null;
@@ -112,6 +173,11 @@ export function getAISummarizer(): AISummarizerProvider {
   const aiProvider = process.env.AI_SUMMARIZER_PROVIDER || "GEMINI"; // Default to Gemini
   const geminiApiKey = process.env.GEMINI_API_KEY;
   const huggingFaceApiKey = process.env.HUGGING_FACE_API_KEY;
+
+  // NEW: Ollama environment variables
+  const ollamaApiUrl = process.env.OLLAMA_API_URL || "http://localhost:11434"; // Default Ollama URL
+  const ollamaModelName = process.env.OLLAMA_MODEL_NAME;
+
 
   switch (aiProvider.toUpperCase()) {
     case "GEMINI":
@@ -126,8 +192,12 @@ export function getAISummarizer(): AISummarizerProvider {
       activeSummarizer = new HuggingFaceSummarizerProvider(huggingFaceApiKey!, hfModelUrl);
       console.log(`Using HuggingFaceSummarizerProvider with model URL: ${hfModelUrl}.`);
       break;
+    case "OLLAMA":
+      activeSummarizer = new OllamaSummarizerProvider(ollamaApiUrl, ollamaModelName!);
+      console.log(`Using OllamaSummarizerProvider with model: ${ollamaModelName} at ${ollamaApiUrl}.`);
+      break;
     default:
-      throw new Error(`Unknown AI_SUMMARIZER_PROVIDER: ${aiProvider}. Please set AI_SUMMARIZER_PROVIDER to 'GEMINI' or 'HUGGINGFACE'.`);
+      throw new Error(`Unknown AI_SUMMARIZER_PROVIDER: ${aiProvider}. Please set AI_SUMMARIZER_PROVIDER to 'GEMINI', 'HUGGINGFACE', or 'OLLAMA'.`);
   }
   return activeSummarizer;
 }
