@@ -104,6 +104,7 @@ class HuggingFaceSummarizerProvider implements AISummarizerProvider {
 class OllamaSummarizerProvider implements AISummarizerProvider {
   private ollamaApiUrl: string;
   private modelName: string;
+  private maxInputLength = 1024; // Common limit for summarization models
 
   constructor(ollamaApiUrl: string, modelName: string) {
     if (!ollamaApiUrl) {
@@ -121,11 +122,20 @@ class OllamaSummarizerProvider implements AISummarizerProvider {
       return null;
     }
 
+    // NEW: Truncate text if it's too long for the model
+    let inputText = text;
+    if (inputText.length > this.maxInputLength) {
+      console.warn(`Input text truncated from ${inputText.length} to ${this.maxInputLength} characters for Ollama summarization.`);
+      inputText = inputText.substring(0, this.maxInputLength);
+    }
+
     // Ollama typically has a chat or completion endpoint
     // We'll use the 'generate' endpoint for simplicity and control over prompt
+    // Use inputText here instead of original 'text'
     const prompt = `다음 텍스트를 한국어로 요약해줘. 원문의 핵심 내용을 중심으로 3~4문장의 간결한 요약문을 만들어줘:
 
-${text}`;
+${inputText}`; // Use truncated inputText
+
 
     console.log(`- Ollama Input Text Length: ${prompt.length}`); // ADDED LOG
     console.log(`- Ollama Input Text Snippet (first 200 chars): ${prompt.substring(0, 200)}...`); // ADDED LOG
