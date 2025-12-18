@@ -31,6 +31,10 @@ function getImageFromContent(content: string): string | null {
   return imageUrl || null;
 }
 
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function getArticleText(link: string): Promise<string | null> {
   if (!link) return null;
   try {
@@ -57,7 +61,13 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
       const cleanedData = data.trim().replace(/^\uFEFF/, '');
       feed = await parser.parseString(cleanedData);
     } else {
-      feed = await parser.parseURL(feedUrl);
+      // For other feeds, use axios for fetching the feed content
+      const { data } = await axios.get(feedUrl, {
+        headers: browserHeaders,
+        responseType: 'text',
+        httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }), // Apply SSL workaround
+      });
+      feed = await parser.parseString(data); // Parse the fetched string
     }
     
     const feedHostname = new URL(feed.link || feedUrl).origin;
@@ -90,6 +100,7 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
           } else {
             console.log(`  - Failed to generate AI summary, using snippet instead.`);
           }
+          await sleep(1000); // Introduce a 1-second delay after each summarization attempt
         } else {
           console.log(`  - Could not fetch article text, using snippet instead.`);
         }
