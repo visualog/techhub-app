@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
+import { RightSidebar } from "@/components/layout/RightSidebar"; // Import new RightSidebar
 import { BookmarksProvider } from "@/context/BookmarksContext";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,11 +24,21 @@ export default function RootLayout({
         <BookmarksProvider>
           <Header />
           <div className="max-w-screen-xl mx-auto flex flex-col">
-            <div className="flex flex-1 flex-col md:flex-row">
-              <Sidebar />
-              <main className="flex-1">
+            <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] lg:grid-cols-[240px_1fr_240px] gap-4">
+              {/* Left Sidebar */}
+              <aside className="md:col-span-1 hidden md:block">
+                <Sidebar />
+              </aside>
+
+              {/* Main Content */}
+              <main className="flex-1 col-span-1 md:col-span-1 lg:col-span-1">
                 {children}
               </main>
+
+              {/* Right Sidebar */}
+              <aside className="lg:col-span-1 hidden lg:block">
+                <RightSidebar />
+              </aside>
             </div>
           </div>
         </BookmarksProvider>
