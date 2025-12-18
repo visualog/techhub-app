@@ -46,6 +46,7 @@ async function getArticleText(link: string): Promise<string | null> {
     const $ = cheerio.load(data);
     $('script, style, noscript, iframe, header, footer, nav').remove();
     const articleText = $('body').text().replace(/\s\s+/g, ' ').trim();
+    console.log(`- Fetched article text from ${link}, length: ${articleText.length}`); // ADDED LOG
     return articleText;
   } catch (error: any) {
     console.error(`- Failed to fetch article text from ${link}:`, error.message);
@@ -55,6 +56,7 @@ async function getArticleText(link: string): Promise<string | null> {
 
 export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
   try {
+    console.log(`Processing feed: ${feedUrl}`); // ADDED LOG
     let feed;
     if (feedUrl.includes('toss.tech')) {
       const { data } = await axios.get(feedUrl, { headers: browserHeaders, responseType: 'text' });
@@ -93,6 +95,13 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
       if (item.link) {
         console.log(`- Generating summary for: ${item.title}`);
         const articleText = await getArticleText(item.link);
+        
+        // ADDED LOGGING FOR TOSS.TECH
+        if (feedUrl.includes('toss.tech') && articleText) {
+          console.log(`  - Toss Tech Article Text (first 200 chars): ${articleText.substring(0, 200)}...`);
+          console.log(`  - Toss Tech Article Text Length: ${articleText.length}`);
+        }
+
         if (articleText) {
           const aiSummary = await summarize(articleText);
           if (aiSummary) {

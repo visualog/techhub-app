@@ -127,6 +127,9 @@ class OllamaSummarizerProvider implements AISummarizerProvider {
 
 ${text}`;
 
+    console.log(`- Ollama Input Text Length: ${prompt.length}`); // ADDED LOG
+    console.log(`- Ollama Input Text Snippet (first 200 chars): ${prompt.substring(0, 200)}...`); // ADDED LOG
+    
     try {
       const response = await axios.post(
         `${this.ollamaApiUrl}/api/generate`,
