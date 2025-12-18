@@ -4,6 +4,7 @@ import { ArticleCard } from "@/components/ui/ArticleCard";
 import { Article } from "@/data/mock-articles";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useFilter } from '@/context/FilterContext'; // NEW IMPORT
 
 interface ArticleListProps {
   onArticleClick: (article: Article) => void;
@@ -18,6 +19,8 @@ export function ArticleList({ onArticleClick }: ArticleListProps) {
   const currentCategory = searchParams.get('category') || 'all';
   const searchTerm = searchParams.get('search') || '';
 
+  const { selectedSources, allSources } = useFilter(); // NEW: Get selectedSources
+
   useEffect(() => {
     async function fetchArticles() {
       setLoading(true);
@@ -29,6 +32,16 @@ export function ArticleList({ onArticleClick }: ArticleListProps) {
         }
         if (searchTerm) {
           query.set('search', searchTerm);
+        }
+
+        // NEW: Add source filtering to query
+        if (selectedSources.length > 0 && selectedSources.length < allSources.length) {
+          query.set('sources', selectedSources.join(','));
+        } else if (selectedSources.length === 0) {
+          // If no sources selected, return empty immediately
+          setArticles([]);
+          setLoading(false);
+          return;
         }
 
         const res = await fetch(`/api/articles?${query.toString()}`);
@@ -46,7 +59,7 @@ export function ArticleList({ onArticleClick }: ArticleListProps) {
     }
 
     fetchArticles();
-  }, [currentCategory, searchTerm]); // Re-fetch when category or search term changes
+  }, [currentCategory, searchTerm, selectedSources]); // NEW: Add selectedSources to dependencies
 
   if (loading) {
     return (
