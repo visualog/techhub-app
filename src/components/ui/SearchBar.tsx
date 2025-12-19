@@ -29,7 +29,7 @@ export function SearchBar() {
     <form onSubmit={handleSearch} className="w-full relative">
       <input
         type="text"
-        placeholder="검색어를 입력하세요 (제목, 요약, 출처)"
+        placeholder="검색어를 입력하세요"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className="w-full p-2 pl-10 rounded-xl bg-neutral-50 dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-300"
