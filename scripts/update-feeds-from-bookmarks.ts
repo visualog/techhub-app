@@ -39,10 +39,13 @@ function parseMarkdownBookmarks(markdown: string): ParsedBookmark[] {
 
   for (const line of lines) {
     // Detect top-level category (e.g., "## 🤖 AI (4개)")
-    const categoryMatch = line.match(/^##\s+(.*?)\s+\(\d+개\)/);
+    const categoryMatch = line.match(/^##\s*(.*?)\s*\(\d+개\)/);
     if (categoryMatch) {
-      const categoryName = categoryMatch[1].trim();
-      currentCategory = CATEGORY_MAP[categoryName] || categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      // Clean the category name by removing emoji and count part
+      const rawCategoryName = categoryMatch[1].trim();
+      const cleanCategoryName = rawCategoryName.replace(/[\p{Emoji_Presentation}\p{Emoji}\s]+/gu, ' ').trim(); // Use Unicode-aware regex for emojis
+      
+      currentCategory = CATEGORY_MAP[cleanCategoryName] || cleanCategoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-'); // Use cleanCategoryName
       continue;
     }
 
@@ -63,35 +66,71 @@ function guessRssUrl(url: string): string | null {
   if (/(feed|rss|atom)(\.xml|\/|\b)/i.test(url)) {
     return url;
   }
-  // Common blog platforms often have predictable RSS paths
+  
   try {
     const parsedUrl = new URL(url);
     const hostname = parsedUrl.hostname;
+
     // Specific heuristics for common platforms
+    if (hostname.includes('d2.naver.com')) {
+      return 'https://d2.naver.com/d2.atom';
+    }
+    if (hostname.includes('tech.kakao.com')) {
+      return 'https://tech.kakao.com/feed/';
+    }
+    if (hostname.includes('toss.tech')) {
+      return 'https://toss.tech/rss.xml';
+    }
+    if (hostname.includes('clova.ai')) {
+      // Check if the URL is already an RSS feed
+      if (parsedUrl.pathname.includes('/feed') || parsedUrl.pathname.includes('/rss')) return url;
+      return `${parsedUrl.origin}/feed/`; // Common feed path for blogs
+    }
+    if (hostname.includes('blog.google')) {
+      // Google blogs often have /rss or /feed
+      if (parsedUrl.pathname.includes('/rss') || parsedUrl.pathname.includes('/feed')) return url;
+      return `${parsedUrl.origin}/rss`; 
+    }
+    if (hostname.includes('techblog.woowahan.com')) {
+      return 'https://techblog.woowahan.com/feed/';
+    }
+    if (hostname.includes('coupang.jobs')) {
+      // Coupang Engineering Blog feeds are usually on Medium, not directly on coupang.jobs
+      // If the URL contains "medium.com/coupang-engineering", it will be caught by medium.com below.
+      return null; 
+    }
+    // If the bookmark is for "Coupang Engineering Medium", its URL should point to Medium
+    // and be handled by the medium.com heuristic.
+
     if (hostname.includes('tistory.com')) {
       return `${parsedUrl.origin}/rss`; // Tistory often has /rss feed
     }
     if (hostname.includes('brunch.co.kr')) {
       // Brunch usually has /@user/feed format. If not already /feed, we can't easily guess.
-      if (parsedUrl.pathname.startsWith('/@') && !parsedUrl.pathname.endsWith('/feed')) {
-         return `${parsedUrl.href}/feed`; // e.g., https://brunch.co.kr/@mobiinside -> https://brunch.co.kr/@mobiinside/feed
+      // If the path already has a /feed, use that. Else, if it's a user/publication path, add /feed.
+      if (parsedUrl.pathname.endsWith('/feed')) return url;
+      const pathParts = parsedUrl.pathname.split('/').filter(p => p);
+      if (pathParts[0] && pathParts[0].startsWith('@')) { // /@username/
+        return `${parsedUrl.origin}/${pathParts[0]}/feed`; // e.g., https://brunch.co.kr/@mobiinside -> https://brunch.co.kr/@mobiinside/feed
       }
+      return null; // Cannot guess from general brunch.co.kr URLs
     }
     if (hostname.includes('medium.com')) {
       // Medium feeds are often /feed/@username or /feed/publication
-      const pathParts = parsedUrl.pathname.split('/');
-      if (pathParts[1] && pathParts[1].startsWith('@')) { // /@username/
-        return `${parsedUrl.origin}/feed/${pathParts[1]}`;
-      } else if (pathParts[1]) { // /publication/
-        return `${parsedUrl.origin}/feed/${pathParts[1]}`;
+      if (parsedUrl.pathname.startsWith('/feed/')) return url; // Already a feed URL
+      const pathParts = parsedUrl.pathname.split('/').filter(p => p); // Remove empty strings
+      if (pathParts[0] && pathParts[0].startsWith('@')) { // /@username/
+        return `${parsedUrl.origin}/feed/${pathParts[0]}`;
+      } else if (pathParts[0]) { // /publication/
+        return `${parsedUrl.origin}/feed/${pathParts[0]}`;
       }
+      return `${parsedUrl.origin}/feed`; // General medium feed if no specific path
     }
-    if (hostname.includes('coupang.jobs')) {
-      // Coupang Engineering Blog feed is often on Medium
-      if (parsedUrl.href.includes('medium.com/coupang-engineering')) {
-        return 'https://medium.com/feed/coupang-engineering';
-      }
+    if (hostname.includes('pxd.co.kr') && parsedUrl.pathname.includes('insights')) {
+      return `${parsedUrl.origin}/feed/`; // Common pattern for sub-paths
     }
+
+
     // Add more specific heuristics here if needed
     
   } catch (e) {
