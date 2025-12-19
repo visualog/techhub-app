@@ -32,7 +32,6 @@ const CATEGORY_MAP: { [key: string]: string } = {
 };
 
 // Function to parse the markdown content
-// Function to parse the markdown content
 function parseMarkdownBookmarks(markdown: string): ParsedBookmark[] {
   const bookmarks: ParsedBookmark[] = [];
   const lines = markdown.split('\n');
@@ -42,16 +41,15 @@ function parseMarkdownBookmarks(markdown: string): ParsedBookmark[] {
     // Detect top-level category (e.g., "## 🤖 AI (4개)")
     const categoryMatch = line.match(/^##\s*(.*?)\s*\(\d+개\)/);
     if (categoryMatch) {
-      // Clean the category name by removing emoji and count part
-      const rawCategoryNameWithEmoji = categoryMatch[1].trim();
-      // A more robust way to remove emojis and other non-text elements to get a clean category for mapping
-      const cleanCategoryText = rawCategoryNameWithEmoji.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\s]+/gu, ' ').trim();
+      const rawCategoryNameWithEmoji = categoryMatch[1].trim(); // e.g., "🤖 AI" or "💻 개발/테크"
+      // Remove leading emoji and any whitespace immediately following it
+      // Using a Unicode-aware regex for emoji matching
+      const cleanCategoryText = rawCategoryNameWithEmoji.replace(/^\p{Emoji_Presentation}\s*/u, '').trim();
       
-      currentCategory = CATEGORY_MAP[cleanCategoryText]; // Use direct lookup
+      currentCategory = CATEGORY_MAP[cleanCategoryText];
       if (!currentCategory) {
-        // Fallback to lowercased and dashed if not in map, but try to be consistent
+        console.warn(`Category "${rawCategoryNameWithEmoji}" (cleaned to "${cleanCategoryText}") not directly found in CATEGORY_MAP. Defaulting to "${cleanCategoryText.toLowerCase().replace(/[^a-z0-9]+/g, '-')}"`);
         currentCategory = cleanCategoryText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-        console.warn(`Category "${cleanCategoryText}" not found in CATEGORY_MAP, defaulting to "${currentCategory}"`);
       }
       continue;
     }
@@ -69,7 +67,7 @@ function parseMarkdownBookmarks(markdown: string): ParsedBookmark[] {
 
 // Heuristic to guess if a URL is an RSS feed URL
 function guessRssUrl(url: string): string | null {
-  // Check for common RSS indicators in the URL itself
+  // Check for common RSS indicators in the URL itself first
   if (/(feed|rss|atom)(\.xml|\/|\b)/i.test(url)) {
     return url;
   }
@@ -78,41 +76,23 @@ function guessRssUrl(url: string): string | null {
     const parsedUrl = new URL(url);
     const hostname = parsedUrl.hostname;
 
-    // Specific heuristics for common platforms
-    if (hostname.includes('d2.naver.com')) {
-      return 'https://d2.naver.com/d2.atom';
-    }
-    if (hostname.includes('tech.kakao.com')) {
-      return 'https://tech.kakao.com/feed/';
-    }
-    if (hostname.includes('toss.tech')) {
-      return 'https://toss.tech/rss.xml';
-    }
-    if (hostname.includes('clova.ai')) {
-      // Clova blog home page, assume common feed path
-      return `${parsedUrl.origin}/tech-blog/feed/`;
-    }
-    if (hostname.includes('blog.google')) {
-      // Google blogs often have /rss at the root or /intl/lang/rss
-      if (parsedUrl.pathname.includes('/rss')) return url;
-      return `${parsedUrl.origin}/intl/ko-kr/rss/`;
-    }
-    if (hostname.includes('techblog.woowahan.com')) {
-      return 'https://techblog.woowahan.com/feed/';
-    }
-    if (hostname.includes('d2sf.naver.com')) {
-      return 'https://d2sf.naver.com/atom'; // D2 Startup Factory also uses atom
-    }
-    if (hostname.includes('coupang.jobs') && url.includes('medium.com')) {
-      // This is a special case where coupang.jobs links to Medium
-      return 'https://medium.com/feed/coupang-engineering';
-    }
-
-    // General blog platforms
-    if (hostname.includes('tistory.com')) {
-      return `${parsedUrl.origin}/rss`;
-    }
-    if (hostname.includes('brunch.co.kr')) {
+    // Direct mappings from bookmark URL to known RSS feed URL (or specific patterns)
+    if (url.includes('clova.ai/tech-blog')) return 'https://clova.ai/tech-blog/feed/';
+    if (url.includes('vcat.ai/blog')) return 'https://vcat.ai/blog/rss'; 
+    if (url.includes('openai.com/news/global-affairs')) return 'https://openai.com/blog/rss'; // OpenAI's general blog RSS
+    if (url.includes('blog.google/intl/ko-kr')) return 'https://blog.google/intl/ko-kr/rss/';
+    if (url.includes('d2.naver.com')) return 'https://d2.naver.com/d2.atom'; // Canonical for D2
+    if (url.includes('tech.kakao.com')) return 'https://tech.kakao.com/feed/'; // Canonical for Kakao Tech
+    if (url.includes('toss.tech')) return 'https://toss.tech/rss.xml'; // Canonical for Toss Tech
+    if (url.includes('app.dalpha.so/blog')) return 'https://app.dalpha.so/blog/feed';
+    if (url.includes('techblog.woowahan.com')) return 'https://techblog.woowahan.com/feed/';
+    if (url.includes('medium.com/coupang-engineering')) return 'https://medium.com/feed/coupang-engineering'; // Coupang Engineering Blog on Medium
+    if (url.includes('d2sf.naver.com')) return 'https://d2sf.naver.com/atom'; // D2 Startup Factory
+    if (url.includes('techblogposts.com')) return 'https://www.techblogposts.com/ko/rss';
+    if (url.includes('44bits.io')) return 'https://www.44bits.io/ko/feed';
+    if (url.includes('designcompass.org/magazine')) return 'https://designcompass.org/feed/';
+    if (url.includes('blog.rightbrain.co.kr')) return 'https://blog.rightbrain.co.kr/feed/';
+    if (url.includes('brunch.co.kr')) {
       if (parsedUrl.pathname.endsWith('/feed')) return url;
       const pathParts = parsedUrl.pathname.split('/').filter(p => p);
       if (pathParts[0] && pathParts[0].startsWith('@')) {
@@ -130,27 +110,44 @@ function guessRssUrl(url: string): string | null {
       }
       return `${parsedUrl.origin}/feed`;
     }
-    if (hostname.includes('pxd.co.kr') && parsedUrl.pathname.includes('insights')) {
-      // The main feed is usually /feed/ for their blog sub-domain
-      return `${parsedUrl.origin}/feed/`; 
-    }
-    if (hostname.includes('blog.opensurvey.co.kr')) {
-      return 'https://blog.opensurvey.co.kr/feed/';
-    }
-    if (hostname.includes('magazine.cheil.com')) {
-      return 'https://magazine.cheil.com/feed/';
-    }
-    if (hostname.includes('blog.effic.biz')) {
-      return 'https://blog.effic.biz/feed/';
-    }
-    if (hostname.includes('blog.socialmkt.co.kr')) {
-      return 'https://blog.socialmkt.co.kr/feed/';
-    }
-    if (hostname.includes('kakao.vc')) {
-      return 'https://www.kakao.vc/blog/feed/';
-    }
+    if (url.includes('pxd.co.kr')) return 'https://story.pxd.co.kr/feed/'; // Canonical pxd story feed
+    if (url.includes('blog.opensurvey.co.kr')) return 'https://blog.opensurvey.co.kr/feed/';
+    if (url.includes('magazine.cheil.com')) return 'https://magazine.cheil.com/feed/';
+    if (url.includes('blog.effic.biz')) return 'https://blog.effic.biz/feed/';
+    if (url.includes('blog.socialmkt.co.kr')) return 'https://blog.socialmkt.co.kr/feed/';
+    if (url.includes('kakao.vc/blog')) return 'https://www.kakao.vc/blog/feed/';
 
-
+    // URLs confirmed to NOT have RSS or too complex to guess
+    if (url.includes('coupang.jobs')) return null; // Jobs page
+    if (url.includes('data.go.kr')) return null; // Public data portal, not a blog feed
+    if (url.includes('design.co.kr')) return null;
+    if (url.includes('gdweb.co.kr')) return null;
+    if (url.includes('figmapedia.com')) return null;
+    if (url.includes('wwit.design')) return null;
+    if (url.includes('uibowl.io')) return null;
+    if (url.includes('lemondesign.tistory.com/65')) return 'https://lemondesign.tistory.com/rss'; // Specific post, revert to base blog feed
+    if (url.includes('lifeboosta.com')) return null;
+    if (url.includes('canva.com')) return null;
+    if (url.includes('pinterest.com')) return null;
+    if (url.includes('dribbble.com')) return null;
+    if (url.includes('awwwards.com')) return null;
+    if (url.includes('spline.design')) return null;
+    if (url.includes('discord.com')) return null;
+    if (url.includes('muz.li')) return 'https://medium.com/feed/muzli'; // Medium publication, handled above
+    if (url.includes('abduzeedo.com')) return 'https://abduzeedo.com/rss'; // Handled above
+    if (url.includes('designlab.com')) return null;
+    if (url.includes('alistapart.com')) return null;
+    if (url.includes('creativemarket.com')) return null;
+    if (url.includes('tympanus.net')) return 'https://tympanus.net/codrops/feed'; // Handled above
+    if (url.includes('creativeboom.com')) return 'https://www.creativeboom.com/feed'; // Handled above
+    if (url.includes('uxplanet.org')) return 'https://uxplanet.org/feed'; // Medium-based
+    if (url.includes('uxdesign.cc')) return 'https://uxdesign.cc/feed'; // Medium-based
+    if (url.includes('itsnicethat.com')) return 'https://www.itsnicethat.com/feed'; // Handled above
+    if (url.includes('justinmind.com')) return null; // blog page has /feed
+    if (url.includes('gsap.com')) return null;
+    if (url.includes('motion.dev')) return 'https://motion.dev/blog/feed'; // Handled above
+    if (url.includes('hongong.hanbit.co.kr')) return null;
+    if (url.includes('fficial.naver.com')) return null;
     
   } catch (e) {
     // Invalid URL, ignore
