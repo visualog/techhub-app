@@ -22,7 +22,6 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const category = searchParams.get('category') || 'all';
   const searchTerm = searchParams.get('search') || '';
-  const sourcesParam = searchParams.get('sources'); // NEW: Get sources parameter
 
   try {
     const articlesCollection = db.collection('articles');
@@ -30,22 +29,6 @@ export async function GET(request: Request) {
 
     if (category !== 'all') {
       query = query.where('category', '==', category);
-    }
-
-    // NEW: Apply source filtering
-    let sourceFilter: string[] = [];
-    if (sourcesParam) {
-      sourceFilter = sourcesParam.split(',').map(s => s.trim()).filter(s => s.length > 0);
-    }
-
-    if (sourceFilter.length > 0) {
-      // Firestore 'in' query supports up to 10 comparison values
-      if (sourceFilter.length <= 10) {
-        query = query.where('source', 'in', sourceFilter);
-      } else {
-        // If more than 10 sources, we'll filter client-side after fetching all
-        console.warn("Too many sources for 'in' query (max 10). Filtering client-side.");
-      }
     }
 
     query = query.orderBy('pubDate', 'desc');
@@ -71,7 +54,7 @@ export async function GET(request: Request) {
       articles.push(articleData);
     });
 
-    // Server-side search filtering (already exists)
+    // Server-side search filtering
     if (searchTerm) {
       const lowercasedTerm = searchTerm.toLowerCase();
       articles = articles.filter(article => 
@@ -80,12 +63,6 @@ export async function GET(request: Request) {
         article.source.toLowerCase().includes(lowercasedTerm)
       );
     }
-    
-    // NEW: Client-side filtering if sourceFilter was too large for 'in' query or if no query was made
-    if (sourceFilter.length > 10) {
-      articles = articles.filter(article => sourceFilter.includes(article.source));
-    }
-
 
     return NextResponse.json(articles);
 
