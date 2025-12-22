@@ -1,7 +1,7 @@
 'use client';
 
 import { ArticleCard } from "@/components/ui/ArticleCard";
-import { Article } => "@/data/mock-articles";
+import { Article } from "@/data/mock-articles";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
