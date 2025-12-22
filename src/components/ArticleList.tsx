@@ -1,7 +1,7 @@
 'use client';
 
 import { ArticleCard } from "@/components/ui/ArticleCard";
-import { Article } from "@/data/mock-articles";
+import { Article } => "@/data/mock-articles";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -37,8 +37,8 @@ export function ArticleList({ onArticleClick }: ArticleListProps) {
         }
         const data: Article[] = await res.json();
         setArticles(data);
-      } catch (e: any) {
-        setError(e.message);
+      } catch (error: unknown) { // Changed from e: any to error: unknown
+        setError((error as Error).message); // Safely access message property
         setArticles([]); // Clear articles on error
       } finally {
         setLoading(false);
@@ -46,21 +46,7 @@ export function ArticleList({ onArticleClick }: ArticleListProps) {
     }
 
     fetchArticles();
-  }, [currentCategory, searchTerm]); // Re-fetch when category or search term changes
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const data: Article[] = await res.json();
-        setArticles(data);
-      } catch (e: any) {
-        setError(e.message);
-        setArticles([]); // Clear articles on error
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchArticles();
-  }, [currentCategory, searchTerm, selectedSources]); // NEW: Add selectedSources to dependencies
+  }, [currentCategory, searchTerm]); // Revert to original dependencies
 
   if (loading) {
     return (
