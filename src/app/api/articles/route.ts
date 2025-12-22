@@ -68,6 +68,6 @@ export async function GET(request: Request) {
 
   } catch (error) {
     console.error('Error fetching articles from Firestore:', error);
-    return new NextResponse('Internal Server Error', { status: 500 });
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
