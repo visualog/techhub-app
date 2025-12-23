@@ -78,16 +78,16 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
         onClick={() => onArticleClick(article)}
       >
         {/* 카드 내부 컨테이너 - 그림자 효과와 호버 애니메이션 */}
-        <div className="flex flex-col h-full rounded-3xl transition-shadow duration-300">
+        <div className="flex flex-col h-full rounded-3xl transition-shadow duration-300 transition-transform duration-300 group-hover:-translate-y-2">
           {/* 아티클 이미지 영역 - 이미지가 있을 경우 */}
           {article.image && (
-            <div className="relative w-full overflow-hidden rounded-3xl group-hover:shadow-xl transition-shadow duration-300">
+            <div className="relative w-full overflow-hidden rounded-3xl transition-shadow duration-300">
               <Image
                 src={article.image}
                 alt={article.title}
                 width={500} // Dummy width to satisfy Next.js
                 height={300} // Dummy height to satisfy Next.js
-                className="w-full h-auto transition-transform duration-300 group-hover:scale-125"
+                className="w-full h-auto transition-transform duration-300"
                 style={{ objectFit: "contain" }}
               />
               {/* 비디오 아티클인 경우 재생 아이콘 표시 */}

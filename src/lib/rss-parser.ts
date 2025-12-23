@@ -35,41 +35,59 @@ function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function getArticleText(link: string): Promise<string | null> {
-  if (!link) return null;
+async function fetchAndParseArticleContent(link: string): Promise<{ text: string | null; ogImage: string | null }> {
+  if (!link) return { text: null, ogImage: null };
+
   try {
-    const { data } = await axios.get(link, { 
-      timeout: 10000, 
+    const { data } = await axios.get(link, {
+      timeout: 15000,
       headers: browserHeaders,
       httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }),
     });
+
     const $ = cheerio.load(data);
-    $('script, style, noscript, iframe, header, footer, nav').remove();
-    const articleText = $('body').text().replace(/\s\s+/g, ' ').trim();
-    console.log(`- Fetched article text from ${link}, length: ${articleText.length}`); // ADDED LOG
-    return articleText;
+
+    // 1. Attempt to get Open Graph image for a better thumbnail
+    const ogImage = $('meta[property="og:image"]').attr('content') || null;
+
+    // 2. Get cleaner article text for summarization
+    $('script, style, noscript, iframe, header, footer, nav, aside').remove(); // More aggressive removal
+    let articleText = '';
+    const mainContent = $('article, main, [role="main"], [role="article"]');
+    
+    if (mainContent.length > 0) {
+      articleText = mainContent.first().text();
+    } else {
+      // Fallback to body if no semantic tags are found
+      articleText = $('body').text();
+    }
+    
+    articleText = articleText.replace(/\s\s+/g, ' ').trim();
+    console.log(`- Fetched article from ${link}, Text length: ${articleText.length}, OG Image: ${!!ogImage}`);
+
+    return { text: articleText, ogImage };
+
   } catch (error: any) {
-    console.error(`- Failed to fetch article text from ${link}:`, error.message);
-    return null;
+    console.error(`- Failed to fetch or parse article content from ${link}:`, error.message);
+    return { text: null, ogImage: null };
   }
 }
 
 export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
   try {
-    console.log(`Processing feed: ${feedUrl}`); // ADDED LOG
+    console.log(`Processing feed: ${feedUrl}`);
     let feed;
     if (feedUrl.includes('toss.tech')) {
       const { data } = await axios.get(feedUrl, { headers: browserHeaders, responseType: 'text' });
       const cleanedData = data.trim().replace(/^\uFEFF/, '');
       feed = await parser.parseString(cleanedData);
     } else {
-      // For other feeds, use axios for fetching the feed content
       const { data } = await axios.get(feedUrl, {
         headers: browserHeaders,
         responseType: 'text',
-        httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }), // Apply SSL workaround
+        httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }),
       });
-      feed = await parser.parseString(data); // Parse the fetched string
+      feed = await parser.parseString(data);
     }
     
     const feedHostname = new URL(feed.link || feedUrl).origin;
@@ -77,43 +95,55 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
     const articles: Article[] = [];
     for (const item of feed.items) {
       let imageUrl: string | null = null;
-
-      imageUrl = (item as any).media?.content?.$?.url || (item as any).media?.thumbnail?.$?.url || item.enclosure?.url || null;
-
+      let summary = '';
       const content = item['content:encoded'] || item.content;
 
+      // --- Start of New Extraction Logic ---
+
+      // 1. Fetch article content and ogImage from the source page
+      const { text: articleText, ogImage } = item.link ? await fetchAndParseArticleContent(item.link) : { text: null, ogImage: null };
+      
+      // 2. Prioritize image sources
+      imageUrl = ogImage // Prioritize Open Graph image
+        || (item as any).media?.content?.$?.url 
+        || (item as any).media?.thumbnail?.$?.url 
+        || item.enclosure?.url 
+        || null;
+
+      // Fallback to image inside content if still no image
       if (!imageUrl && content) {
         const imgFromContent = getImageFromContent(content);
         if (imgFromContent) {
           imageUrl = imgFromContent.startsWith('http') ? imgFromContent : new URL(imgFromContent, feedHostname).href;
         }
       }
-      
-      let summary = item.contentSnippet?.substring(0, 200) || item.summary?.substring(0, 200) || '';
 
-      // AI Summary Generation
-      if (item.link) {
+      // 3. Generate summary
+      if (articleText) {
         console.log(`- Generating summary for: ${item.title}`);
-        const articleText = await getArticleText(item.link);
-        
-        // ADDED LOGGING FOR TOSS.TECH
-        if (feedUrl.includes('toss.tech') && articleText) {
-          console.log(`  - Toss Tech Article Text (first 200 chars): ${articleText.substring(0, 200)}...`);
-          console.log(`  - Toss Tech Article Text Length: ${articleText.length}`);
-        }
-
-        if (articleText) {
-          const aiSummary = await summarize(articleText);
-          if (aiSummary) {
-            summary = aiSummary;
-          } else {
-            console.log(`  - Failed to generate AI summary, using snippet instead.`);
-          }
-          await sleep(1000); // Introduce a 1-second delay after each summarization attempt
+        const aiSummary = await summarize(articleText);
+        if (aiSummary) {
+          summary = aiSummary;
         } else {
-          console.log(`  - Could not fetch article text, using snippet instead.`);
+          console.log(`  - AI summary failed. Falling back to content snippet.`);
         }
+        await sleep(1000); // Rate limit AI calls
       }
+      
+      // If summary is still empty, use fallback methods
+      if (!summary) {
+        if (item.contentSnippet) {
+          summary = item.contentSnippet.substring(0, 300);
+        } else if (content) {
+          // A better fallback summary from the content
+          const $ = cheerio.load(content);
+          $('style, script').remove(); // Clean the content
+          summary = $('p').first().text().substring(0, 300) || $.text().substring(0, 300);
+        }
+         summary = summary.trim();
+      }
+
+      // --- End of New Extraction Logic ---
 
       const article: Article = {
         id: item.guid || item.link || '',

@@ -132,7 +132,7 @@ class OllamaSummarizerProvider implements AISummarizerProvider {
     // Ollama typically has a chat or completion endpoint
     // We'll use the 'generate' endpoint for simplicity and control over prompt
     // Use inputText here instead of original 'text'
-    const prompt = `다음 텍스트를 한국어로 요약해줘. 원문의 핵심 내용을 중심으로 3~4문장의 간결한 요약문을 만들어줘:
+    const prompt = `다음 텍스트를 한국어로 요약해줘. 만약 원문이 영어라면, 먼저 한국어로 번역한 후 요약해줘. 원문의 핵심 내용을 중심으로 3~4문장의 간결한 요약문을 만들어줘:
 
 ${inputText}`; // Use truncated inputText
 
