@@ -42,8 +42,8 @@ export async function GET(request: Request) {
       const articleData = {
         ...data,
         id: doc.id,
-        pubDate: data.pubDate.toDate().toISOString(),
-        createdAt: data.createdAt?.toDate().toISOString() || new Date().toISOString(),
+        pubDate: data.pubDate.toDate ? data.pubDate.toDate().toISOString() : new Date(data.pubDate).toISOString(),
+        createdAt: data.createdAt?.toDate ? data.createdAt.toDate().toISOString() : (data.createdAt ? new Date(data.createdAt).toISOString() : new Date().toISOString()),
       } as Article;
 
       if (!articleData.image) {
