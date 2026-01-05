@@ -7,11 +7,15 @@ import { useState, useEffect, useCallback } from "react";
 import { ArticleListSkeleton } from "@/components/ui/ArticleListSkeleton";
 
 
+// Define ViewMode type here or import it if shared (simple enough to duplicate or infer)
+type ViewMode = 'grid' | 'masonry';
+
 interface ArticleListProps {
   onArticleClick: (article: Article) => void;
+  viewMode?: ViewMode;
 }
 
-export function ArticleList({ onArticleClick }: ArticleListProps) {
+export function ArticleList({ onArticleClick, viewMode = 'grid' }: ArticleListProps) {
   const searchParams = useSearchParams();
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -73,32 +77,60 @@ export function ArticleList({ onArticleClick }: ArticleListProps) {
     );
   }
 
+  /* Create unique list */
+  const uniqueArticles = articles.length > 0
+    ? Array.from(new Map(articles.map(item => [item.link, item])).values())
+    : [];
+
   return (
     <div className="">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {articles.length > 0 ? (
-          // Deduplicate articles by LINK to prevent visual duplicates if DB has multiple entries
-          Array.from(new Map(articles.map(item => [item.link, item])).values())
-            .map((article, index) => (
+      {viewMode === 'grid' ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {uniqueArticles.length > 0 ? (
+            uniqueArticles.map((article, index) => (
               <ArticleCard
                 key={article.link}
                 article={article}
                 onArticleClick={onArticleClick}
-                priority={index < 2} // Prioritize creating the LCP image for the first couple of items
+                priority={index < 2}
               />
             ))
-        ) : (
-          <div className="col-span-full py-12 text-center">
-            <p className="text-gray-500 dark:text-gray-400 text-lg">
-              {searchTerm
-                ? `"${searchTerm}"(으)로 검색된 게시글이 없습니다.`
-                : currentTag
-                  ? `"${currentTag}" 태그가 포함된 게시글이 없습니다.`
-                  : '해당 카테고리에 게시글이 없습니다.'}
-            </p>
-          </div>
-        )}
-      </div>
+          ) : (
+            <EmptyState searchTerm={searchTerm} currentTag={currentTag} />
+          )}
+        </div>
+      ) : (
+        /* Masonry Layout using CSS Columns */
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+          {uniqueArticles.length > 0 ? (
+            uniqueArticles.map((article, index) => (
+              <div key={article.link} className="break-inside-avoid mb-6">
+                <ArticleCard
+                  article={article}
+                  onArticleClick={onArticleClick}
+                  priority={index < 2}
+                />
+              </div>
+            ))
+          ) : (
+            <EmptyState searchTerm={searchTerm} currentTag={currentTag} />
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function EmptyState({ searchTerm, currentTag }: { searchTerm: string, currentTag: string | null }) {
+  return (
+    <div className="col-span-full py-12 text-center">
+      <p className="text-gray-500 dark:text-gray-400 text-lg">
+        {searchTerm
+          ? `"${searchTerm}"(으)로 검색된 게시글이 없습니다.`
+          : currentTag
+            ? `"${currentTag}" 태그가 포함된 게시글이 없습니다.`
+            : '해당 카테고리에 게시글이 없습니다.'}
+      </p>
     </div>
   );
 }

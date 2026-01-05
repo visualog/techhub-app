@@ -20,7 +20,7 @@ const FEEDS_JSON_PATH = path.join(process.cwd(), 'src', 'data', 'feeds.json');
 const NON_RSS_SOURCES_JSON_PATH = path.join(process.cwd(), 'src', 'data', 'non-rss-sources.json');
 const BOOKMARKS_MD_PATH = path.join(process.cwd(), 'src', 'data', 'bookmarks.md'); // Path to bookmarks.md
 
-// Map for cleaner category IDs
+// Map for clean category IDs
 const CATEGORY_MAP: { [key: string]: string } = {
   "AI": "ai-trend",
   "개발/테크": "dev-blog",
@@ -41,14 +41,24 @@ function parseMarkdownBookmarks(markdown: string): ParsedBookmark[] {
     // Detect top-level category (e.g., "## 🤖 AI (4개)")
     const categoryMatch = line.match(/^##\s*(.*?)\s*\(\d+개\)/);
     if (categoryMatch) {
-      const rawCategoryNameWithEmoji = categoryMatch[1].trim(); // e.g., "🤖 AI" or "💻 개발/테크"
-      // Remove leading emoji and any whitespace immediately following it
-      // Replace any character that is not a letter or number at the start
-      const cleanCategoryText = rawCategoryNameWithEmoji.replace(/^[^\p{L}\p{N}]*/u, '').trim();
-      
-      currentCategory = CATEGORY_MAP[cleanCategoryText];
-      if (!currentCategory) {
-        console.warn(`Category "${rawCategoryNameWithEmoji}" (cleaned to "${cleanCategoryText}") not directly found in CATEGORY_MAP. Defaulting to "${cleanCategoryText.toLowerCase().replace(/[^a-z0-9]+/g, '-')}"`);
+      const rawHeader = categoryMatch[1]; // e.g., "🤖 AI" or "💻 개발/테크"
+
+      // Strategy: Check if any known category key is part of the header string
+      // This bypasses tricky parsing of emojis/whitespace
+      let foundKey: string | null = null;
+      for (const key of Object.keys(CATEGORY_MAP)) {
+        if (rawHeader.includes(key)) {
+          foundKey = key;
+          break;
+        }
+      }
+
+      if (foundKey) {
+        currentCategory = CATEGORY_MAP[foundKey];
+      } else {
+        // Fallback: cleaning attempts
+        const cleanCategoryText = rawHeader.replace(/^[^\p{L}\p{N}]*/u, '').trim();
+        console.warn(`Category "${rawHeader}" not matched in CATEGORY_MAP. Defaulting to slugified: "${cleanCategoryText}"`);
         currentCategory = cleanCategoryText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       }
       continue;
@@ -59,12 +69,12 @@ function parseMarkdownBookmarks(markdown: string): ParsedBookmark[] {
     if (linkMatch && currentCategory) {
       const name = linkMatch[1].trim();
       let url = linkMatch[2].trim();
-      
+
       // Remove trailing slash for consistency
       if (url.endsWith('/')) {
         url = url.slice(0, -1);
       }
-      
+
       bookmarks.push({ name, url, category: currentCategory });
     }
   }
@@ -77,21 +87,24 @@ function guessRssUrl(url: string): string | null {
   if (/(feed|rss|atom)(\.xml|\/|\b)/i.test(url)) {
     return url;
   }
-  
+
   try {
     const parsedUrl = new URL(url);
     const hostname = parsedUrl.hostname;
 
+    // Normalize hostname (remove www)
+    const normalizedHost = hostname.replace(/^www\./, '');
+
     // --- Explicit Mappings (High Priority) ---
     // AI
-    if (url.includes('clova.ai/tech-blog')) return 'https://d2.naver.com/d2.atom'; // NOTE: Clova often shares D2 feed or has none, but D2 is safest for Naver Tech
-    if (url.includes('vcat.ai/blog')) return 'https://vcat.ai/blog/rss.xml'; 
+    if (url.includes('clova.ai/tech-blog')) return 'https://d2.naver.com/d2.atom';
+    if (url.includes('vcat.ai/blog')) return 'https://vcat.ai/blog/rss.xml';
     if (url.includes('openai.com')) return 'https://openai.com/index/rss.xml';
     if (url.includes('blog.google/intl/ko-kr')) return 'https://blog.google/intl/ko-kr/rss/';
-    
+
     // Dev/Tech
     if (url.includes('d2.naver.com')) return 'https://d2.naver.com/d2.atom';
-    if (url.includes('tech.kakao.com')) return 'https://tech.kakao.com/feed/'; 
+    if (url.includes('tech.kakao.com')) return 'https://tech.kakao.com/feed/';
     if (url.includes('toss.tech')) return 'https://toss.tech/rss.xml';
     if (url.includes('app.dalpha.so/blog')) return 'https://app.dalpha.so/blog/feed';
     if (url.includes('techblog.woowahan.com')) return 'https://techblog.woowahan.com/feed/';
@@ -99,14 +112,14 @@ function guessRssUrl(url: string): string | null {
     if (url.includes('d2sf.naver.com')) return 'https://d2sf.naver.com/atom';
     if (url.includes('techblogposts.com')) return 'https://www.techblogposts.com/ko/rss';
     if (url.includes('44bits.io')) return 'https://www.44bits.io/ko/feed';
-    
+
     // Design/UX
-    if (url.includes('designcompass.org/magazine')) return 'https://designcompass.org/feed/';
+    if (url.includes('designcompass.org')) return 'https://designcompass.org/feed/';
     if (url.includes('pxd.co.kr')) return 'https://story.pxd.co.kr/feed/';
     if (url.includes('blog.rightbrain.co.kr')) return 'https://blog.rightbrain.co.kr/feed/';
-    if (url.includes('uibowl.io')) return 'https://uibowl.io/blog/rss.xml'; // Guess
-    if (url.includes('figmapedia.com')) return 'https://www.figmapedia.com/rss.xml'; // Guess
-    if (url.includes('wwit.design')) return 'https://wwit.design/rss.xml'; // Guess
+    if (url.includes('uibowl.io')) return 'https://uibowl.io/blog/rss.xml';
+    if (url.includes('figmapedia.com')) return 'https://www.figmapedia.com/rss.xml';
+    if (url.includes('wwit.design')) return 'https://wwit.design/rss.xml';
 
     // Marketing/Trends
     if (url.includes('blog.opensurvey.co.kr')) return 'https://blog.opensurvey.co.kr/feed/';
@@ -116,67 +129,74 @@ function guessRssUrl(url: string): string | null {
     if (url.includes('kakao.vc/blog')) return 'https://www.kakao.vc/blog/feed/';
     if (url.includes('blog.nasmedia.co.kr')) return 'https://blog.nasmedia.co.kr/feed';
 
-    // Platform Specific RegEx
-    
+    // Platform Specific Heuristics
+
     // Tistory
-    if (hostname.includes('tistory.com')) {
-      return `${parsedUrl.origin}/rss`;
+    // Handle specific post pages: lemondesign.tistory.com/65 -> lemondesign.tistory.com/rss
+    if (normalizedHost.includes('tistory.com')) {
+      return `${parsedUrl.protocol}//${hostname}/rss`;
     }
 
     // Brunch
-    if (url.includes('brunch.co.kr')) {
+    // Handle @username patterns: brunch.co.kr/@user/123 or brunch.co.kr/@user
+    if (normalizedHost.includes('brunch.co.kr')) {
       if (parsedUrl.pathname.endsWith('/feed')) return url;
-      // Extract username from @username in path
+
       const pathParts = parsedUrl.pathname.split('/').filter(p => p);
       const userPart = pathParts.find(p => p.startsWith('@'));
       if (userPart) {
+        // userPart includes the @, e.g., @rightbrain
         return `https://brunch.co.kr/rss/${userPart}`;
       }
       return null;
     }
 
     // Medium
-    if (hostname.includes('medium.com')) {
-        if (parsedUrl.pathname.startsWith('/feed/')) return url;
-        // Check for /@username
-        const pathParts = parsedUrl.pathname.split('/').filter(p => p);
-        if (pathParts[0] && pathParts[0].startsWith('@')) {
-          return `${parsedUrl.origin}/feed/${pathParts[0]}`;
-        } 
-        // Check for custom domain publication or standard publication
-        // If it's a publication URL like medium.com/publication-name
-        if (pathParts.length === 1 && !pathParts[0].startsWith('@') && !['about', 'membership'].includes(pathParts[0])) {
-             return `${parsedUrl.origin}/feed/${pathParts[0]}`;
-        }
+    if (normalizedHost.includes('medium.com')) {
+      if (parsedUrl.pathname.startsWith('/feed/')) return url;
+
+      const pathParts = parsedUrl.pathname.split('/').filter(p => p);
+      if (pathParts[0] && pathParts[0].startsWith('@')) {
+        // medium.com/@user -> medium.com/feed/@user
+        return `${parsedUrl.origin}/feed/${pathParts[0]}`;
+      }
+      // Custom domain or publication path logic
+      // If path is like medium.com/publication, try medium.com/feed/publication
+      if (pathParts.length === 1 && !pathParts[0].startsWith('@') && !['about', 'membership', 'tag'].includes(pathParts[0])) {
+        return `${parsedUrl.origin}/feed/${pathParts[0]}`;
+      }
     }
 
     // Velog
-    if (hostname.includes('velog.io')) {
-        // velog.io/@username
-         const pathParts = parsedUrl.pathname.split('/').filter(p => p);
-         if (pathParts[0] && pathParts[0].startsWith('@')) {
-             return `https://v2.velog.io/rss/${pathParts[0]}`;
-         }
+    if (normalizedHost.includes('velog.io')) {
+      const pathParts = parsedUrl.pathname.split('/').filter(p => p);
+      if (pathParts[0] && pathParts[0].startsWith('@')) {
+        return `https://v2.velog.io/rss/${pathParts[0]}`;
+      }
     }
-    
-    // WordPress common patterns (wp-content, etc. usually imply /feed)
-    // difficult to guess without checking, but let's try standard /feed
-    
-    // URLs confirmed to NOT have RSS or too complex to guess
-    if (url.includes('coupang.jobs')) return null; 
-    if (url.includes('data.go.kr')) return null;
-    if (url.includes('design.co.kr')) return null;
-    if (url.includes('gdweb.co.kr')) return null;
-    if (url.includes('lifeboosta.com')) return null;
-    if (url.includes('canva.com')) return null;
-    if (url.includes('pinterest.com')) return null;
-    if (url.includes('dribbble.com')) return null;
-    if (url.includes('awwwards.com')) return null;
-    if (url.includes('spline.design')) return null;
-    if (url.includes('discord.com')) return null;
-    if (url.includes('justinmind.com')) return null;
-    if (url.includes('hongong.hanbit.co.kr')) return null; // Often static or complex
-    
+
+    // Known Non-RSS or too complex
+    const nonRssDomains = [
+      'coupang.jobs',
+      'data.go.kr',
+      'design.co.kr',
+      'gdweb.co.kr',
+      'lifeboosta.com',
+      'canva.com',
+      'pinterest.com',
+      'dribbble.com',
+      'awwwards.com',
+      'spline.design',
+      'discord.com',
+      'justinmind.com',
+      'hongong.hanbit.co.kr',
+      'abduzeedo.com',
+      'creativemarket.com',
+      'tympanus.net'
+    ];
+
+    if (nonRssDomains.some(d => normalizedHost.includes(d))) return null;
+
   } catch (e) {
     // Invalid URL, ignore
   }
@@ -218,35 +238,44 @@ async function main() {
 
   const newFeeds: Feed[] = [];
   const newNonRssSources: ParsedBookmark[] = [];
+  const urlsToRemoveFromNonRSS = new Set<string>();
 
   // Keep track of URLs we've already processed to avoid duplicates
   const processedRssUrls = new Set(existingFeeds.map(f => f.rssUrl));
   const processedNonRssUrls = new Set(existingNonRssSources.map(s => s.url));
 
   for (const bm of parsedBookmarks) {
-    // Check if the exact bookmark URL is already processed as a non-RSS source
-    if (processedNonRssUrls.has(bm.url)) {
-      // console.log(`Skipping duplicate non-RSS URL: ${bm.url}`);
-      continue;
-    }
-
     const rssDetectedUrl = guessRssUrl(bm.url);
 
     if (rssDetectedUrl) {
+      // It IS a potential RSS feed.
+
+      // If previously listed as non-RSS, we should remove it from there
+      if (processedNonRssUrls.has(bm.url)) {
+        urlsToRemoveFromNonRSS.add(bm.url);
+      }
+
       if (processedRssUrls.has(rssDetectedUrl)) {
         // console.log(`Skipping duplicate RSS URL: ${rssDetectedUrl}`);
+        // Optionally update category if it was generic before?
+        // For now, let's just skip to preserve ID
         continue;
       }
+
       newFeeds.push({
-        id: `feed-${Math.random().toString(36).substring(2, 9)}`, // Simple unique ID
+        id: `feed-${Math.random().toString(36).substring(2, 9)}`,
         name: bm.name,
         rssUrl: rssDetectedUrl,
         category: bm.category,
       });
       processedRssUrls.add(rssDetectedUrl);
+
     } else {
-      newNonRssSources.push(bm);
-      processedNonRssUrls.add(bm.url);
+      // It is NOT a detected RSS feed.
+      if (!processedNonRssUrls.has(bm.url)) {
+        newNonRssSources.push(bm);
+        processedNonRssUrls.add(bm.url);
+      }
     }
   }
 
@@ -256,9 +285,16 @@ async function main() {
   console.log(`Updated feeds.json with ${newFeeds.length} new RSS feeds. Total feeds: ${updatedFeeds.length}`);
 
   // 5. Save updated non-rss-sources.json
-  const updatedNonRssSources = [...existingNonRssSources, ...newNonRssSources];
-  fs.writeFileSync(NON_RSS_SOURCES_JSON_PATH, JSON.stringify(updatedNonRssSources, null, 2), 'utf-8');
-  console.log(`Updated non-rss-sources.json with ${newNonRssSources.length} new non-RSS sources. Total non-RSS: ${updatedNonRssSources.length}`);
+  // Filter out any sources that are now in RSS list or removals
+  let finalNonRssSources = [...existingNonRssSources, ...newNonRssSources];
+
+  if (urlsToRemoveFromNonRSS.size > 0) {
+    console.log(`Removing ${urlsToRemoveFromNonRSS.size} items from non-RSS list as they are now detected as RSS feeds.`);
+    finalNonRssSources = finalNonRssSources.filter(item => !urlsToRemoveFromNonRSS.has(item.url));
+  }
+
+  fs.writeFileSync(NON_RSS_SOURCES_JSON_PATH, JSON.stringify(finalNonRssSources, null, 2), 'utf-8');
+  console.log(`Updated non-rss-sources.json with ${newNonRssSources.length} new non-RSS sources. Final non-RSS: ${finalNonRssSources.length}`);
 
   console.log('Feed update complete.');
 }

@@ -184,5 +184,29 @@
     "name": "kakao ventures blog",
     "rssUrl": "https://www.kakao.vc/blog/feed/",
     "category": "startup-vc"
+  },
+  {
+    "id": "feed-ynpg2bt",
+    "name": "Figmapedia",
+    "rssUrl": "https://www.figmapedia.com/rss.xml",
+    "category": "design-ux"
+  },
+  {
+    "id": "feed-sbcibkx",
+    "name": "What was IT",
+    "rssUrl": "https://wwit.design/rss.xml",
+    "category": "design-ux"
+  },
+  {
+    "id": "feed-x0ncnck",
+    "name": "UI Bowl",
+    "rssUrl": "https://uibowl.io/blog/rss.xml",
+    "category": "design-ux"
+  },
+  {
+    "id": "feed-x969i7c",
+    "name": "나스미디어 10월 트렌드",
+    "rssUrl": "https://blog.nasmedia.co.kr/feed",
+    "category": "marketing"
   }
 ]

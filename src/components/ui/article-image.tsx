@@ -27,6 +27,7 @@ export const ArticleImage = ({ src, alt, isVideo = false, priority = false }: Ar
                     className="w-full h-auto transition-transform duration-300"
                     style={{ objectFit: "contain" }}
                     priority={priority}
+                    unoptimized={true}
                 />
                 {isVideo && <PlayIcon />}
             </div>

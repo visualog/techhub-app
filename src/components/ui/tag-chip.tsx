@@ -14,13 +14,16 @@ interface TagChipProps {
  * 'default' variant for Tags (Gray background, clickable).
  */
 export const TagChip = ({ label, onClick, variant = 'default', className }: TagChipProps) => {
-    const baseStyles = "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors";
+    // Reduced font weight from 'font-medium' to default (roughly 400), or specify 'font-normal' explicitly if needed.
+    // However, user asked for "one step thinner", and current is 'font-medium' (500). 'font-normal' (400) is appropriate.
+    const baseStyles = "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-normal transition-colors";
 
     const variants = {
         primary: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
-        default: `bg-gray-100 text-gray-800 dark:bg-neutral-800 dark:text-gray-300 ${onClick
-                ? 'cursor-pointer hover:bg-indigo-100 hover:text-indigo-700 dark:hover:bg-indigo-900/30 dark:hover:text-indigo-300'
-                : ''
+        // Matched colors from TagFilter: bg-neutral-200 text-gray-700 (light), bg-neutral-800 text-gray-300 (dark)
+        default: `bg-neutral-200 text-gray-700 dark:bg-neutral-800 dark:text-gray-300 ${onClick
+            ? 'cursor-pointer hover:bg-neutral-300 hover:text-gray-900 dark:hover:bg-neutral-700 dark:hover:text-gray-100'
+            : ''
             }`
     };
 
