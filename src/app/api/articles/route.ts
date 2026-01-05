@@ -16,9 +16,16 @@ export async function GET(request: NextRequest) {
     const category = searchParams.get("category");
     const search = searchParams.get("search");
 
+    const tag = searchParams.get("tag");
+
     let query: FirebaseFirestore.Query = db.collection("articles");
 
-    // 1. Category Filter (Database Level)
+    // 1. Tag Filter (Database Level)
+    if (tag) {
+      query = query.where("tags", "array-contains", tag);
+    }
+
+    // 2. Category Filter (Database Level)
     if (category && category !== "all") {
       query = query.where("category", "==", category);
     }
@@ -38,7 +45,7 @@ export async function GET(request: NextRequest) {
         // Convert Timestamp to string for JSON serialization
         pubDate: data.pubDate?.toDate ? data.pubDate.toDate().toISOString() : data.pubDate,
         createdAt: data.createdAt?.toDate ? data.createdAt.toDate().toISOString() : data.createdAt,
-      } as Article;
+      } as unknown as Article;
     });
 
     // 2. Search Filter (Memory Level for Phase 1)
@@ -56,10 +63,10 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json(articles);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error fetching articles:", error);
     return NextResponse.json(
-      { error: "Internal Server Error", details: error.message },
+      { error: "Internal Server Error", details: (error as Error).message },
       { status: 500 }
     );
   }

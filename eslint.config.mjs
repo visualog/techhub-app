@@ -11,6 +11,10 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "dist/**",
+    "scripts/**",
+    "check_date.js",
+    "**/firebaseAdmin.js",
     "next-env.d.ts",
   ]),
 ]);

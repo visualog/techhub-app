@@ -4,7 +4,7 @@ import axios from "axios";
 
 // 1. Define the AISummarizerProvider Interface
 interface AISummarizerProvider {
-  summarize(text: string, title?: string): Promise<string | null>;
+  summarize(text: string): Promise<string | null>;
 }
 
 // 2. Implement GeminiSummarizerProvider
@@ -20,7 +20,7 @@ class GeminiSummarizerProvider implements AISummarizerProvider {
     this.modelName = modelName;
   }
 
-  async summarize(text: string, title?: string): Promise<string | null> {
+  async summarize(text: string): Promise<string | null> {
 
     const model = this.genAI.getGenerativeModel({ model: this.modelName });
     const prompt = `다음 텍스트를 한국어로 요약해줘. 원문의 핵심 내용을 중심으로 3~4문장의 간결한 요약문을 만들어줘:
@@ -32,8 +32,8 @@ ${text}`;
       const response = result.response;
       const summary = response.text();
       return summary;
-    } catch (error: any) {
-      console.error(`Error generating summary with Gemini (${this.modelName}):`, error.message);
+    } catch (error: unknown) {
+      console.error(`Error generating summary with Gemini (${this.modelName}):`, (error as Error).message);
       return null;
     }
   }
@@ -53,7 +53,7 @@ class HuggingFaceSummarizerProvider implements AISummarizerProvider {
     this.modelUrl = modelUrl;
   }
 
-  async summarize(text: string, title?: string): Promise<string | null> {
+  async summarize(text: string): Promise<string | null> {
 
     // Truncate text if it's too long for the model
     let inputText = text;
@@ -83,11 +83,14 @@ class HuggingFaceSummarizerProvider implements AISummarizerProvider {
         console.warn("Hugging Face API returned an unexpected response format.", summaries);
         return null;
       }
-    } catch (error: any) {
-      console.error("Error generating summary with Hugging Face:", error.message);
-      if (error.response) {
-        console.error("Hugging Face API Response Status:", error.response.status);
-        console.error("Hugging Face API Response Data:", error.response.data);
+    } catch (error: unknown) {
+      console.error("Error generating summary with Hugging Face:", (error as Error).message);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ((error as any).response) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        console.error("Hugging Face API Response Status:", (error as any).response.status);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        console.error("Hugging Face API Response Data:", (error as any).response.data);
       }
       return null;
     }
@@ -111,7 +114,7 @@ class OllamaSummarizerProvider implements AISummarizerProvider {
     this.modelName = modelName;
   }
 
-  async summarize(text: string, title?: string): Promise<string | null> {
+  async summarize(text: string): Promise<string | null> {
     if (!text) {
       return null;
     }
@@ -119,7 +122,7 @@ class OllamaSummarizerProvider implements AISummarizerProvider {
     // NEW: Truncate text if it's too long for the model
     let inputText = text;
     if (inputText.length > this.maxInputLength) {
-      console.warn(`[OllamaSummarizer] Input text for article (Title: "${title || 'Unknown'}") truncated from ${inputText.length} to ${this.maxInputLength} characters for Ollama summarization.`);
+      console.warn(`[OllamaSummarizer] Input text truncated from ${inputText.length} to ${this.maxInputLength} characters for Ollama summarization.`);
       inputText = inputText.substring(0, this.maxInputLength);
     }
 
@@ -157,11 +160,14 @@ ${inputText}`; // Use truncated inputText
         console.warn("Ollama API returned an unexpected response format.", response.data);
         return null;
       }
-    } catch (error: any) {
-      console.error("Error generating summary with Ollama:", error.message);
-      if (error.response) {
-        console.error("Ollama API Response Status:", error.response.status);
-        console.error("Ollama API Response Data:", error.response.data);
+    } catch (error: unknown) {
+      console.error("Error generating summary with Ollama:", (error as Error).message);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ((error as any).response) { // axios error often has response
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        console.error("Ollama API Response Status:", (error as any).response.status);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        console.error("Ollama API Response Data:", (error as any).response.data);
       }
       return null;
     }
@@ -210,6 +216,6 @@ export function getAISummarizer(): AISummarizerProvider {
 }
 
 // Export the summarize function that the rss-parser will call
-export const summarize = (text: string, title?: string): Promise<string | null> => {
-  return getAISummarizer().summarize(text, title);
+export const summarize = (text: string): Promise<string | null> => {
+  return getAISummarizer().summarize(text);
 };

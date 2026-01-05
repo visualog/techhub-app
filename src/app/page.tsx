@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { ArticleList } from "@/components/ArticleList";
+import { TagFilter } from '@/components/TagFilter';
 import { useSearchParams } from "next/navigation";
 import { categories } from "@/data/categories";
 import { Article } from '@/data/mock-articles';
@@ -27,15 +28,24 @@ export default function Home() {
 
   return (
     <>
-      <div className="px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 lg:pt-8">
-        <h1 className="text-2xl font-bold mb-4">{categoryName}</h1>
-      </div>
-      <ArticleList onArticleClick={handleArticleClick} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <h1 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">
+              {categoryName === "전체 보기" ? "Latest Articles" : categoryName}
+            </h1>
 
+          </div>
+
+          <TagFilter />
+
+          <ArticleList onArticleClick={handleArticleClick} />
+        </div>
+      </div>
       {selectedArticle && (
-        <ArticleDetailModal 
-          article={selectedArticle} 
-          onClose={handleCloseModal} 
+        <ArticleDetailModal
+          article={selectedArticle}
+          onClose={handleCloseModal}
         />
       )}
     </>

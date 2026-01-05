@@ -5,7 +5,7 @@ import { Article } from "@/data/mock-articles";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
 import { ArticleListSkeleton } from "@/components/ui/ArticleListSkeleton";
-import { Button } from "@/components/ui/button"; // Assuming you have a Button component, otherwise standard button
+
 
 interface ArticleListProps {
   onArticleClick: (article: Article) => void;
@@ -18,6 +18,7 @@ export function ArticleList({ onArticleClick }: ArticleListProps) {
   const [error, setError] = useState<string | null>(null);
 
   const currentCategory = searchParams.get('category') || 'all';
+  const currentTag = searchParams.get('tag');
   const searchTerm = searchParams.get('search') || '';
 
   const fetchArticles = useCallback(async () => {
@@ -27,6 +28,9 @@ export function ArticleList({ onArticleClick }: ArticleListProps) {
       const query = new URLSearchParams();
       if (currentCategory !== 'all') {
         query.set('category', currentCategory);
+      }
+      if (currentTag) {
+        query.set('tag', currentTag);
       }
       if (searchTerm) {
         query.set('search', searchTerm);
@@ -44,7 +48,7 @@ export function ArticleList({ onArticleClick }: ArticleListProps) {
     } finally {
       setLoading(false);
     }
-  }, [currentCategory, searchTerm]);
+  }, [currentCategory, currentTag, searchTerm]);
 
   useEffect(() => {
     fetchArticles();
@@ -70,22 +74,27 @@ export function ArticleList({ onArticleClick }: ArticleListProps) {
   }
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
+    <div className="">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.length > 0 ? (
-          articles.map((article) => (
-            <ArticleCard
-              key={article.id}
-              article={article}
-              onArticleClick={onArticleClick}
-            />
-          ))
+          // Deduplicate articles by LINK to prevent visual duplicates if DB has multiple entries
+          Array.from(new Map(articles.map(item => [item.link, item])).values())
+            .map((article, index) => (
+              <ArticleCard
+                key={article.link}
+                article={article}
+                onArticleClick={onArticleClick}
+                priority={index < 2} // Prioritize creating the LCP image for the first couple of items
+              />
+            ))
         ) : (
           <div className="col-span-full py-12 text-center">
             <p className="text-gray-500 dark:text-gray-400 text-lg">
               {searchTerm
                 ? `"${searchTerm}"(으)로 검색된 게시글이 없습니다.`
-                : '해당 카테고리에 게시글이 없습니다.'}
+                : currentTag
+                  ? `"${currentTag}" 태그가 포함된 게시글이 없습니다.`
+                  : '해당 카테고리에 게시글이 없습니다.'}
             </p>
           </div>
         )}

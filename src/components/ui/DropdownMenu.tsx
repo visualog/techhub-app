@@ -34,8 +34,8 @@ export function DropdownMenu({ trigger, children }: DropdownMenuProps) {
         {trigger}
       </div>
       {isOpen && (
-        <div 
-          className="absolute right-0 mt-2 w-48 bg-white dark:bg-neutral-800 rounded-md shadow-lg py-1 z-20 border border-neutral-200 dark:border-neutral-700"
+        <div
+          className="absolute right-0 mt-2 w-48 bg-white dark:bg-neutral-800 rounded-md shadow-lg py-1 z-[60] border border-neutral-200 dark:border-neutral-700"
           onClick={() => setIsOpen(false)} // Close menu on item click
         >
           {children}
@@ -51,19 +51,19 @@ interface DropdownMenuItemProps {
 }
 
 export function DropdownMenuItem({ children, href }: DropdownMenuItemProps) {
-    const classes = "block px-4 py-2 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer";
+  const classes = "block px-4 py-2 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer";
 
-    if (href) {
-        return (
-            <Link href={href} className={classes}>
-                {children}
-            </Link>
-        );
-    }
-
+  if (href) {
     return (
-        <div className={classes}>
-            {children}
-        </div>
+      <Link href={href} className={classes}>
+        {children}
+      </Link>
     );
+  }
+
+  return (
+    <div className={classes}>
+      {children}
+    </div>
+  );
 }

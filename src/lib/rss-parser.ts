@@ -5,7 +5,8 @@ import { Article } from '@/data/mock-articles';
 import { URL } from 'url';
 import { summarize } from './ai-provider';
 
-const robotsParser = require('robots-parser');
+import robotsParser from 'robots-parser';
+import https from 'https';
 
 const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36';
 
@@ -26,7 +27,7 @@ const parser = new Parser({
   headers: browserHeaders,
 });
 
-const robotsCache = new Map<string, any>();
+const robotsCache = new Map<string, unknown>();
 
 function getImageFromContent(content: string): string | null {
   if (!content) return null;
@@ -54,14 +55,15 @@ async function fetchAndParseArticleContent(link: string): Promise<{ text: string
         robots = robotsParser(robotsUrl, robotsTxt);
         robotsCache.set(url.origin, robots);
         console.log(`- Fetched and cached robots.txt for ${url.origin}`);
-      } catch (error: any) {
-        console.warn(`- Could not fetch or parse robots.txt for ${url.origin}. Assuming allowed.`, error.message);
+      } catch (error: unknown) {
+        console.warn(`- Could not fetch or parse robots.txt for ${url.origin}. Assuming allowed.`, (error as Error).message);
         robots = robotsParser(robotsUrl, ''); // Assume allowed if robots.txt is missing
         robotsCache.set(url.origin, robots);
       }
     }
 
-    if (robots && !robots.isAllowed(link, userAgent)) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (robots && !(robots as any).isAllowed(link, userAgent)) {
       console.warn(`- Crawling disallowed by robots.txt for: ${link}`);
       return { text: null, ogImage: null };
     }
@@ -70,7 +72,7 @@ async function fetchAndParseArticleContent(link: string): Promise<{ text: string
     const { data } = await axios.get(link, {
       timeout: 15000,
       headers: browserHeaders,
-      httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }),
+      httpsAgent: new https.Agent({ rejectUnauthorized: false }),
     });
 
     const $ = cheerio.load(data);
@@ -80,20 +82,20 @@ async function fetchAndParseArticleContent(link: string): Promise<{ text: string
     $('script, style, noscript, iframe, header, footer, nav, aside').remove();
     let articleText = '';
     const mainContent = $('article, main, [role="main"], [role="article"]');
-    
+
     if (mainContent.length > 0) {
       articleText = mainContent.first().text();
     } else {
       articleText = $('body').text();
     }
-    
+
     articleText = articleText.replace(/\s\s+/g, ' ').trim();
     console.log(`- Fetched article from ${link}, Text length: ${articleText.length}, OG Image: ${!!ogImage}`);
 
     return { text: articleText, ogImage };
 
-  } catch (error: any) {
-    console.error(`- Failed to fetch or parse article content from ${link}:`, error.message);
+  } catch (error: unknown) {
+    console.error(`- Failed to fetch or parse article content from ${link}:`, (error as Error).message);
     return { text: null, ogImage: null };
   }
 }
@@ -110,11 +112,11 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
       const { data } = await axios.get(feedUrl, {
         headers: browserHeaders,
         responseType: 'text',
-        httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }),
+        httpsAgent: new https.Agent({ rejectUnauthorized: false }),
       });
       feed = await parser.parseString(data);
     }
-    
+
     const feedHostname = new URL(feed.link || feedUrl).origin;
 
     const articles: Article[] = [];
@@ -127,12 +129,13 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
 
       // 1. Fetch article content and ogImage from the source page
       const { text: articleText, ogImage } = item.link ? await fetchAndParseArticleContent(item.link) : { text: null, ogImage: null };
-      
+
       // 2. Prioritize image sources
+      const itemWithMedia = item as unknown as { media?: { content?: { $?: { url?: string } }, thumbnail?: { $?: { url?: string } } } };
       imageUrl = ogImage // Prioritize Open Graph image
-        || (item as any).media?.content?.$?.url 
-        || (item as any).media?.thumbnail?.$?.url 
-        || item.enclosure?.url 
+        || itemWithMedia.media?.content?.$?.url
+        || itemWithMedia.media?.thumbnail?.$?.url
+        || item.enclosure?.url
         || null;
 
       // Fallback to image inside content if still no image
@@ -154,7 +157,7 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
         }
         await sleep(1000); // Rate limit AI calls
       }
-      
+
       // If summary is still empty, use fallback methods
       if (!summary) {
         if (item.contentSnippet) {
@@ -165,7 +168,7 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
           $('style, script').remove(); // Clean the content
           summary = $('p').first().text().substring(0, 300) || $.text().substring(0, 300);
         }
-         summary = summary.trim();
+        summary = summary.trim();
       }
 
       // --- End of New Extraction Logic ---
@@ -186,11 +189,11 @@ export async function parseRssFeed(feedUrl: string): Promise<Article[]> {
       };
       articles.push(article);
     }
-    
+
     return articles.filter(article => article.title && article.link);
 
-  } catch (error: any) {
-    console.error(`Error parsing RSS feed from ${feedUrl}: ${error.message}`);
+  } catch (error: unknown) {
+    console.error(`Error parsing RSS feed from ${feedUrl}: ${((error as Error).message)}`);
     return [];
   }
 }

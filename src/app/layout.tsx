@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { BookmarksProvider } from "@/context/BookmarksContext";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AuthProvider } from "@/context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,17 +28,19 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <BookmarksProvider>
-            <Header />
-            <div className="max-w-screen-xl mx-auto flex flex-col">
-              <div className="flex flex-1 flex-col md:flex-row">
-                <Sidebar />
-                <main className="flex-1">
-                  {children}
-                </main>
+          <AuthProvider>
+            <BookmarksProvider>
+              <Header />
+              <div className="max-w-screen-xl mx-auto flex flex-col">
+                <div className="flex flex-1 flex-col md:flex-row">
+                  <Sidebar />
+                  <main className="flex-1">
+                    {children}
+                  </main>
+                </div>
               </div>
-            </div>
-          </BookmarksProvider>
+            </BookmarksProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

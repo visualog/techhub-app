@@ -19,8 +19,8 @@ if (typeof window === 'undefined') {
   try {
     const serviceAccountContent = fs.readFileSync(absolutePath, 'utf8');
     serviceAccount = JSON.parse(serviceAccountContent);
-  } catch (error: any) {
-    console.error(`Error loading service account key from ${absolutePath}:`, error.message);
+  } catch (error: unknown) {
+    console.error(`Error loading service account key from ${absolutePath}:`, (error as Error).message);
     throw new Error(`Failed to load or parse Firebase service account key.`);
   }
 }
