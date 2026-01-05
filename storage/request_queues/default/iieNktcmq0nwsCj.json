@@ -1,0 +1,9 @@
+{
+	"id": "iieNktcmq0nwsCj",
+	"json": "{\"id\":\"iieNktcmq0nwsCj\",\"url\":\"https://research.google/blog/how-we-created-hov-specific-etas-in-google-maps/\",\"loadedUrl\":\"https://research.google/blog/how-we-created-hov-specific-etas-in-google-maps/\",\"uniqueKey\":\"https://research.google/blog/how-we-created-hov-specific-etas-in-google-maps\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/how-we-created-hov-specific-etas-in-google-maps/\",\"title\":\"How we created HOV-specific ETAs in Google Maps\",\"pubDate\":\"2025-06-30T12:15:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Data Mining & Modeling\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/how-we-created-hov-specific-etas-in-google-maps/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/HOV_Cover.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:58.699Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/how-we-created-hov-specific-etas-in-google-maps",
+	"url": "https://research.google/blog/how-we-created-hov-specific-etas-in-google-maps/"
+}

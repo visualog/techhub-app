@@ -1,0 +1,9 @@
+{
+	"id": "V4Iaa8JJ93RCce5",
+	"json": "{\"id\":\"V4Iaa8JJ93RCce5\",\"url\":\"https://research.google/blog/toward-provably-private-insights-into-ai-use/\",\"loadedUrl\":\"https://research.google/blog/toward-provably-private-insights-into-ai-use/\",\"uniqueKey\":\"https://research.google/blog/toward-provably-private-insights-into-ai-use\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/toward-provably-private-insights-into-ai-use/\",\"title\":\"Toward provably private insights into AI use\",\"pubDate\":\"2025-10-30T10:56:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Mobile Systems\",\"Security, Privacy and Abuse Prevention\",\"Software Systems & Engineering\"],\"guid\":\"https://research.google/blog/toward-provably-private-insights-into-ai-use/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/ConfFedAnalytics1_Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:17.804Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/toward-provably-private-insights-into-ai-use",
+	"url": "https://research.google/blog/toward-provably-private-insights-into-ai-use/"
+}

@@ -4,7 +4,8 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "noEmit": false,
-    "outDir": "dist"
+    "outDir": "dist",
+    "lib": ["dom", "esnext"]
   },
   "include": ["scripts/**/*.ts", "src/**/*.ts"],
   "exclude": ["node_modules", "src/app", "src/components"]

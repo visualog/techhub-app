@@ -5,6 +5,8 @@ import { Article } from '@/data/mock-articles';
 import { URL } from 'url';
 import { summarize } from './ai-provider';
 
+const robotsParser = require('robots-parser');
+
 const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36';
 
 const browserHeaders = {
@@ -24,6 +26,8 @@ const parser = new Parser({
   headers: browserHeaders,
 });
 
+const robotsCache = new Map<string, any>();
+
 function getImageFromContent(content: string): string | null {
   if (!content) return null;
   const $ = cheerio.load(content);
@@ -39,6 +43,30 @@ async function fetchAndParseArticleContent(link: string): Promise<{ text: string
   if (!link) return { text: null, ogImage: null };
 
   try {
+    // --- Start of robots.txt check ---
+    const url = new URL(link);
+    const robotsUrl = `${url.origin}/robots.txt`;
+    let robots = robotsCache.get(url.origin);
+
+    if (!robots) {
+      try {
+        const { data: robotsTxt } = await axios.get(robotsUrl, { timeout: 5000 });
+        robots = robotsParser(robotsUrl, robotsTxt);
+        robotsCache.set(url.origin, robots);
+        console.log(`- Fetched and cached robots.txt for ${url.origin}`);
+      } catch (error: any) {
+        console.warn(`- Could not fetch or parse robots.txt for ${url.origin}. Assuming allowed.`, error.message);
+        robots = robotsParser(robotsUrl, ''); // Assume allowed if robots.txt is missing
+        robotsCache.set(url.origin, robots);
+      }
+    }
+
+    if (robots && !robots.isAllowed(link, userAgent)) {
+      console.warn(`- Crawling disallowed by robots.txt for: ${link}`);
+      return { text: null, ogImage: null };
+    }
+    // --- End of robots.txt check ---
+
     const { data } = await axios.get(link, {
       timeout: 15000,
       headers: browserHeaders,
@@ -47,18 +75,15 @@ async function fetchAndParseArticleContent(link: string): Promise<{ text: string
 
     const $ = cheerio.load(data);
 
-    // 1. Attempt to get Open Graph image for a better thumbnail
     const ogImage = $('meta[property="og:image"]').attr('content') || null;
 
-    // 2. Get cleaner article text for summarization
-    $('script, style, noscript, iframe, header, footer, nav, aside').remove(); // More aggressive removal
+    $('script, style, noscript, iframe, header, footer, nav, aside').remove();
     let articleText = '';
     const mainContent = $('article, main, [role="main"], [role="article"]');
     
     if (mainContent.length > 0) {
       articleText = mainContent.first().text();
     } else {
-      // Fallback to body if no semantic tags are found
       articleText = $('body').text();
     }
     

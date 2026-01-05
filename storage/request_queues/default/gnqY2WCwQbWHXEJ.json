@@ -1,0 +1,9 @@
+{
+	"id": "gnqY2WCwQbWHXEJ",
+	"json": "{\"id\":\"gnqY2WCwQbWHXEJ\",\"url\":\"https://magazine.cheil.com/57552\",\"loadedUrl\":\"https://n.news.naver.com/mnews/article/015/0005219144?sid=101\",\"uniqueKey\":\"https://magazine.cheil.com/57552\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://magazine.cheil.com/57552\",\"title\":\"광고산업대상 은탑산업훈장 김종현 제일기획 대표\",\"pubDate\":\"2025-12-02T06:31:05.000Z\",\"source\":\"제일 매거진\",\"sourceId\":\"feed-60vh01n\",\"category\":\"it-trend\",\"tags\":[\"In the Media\"],\"guid\":\"https://magazine.cheil.com/?p=57552\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:49:07.634Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://magazine.cheil.com/57552",
+	"url": "https://magazine.cheil.com/57552"
+}

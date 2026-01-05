@@ -1,0 +1,9 @@
+{
+	"id": "1B79RhS2cgoVDOg",
+	"json": "{\"id\":\"1B79RhS2cgoVDOg\",\"url\":\"https://app.dalpha.so/blog/educationcases/\",\"loadedUrl\":\"https://app.dalpha.so/blog/educationcases/\",\"uniqueKey\":\"https://app.dalpha.so/blog/educationcases\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://app.dalpha.so/blog/educationcases/\",\"title\":\"교육 서비스를 AI로 고도화하는 4가지 방법 : 맞춤형 강의 추천, 튜터링 챗봇, 역량 평가, 교육과정 검색\",\"pubDate\":\"2025-08-19T06:45:07.000Z\",\"source\":\"AI 인사이트 블로그 • 달파 블로그\",\"sourceId\":\"feed-fejmicx\",\"category\":\"dev-blog\",\"tags\":[\"AI 성공사례\"],\"guid\":\"68a417cd864e68005e8870c5\",\"imageUrlFromRss\":\"https://app.dalpha.so/blog/content/images/2025/08/----4.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:44:15.646Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://app.dalpha.so/blog/educationcases",
+	"url": "https://app.dalpha.so/blog/educationcases/"
+}

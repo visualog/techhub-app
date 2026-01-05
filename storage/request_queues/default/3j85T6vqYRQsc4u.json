@@ -1,0 +1,9 @@
+{
+	"id": "3j85T6vqYRQsc4u",
+	"json": "{\"id\":\"3j85T6vqYRQsc4u\",\"url\":\"https://d2.naver.com/helloworld/3974242\",\"loadedUrl\":\"https://d2.naver.com/helloworld/3974242\",\"uniqueKey\":\"https://d2.naver.com/helloworld/3974242\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://d2.naver.com/helloworld/3974242\",\"title\":\"서비스 조직에서 Kafka를 사용할 때 알아 두어야 할 것들 (5)\",\"pubDate\":\"2025-11-20T16:13:06.000Z\",\"source\":\"D2 Blog\",\"sourceId\":\"feed-8lmxabs\",\"category\":\"ai-trend\",\"tags\":[],\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:50:40.011Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://d2.naver.com/helloworld/3974242",
+	"url": "https://d2.naver.com/helloworld/3974242"
+}

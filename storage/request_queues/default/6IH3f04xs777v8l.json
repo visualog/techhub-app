@@ -1,0 +1,9 @@
+{
+	"id": "6IH3f04xs777v8l",
+	"json": "{\"id\":\"6IH3f04xs777v8l\",\"url\":\"https://research.google/blog/load-balancing-with-random-job-arrivals/\",\"loadedUrl\":\"https://research.google/blog/load-balancing-with-random-job-arrivals/\",\"uniqueKey\":\"https://research.google/blog/load-balancing-with-random-job-arrivals\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/load-balancing-with-random-job-arrivals/\",\"title\":\"Load balancing with random job arrivals\",\"pubDate\":\"2025-03-20T20:54:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Distributed Systems & Parallel Computing\"],\"guid\":\"https://research.google/blog/load-balancing-with-random-job-arrivals/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/LoadBalancing-1-TreeBalancing.gif\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:22.422Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/load-balancing-with-random-job-arrivals",
+	"url": "https://research.google/blog/load-balancing-with-random-job-arrivals/"
+}

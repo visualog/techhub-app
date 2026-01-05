@@ -1,0 +1,9 @@
+{
+	"id": "gYo73eC5VT3lvY7",
+	"json": "{\"id\":\"gYo73eC5VT3lvY7\",\"url\":\"https://toss.tech/article/toss-next-ml-challenge\",\"loadedUrl\":\"https://toss.tech/article/toss-next-ml-challenge\",\"uniqueKey\":\"https://toss.tech/article/toss-next-ml-challenge\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://toss.tech/article/toss-next-ml-challenge\",\"title\":\"토스 Next ML Challenge - 광고 클릭 예측(PCTR) ML 경진대회 출제 후기\",\"pubDate\":\"2025-12-02T02:06:00.000Z\",\"source\":\"토스 기술 블로그, 토스 테크\",\"sourceId\":\"dev-blog-003\",\"category\":\"dev-blog\",\"tags\":[],\"guid\":\"https://toss.tech/article/toss-next-ml-challenge\",\"imageUrlFromRss\":\"https://static.toss.im/ipd-tcs/toss_core/live/106bbd5e-d423-46e4-8b01-d0bdc0846a2e/image.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:48.690Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://toss.tech/article/toss-next-ml-challenge",
+	"url": "https://toss.tech/article/toss-next-ml-challenge"
+}

@@ -1,0 +1,9 @@
+{
+	"id": "8Msu9azUQomIrRT",
+	"json": "{\"id\":\"8Msu9azUQomIrRT\",\"url\":\"https://research.google/blog/a-differentially-private-framework-for-gaining-insights-into-ai-chatbot-use/\",\"loadedUrl\":\"https://research.google/blog/a-differentially-private-framework-for-gaining-insights-into-ai-chatbot-use/\",\"uniqueKey\":\"https://research.google/blog/a-differentially-private-framework-for-gaining-insights-into-ai-chatbot-use\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/a-differentially-private-framework-for-gaining-insights-into-ai-chatbot-use/\",\"title\":\"A differentially private framework for gaining insights into AI chatbot use\",\"pubDate\":\"2025-12-10T21:59:41.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Responsible AI\",\"Security, Privacy and Abuse Prevention\"],\"guid\":\"https://research.google/blog/a-differentially-private-framework-for-gaining-insights-into-ai-chatbot-use/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/Gaining_insights_into_AI_chatbot_use_hero-1.jpeg\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:07.491Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/a-differentially-private-framework-for-gaining-insights-into-ai-chatbot-use",
+	"url": "https://research.google/blog/a-differentially-private-framework-for-gaining-insights-into-ai-chatbot-use/"
+}

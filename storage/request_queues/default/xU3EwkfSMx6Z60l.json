@@ -1,0 +1,9 @@
+{
+	"id": "xU3EwkfSMx6Z60l",
+	"json": "{\"id\":\"xU3EwkfSMx6Z60l\",\"url\":\"https://toss.tech/article/ast-funnel-visualization\",\"loadedUrl\":\"https://toss.tech/article/ast-funnel-visualization\",\"uniqueKey\":\"https://toss.tech/article/ast-funnel-visualization\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://toss.tech/article/ast-funnel-visualization\",\"title\":\"AST로 Outdated 없는 퍼널 문서 만들기\",\"pubDate\":\"2025-12-24T05:31:00.000Z\",\"source\":\"토스 기술 블로그, 토스 테크\",\"sourceId\":\"dev-blog-003\",\"category\":\"dev-blog\",\"tags\":[],\"guid\":\"https://toss.tech/article/ast-funnel-visualization\",\"imageUrlFromRss\":\"https://static.toss.im/ipd-tcs/toss_core/live/bafab48a-3e2b-41e0-8437-c35d099d0011/1224_tech_inner_1.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:41.435Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://toss.tech/article/ast-funnel-visualization",
+	"url": "https://toss.tech/article/ast-funnel-visualization"
+}

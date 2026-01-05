@@ -1,0 +1,9 @@
+{
+	"id": "VBuuMFokOlO62Mj",
+	"json": "{\"id\":\"VBuuMFokOlO62Mj\",\"url\":\"https://tech.kakao.com/posts/806\",\"loadedUrl\":\"https://tech.kakao.com/posts/806\",\"uniqueKey\":\"https://tech.kakao.com/posts/806\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://tech.kakao.com/posts/806\",\"title\":\"“생각하고 답변하는” 카카오의 하이브리드 멀티모달 언어모델, Kanana-v-4b-hybrid 개발기\",\"pubDate\":\"2026-01-04T15:00:00.000Z\",\"source\":\"tech.kakao.com\",\"sourceId\":\"dev-blog-002\",\"category\":\"dev-blog\",\"tags\":[\"blog\"],\"guid\":\"https://tech.kakao.com/posts/806\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:20.953Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://tech.kakao.com/posts/806",
+	"url": "https://tech.kakao.com/posts/806"
+}

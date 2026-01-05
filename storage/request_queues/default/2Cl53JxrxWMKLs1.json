@@ -1,0 +1,9 @@
+{
+	"id": "2Cl53JxrxWMKLs1",
+	"json": "{\"id\":\"2Cl53JxrxWMKLs1\",\"url\":\"https://research.google/blog/afrimed-qa-benchmarking-large-language-models-for-global-health/\",\"loadedUrl\":\"https://research.google/blog/afrimed-qa-benchmarking-large-language-models-for-global-health/\",\"uniqueKey\":\"https://research.google/blog/afrimed-qa-benchmarking-large-language-models-for-global-health\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/afrimed-qa-benchmarking-large-language-models-for-global-health/\",\"title\":\"AfriMed-QA: Benchmarking large language models for global health\",\"pubDate\":\"2025-09-24T19:11:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Health & Bioscience\",\"Open Source Models & Datasets\"],\"guid\":\"https://research.google/blog/afrimed-qa-benchmarking-large-language-models-for-global-health/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/AfriMedQA-1a-Thumb.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:32.020Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/afrimed-qa-benchmarking-large-language-models-for-global-health",
+	"url": "https://research.google/blog/afrimed-qa-benchmarking-large-language-models-for-global-health/"
+}

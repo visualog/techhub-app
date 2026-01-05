@@ -1,0 +1,9 @@
+{
+	"id": "R7aqcXCFhTywaqy",
+	"json": "{\"id\":\"R7aqcXCFhTywaqy\",\"url\":\"https://toss.tech/article/vulnerability-analysis-automation-1\",\"loadedUrl\":\"https://toss.tech/article/vulnerability-analysis-automation-1\",\"uniqueKey\":\"https://toss.tech/article/vulnerability-analysis-automation-1\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://toss.tech/article/vulnerability-analysis-automation-1\",\"title\":\"LLM을 이용한 서비스 취약점 분석 자동화 #1\",\"pubDate\":\"2025-12-24T08:28:00.000Z\",\"source\":\"토스 기술 블로그, 토스 테크\",\"sourceId\":\"dev-blog-003\",\"category\":\"dev-blog\",\"tags\":[],\"guid\":\"https://toss.tech/article/vulnerability-analysis-automation-1\",\"imageUrlFromRss\":\"https://static.toss.im/ipd-tcs/toss_core/live/3db9d218-f990-4ae4-b2a7-021854ad6e39/image.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:41.149Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://toss.tech/article/vulnerability-analysis-automation-1",
+	"url": "https://toss.tech/article/vulnerability-analysis-automation-1"
+}

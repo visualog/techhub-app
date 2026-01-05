@@ -1,0 +1,9 @@
+{
+	"id": "MRDPjd6fLppTMks",
+	"json": "{\"id\":\"MRDPjd6fLppTMks\",\"url\":\"https://research.google/blog/benchmarking-llms-for-global-health/\",\"loadedUrl\":\"https://research.google/blog/benchmarking-llms-for-global-health/\",\"uniqueKey\":\"https://research.google/blog/benchmarking-llms-for-global-health\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/benchmarking-llms-for-global-health/\",\"title\":\"Benchmarking LLMs for global health\",\"pubDate\":\"2025-04-30T10:33:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Global\",\"Health & Bioscience\",\"Responsible AI\"],\"guid\":\"https://research.google/blog/benchmarking-llms-for-global-health/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/TRINDs2_PyramidHero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:13.285Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/benchmarking-llms-for-global-health",
+	"url": "https://research.google/blog/benchmarking-llms-for-global-health/"
+}

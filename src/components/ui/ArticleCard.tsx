@@ -73,7 +73,7 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
   return (
     <>
       {/* 메인 카드 컨테이너 - relative positioning으로 북마크 버튼 배치 */}
-      <div 
+      <div
         className="relative block h-full group cursor-pointer"
         onClick={() => onArticleClick(article)}
       >
@@ -112,10 +112,10 @@ export function ArticleCard({ article, onArticleClick }: ArticleCardProps) {
             <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-white leading-tight">
               {article.title}
             </h3>
-            {/* 아티클 요약 - 최대 3줄까지 표시 (line-clamp-3) */}
-            <p className="text-neutral-400 dark:text-neutral-600 text-sm mb-3 line-clamp-3">
+            {/* 아티클 요약 - 목록에서는 숨김 처리 */}
+            {/* <p className="text-neutral-400 dark:text-neutral-600 text-sm mb-3 line-clamp-3">
               {article.summary}
-            </p>
+            </p> */}
             {/* 태그 목록 */}
             <div className="flex items-center gap-2 mb-3">
               {article.tags.slice(0, 2).map((tag, index) => (

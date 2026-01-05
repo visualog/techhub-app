@@ -1,0 +1,9 @@
+{
+	"id": "PC7fRUpAzNhDFwX",
+	"json": "{\"id\":\"PC7fRUpAzNhDFwX\",\"url\":\"https://research.google/blog/differential-privacy-on-trust-graphs/\",\"loadedUrl\":\"https://research.google/blog/differential-privacy-on-trust-graphs/\",\"uniqueKey\":\"https://research.google/blog/differential-privacy-on-trust-graphs\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/differential-privacy-on-trust-graphs/\",\"title\":\"Differential privacy on trust graphs\",\"pubDate\":\"2025-05-13T11:41:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Security, Privacy and Abuse Prevention\"],\"guid\":\"https://research.google/blog/differential-privacy-on-trust-graphs/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/DPTrustGraph1_ExampleHero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:08.232Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/differential-privacy-on-trust-graphs",
+	"url": "https://research.google/blog/differential-privacy-on-trust-graphs/"
+}

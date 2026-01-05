@@ -1,0 +1,9 @@
+{
+	"id": "F08iyG6Axq6skn0",
+	"json": "{\"id\":\"F08iyG6Axq6skn0\",\"url\":\"https://research.google/blog/the-anatomy-of-a-personal-health-agent/\",\"loadedUrl\":\"https://research.google/blog/the-anatomy-of-a-personal-health-agent/\",\"uniqueKey\":\"https://research.google/blog/the-anatomy-of-a-personal-health-agent\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/the-anatomy-of-a-personal-health-agent/\",\"title\":\"The anatomy of a personal health agent\",\"pubDate\":\"2025-09-30T14:41:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Health & Bioscience\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/the-anatomy-of-a-personal-health-agent/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/PHA8_Results1body.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:30.468Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/the-anatomy-of-a-personal-health-agent",
+	"url": "https://research.google/blog/the-anatomy-of-a-personal-health-agent/"
+}

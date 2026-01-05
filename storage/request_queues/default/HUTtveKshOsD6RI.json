@@ -1,0 +1,9 @@
+{
+	"id": "HUTtveKshOsD6RI",
+	"json": "{\"id\":\"HUTtveKshOsD6RI\",\"url\":\"https://d2.naver.com/helloworld/0931890\",\"loadedUrl\":\"https://d2.naver.com/helloworld/0931890\",\"uniqueKey\":\"https://d2.naver.com/helloworld/0931890\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://d2.naver.com/helloworld/0931890\",\"title\":\"VLOps:Event-driven MLOps & Omni-Evaluator\",\"pubDate\":\"2025-12-03T16:05:10.000Z\",\"source\":\"D2 Blog\",\"sourceId\":\"feed-8lmxabs\",\"category\":\"ai-trend\",\"tags\":[],\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:50:07.177Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://d2.naver.com/helloworld/0931890",
+	"url": "https://d2.naver.com/helloworld/0931890"
+}

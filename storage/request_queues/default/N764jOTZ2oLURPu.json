@@ -1,0 +1,9 @@
+{
+	"id": "N764jOTZ2oLURPu",
+	"json": "{\"id\":\"N764jOTZ2oLURPu\",\"url\":\"https://app.dalpha.so/blog/news-helloai/\",\"loadedUrl\":\"https://app.dalpha.so/blog/news-helloai/\",\"uniqueKey\":\"https://app.dalpha.so/blog/news-helloai\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://app.dalpha.so/blog/news-helloai/\",\"title\":\"[헬로AI] “최신 모델, 최적 구현“ 달파의 모듈형 AI 기술력은 승리한다\",\"pubDate\":\"2025-08-27T05:31:10.000Z\",\"source\":\"AI 인사이트 블로그 • 달파 블로그\",\"sourceId\":\"feed-fejmicx\",\"category\":\"dev-blog\",\"tags\":[\"달파뉴스\"],\"guid\":\"68abe384864e68005e887253\",\"imageUrlFromRss\":\"https://app.dalpha.so/blog/content/images/2025/08/----7.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:44:13.360Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://app.dalpha.so/blog/news-helloai",
+	"url": "https://app.dalpha.so/blog/news-helloai/"
+}

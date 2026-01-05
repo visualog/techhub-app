@@ -11,6 +11,6 @@ export const categories: Category[] = [
   { id: "it-trend", name: "IT 트렌드" },
   { id: "marketing", name: "마케팅" },
   { id: "startup-vc", name: "스타트업/VC" },
-  { id: "ai", name: "AI" },
-  { id: "startup-support", name: "정책/지원" },
+  { id: "ai-trend", name: "AI" },
+  { id: "policy-support", name: "정책/지원" },
 ];

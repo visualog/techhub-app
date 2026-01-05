@@ -1,0 +1,9 @@
+{
+	"id": "y0aTiFDCCeBDGD9",
+	"json": "{\"id\":\"y0aTiFDCCeBDGD9\",\"url\":\"https://d2.naver.com/helloworld/2678553\",\"loadedUrl\":\"https://d2.naver.com/helloworld/2678553\",\"uniqueKey\":\"https://d2.naver.com/helloworld/2678553\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://d2.naver.com/helloworld/2678553\",\"title\":\"사용자의 목소리를 AI로 재현하다: LLM기반 Multi Agent UX플랫폼 개발기\",\"pubDate\":\"2025-12-02T16:52:17.000Z\",\"source\":\"D2 Blog\",\"sourceId\":\"feed-8lmxabs\",\"category\":\"ai-trend\",\"tags\":[],\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:50:13.493Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://d2.naver.com/helloworld/2678553",
+	"url": "https://d2.naver.com/helloworld/2678553"
+}

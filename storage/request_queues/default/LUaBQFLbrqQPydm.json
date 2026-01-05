@@ -1,0 +1,9 @@
+{
+	"id": "LUaBQFLbrqQPydm",
+	"json": "{\"id\":\"LUaBQFLbrqQPydm\",\"url\":\"https://research.google/blog/achieving-10000x-training-data-reduction-with-high-fidelity-labels/\",\"loadedUrl\":\"https://research.google/blog/achieving-10000x-training-data-reduction-with-high-fidelity-labels/\",\"uniqueKey\":\"https://research.google/blog/achieving-10000x-training-data-reduction-with-high-fidelity-labels\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/achieving-10000x-training-data-reduction-with-high-fidelity-labels/\",\"title\":\"Achieving 10,000x training data reduction with high-fidelity labels\",\"pubDate\":\"2025-08-07T09:46:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Human-Computer Interaction and Visualization\",\"Machine Intelligence\",\"Security, Privacy and Abuse Prevention\"],\"guid\":\"https://research.google/blog/achieving-10000x-training-data-reduction-with-high-fidelity-labels/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/CurationStrategies_ProcessHero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:46.080Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/achieving-10000x-training-data-reduction-with-high-fidelity-labels",
+	"url": "https://research.google/blog/achieving-10000x-training-data-reduction-with-high-fidelity-labels/"
+}

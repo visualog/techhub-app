@@ -1,0 +1,9 @@
+{
+	"id": "VxoV6Og87KX6bAy",
+	"json": "{\"id\":\"VxoV6Og87KX6bAy\",\"url\":\"https://research.google/blog/making-llms-more-accurate-by-using-all-of-their-layers/\",\"loadedUrl\":\"https://research.google/blog/making-llms-more-accurate-by-using-all-of-their-layers/\",\"uniqueKey\":\"https://research.google/blog/making-llms-more-accurate-by-using-all-of-their-layers\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/making-llms-more-accurate-by-using-all-of-their-layers/\",\"title\":\"Making LLMs more accurate by using all of their layers\",\"pubDate\":\"2025-09-17T17:00:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Generative AI\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/making-llms-more-accurate-by-using-all-of-their-layers/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/SLED-0-Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:34.695Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/making-llms-more-accurate-by-using-all-of-their-layers",
+	"url": "https://research.google/blog/making-llms-more-accurate-by-using-all-of-their-layers/"
+}

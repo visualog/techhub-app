@@ -39,7 +39,9 @@ jobs:
       - name: Run Feed Collector Script
         env:
           FIREBASE_SERVICE_ACCOUNT_KEY_PATH: ./serviceAccountKey.json
-        run: node dist/scripts/collect-feeds.js
+          AI_SUMMARIZER_PROVIDER: "OLLAMA"
+          OLLAMA_MODEL_NAME: "exaone3.5:2.4b"
+        run: node dist/scripts/crawl-and-summarize.js
         id: run_script
         continue-on-error: true # Allow job to finish even if script fails
 

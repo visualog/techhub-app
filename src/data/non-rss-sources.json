@@ -113,5 +113,60 @@
     "name": "나스미디어 10월 트렌드",
     "url": "https://blog.nasmedia.co.kr/entry/2025/10-trendissue-media1",
     "category": "marketing"
+  },
+  {
+    "name": "공공데이터포털",
+    "url": "https://www.data.go.kr",
+    "category": "dev-blog"
+  },
+  {
+    "name": "디자인코리아",
+    "url": "https://design.co.kr",
+    "category": "design-ux"
+  },
+  {
+    "name": "굿디자인웹",
+    "url": "https://www.gdweb.co.kr/main",
+    "category": "design-ux"
+  },
+  {
+    "name": "Muz.li",
+    "url": "https://medium.muz.li",
+    "category": "design-ux"
+  },
+  {
+    "name": "Abduzeedo",
+    "url": "https://abduzeedo.com/node?page=1",
+    "category": "design-ux"
+  },
+  {
+    "name": "Codrops",
+    "url": "https://tympanus.net/codrops",
+    "category": "design-ux"
+  },
+  {
+    "name": "Creative Boom",
+    "url": "https://www.creativeboom.com",
+    "category": "design-ux"
+  },
+  {
+    "name": "UX Planet",
+    "url": "https://uxplanet.org",
+    "category": "design-ux"
+  },
+  {
+    "name": "UX Collective",
+    "url": "https://uxdesign.cc",
+    "category": "design-ux"
+  },
+  {
+    "name": "It's Nice That",
+    "url": "https://www.itsnicethat.com",
+    "category": "design-ux"
+  },
+  {
+    "name": "Motion.dev Blog",
+    "url": "https://motion.dev/blog",
+    "category": "design-ux"
   }
 ]

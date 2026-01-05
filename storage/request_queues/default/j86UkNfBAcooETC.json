@@ -1,0 +1,9 @@
+{
+	"id": "j86UkNfBAcooETC",
+	"json": "{\"id\":\"j86UkNfBAcooETC\",\"url\":\"https://research.google/blog/using-ai-to-identify-genetic-variants-in-tumors-with-deepsomatic/\",\"loadedUrl\":\"https://research.google/blog/using-ai-to-identify-genetic-variants-in-tumors-with-deepsomatic/\",\"uniqueKey\":\"https://research.google/blog/using-ai-to-identify-genetic-variants-in-tumors-with-deepsomatic\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/using-ai-to-identify-genetic-variants-in-tumors-with-deepsomatic/\",\"title\":\"Using AI to identify genetic variants in tumors with DeepSomatic\",\"pubDate\":\"2025-10-16T16:33:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"General Science\",\"Health & Bioscience\",\"Open Source Models & Datasets\"],\"guid\":\"https://research.google/blog/using-ai-to-identify-genetic-variants-in-tumors-with-deepsomatic/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/DeepSomatic-0a-Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:24.648Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/using-ai-to-identify-genetic-variants-in-tumors-with-deepsomatic",
+	"url": "https://research.google/blog/using-ai-to-identify-genetic-variants-in-tumors-with-deepsomatic/"
+}

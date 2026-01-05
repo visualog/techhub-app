@@ -1,0 +1,9 @@
+{
+	"id": "mqVwJzyiiSFua71",
+	"json": "{\"id\":\"mqVwJzyiiSFua71\",\"url\":\"https://toss.tech/article/payments-legacy-4\",\"loadedUrl\":\"https://toss.tech/article/payments-legacy-4\",\"uniqueKey\":\"https://toss.tech/article/payments-legacy-4\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://toss.tech/article/payments-legacy-4\",\"title\":\"토스페이먼츠의 Open API 생태계\",\"pubDate\":\"2025-11-28T01:00:00.000Z\",\"source\":\"토스 기술 블로그, 토스 테크\",\"sourceId\":\"dev-blog-003\",\"category\":\"dev-blog\",\"tags\":[],\"guid\":\"https://toss.tech/article/payments-legacy-4\",\"imageUrlFromRss\":\"https://static.toss.im/ipd-tcs/toss_core/live/048344e5-15b2-4746-b702-b0d7c5a44f78/image.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:51.739Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://toss.tech/article/payments-legacy-4",
+	"url": "https://toss.tech/article/payments-legacy-4"
+}

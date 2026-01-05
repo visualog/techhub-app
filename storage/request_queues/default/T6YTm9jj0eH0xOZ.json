@@ -1,0 +1,9 @@
+{
+	"id": "T6YTm9jj0eH0xOZ",
+	"json": "{\"id\":\"T6YTm9jj0eH0xOZ\",\"url\":\"https://d2.naver.com/helloworld/8677833\",\"loadedUrl\":\"https://d2.naver.com/helloworld/8677833\",\"uniqueKey\":\"https://d2.naver.com/helloworld/8677833\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://d2.naver.com/helloworld/8677833\",\"title\":\"Telegraf로 커스텀 지표 수집하기: Exporter 개발 경험 공유\",\"pubDate\":\"2025-11-18T14:39:13.000Z\",\"source\":\"D2 Blog\",\"sourceId\":\"feed-8lmxabs\",\"category\":\"ai-trend\",\"tags\":[],\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:50:46.465Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://d2.naver.com/helloworld/8677833",
+	"url": "https://d2.naver.com/helloworld/8677833"
+}

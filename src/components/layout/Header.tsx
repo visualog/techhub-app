@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { SearchBar } from '@/components/ui/SearchBar';
 import { Avatar } from '@/components/ui/Avatar';
 import { DropdownMenu, DropdownMenuItem } from '@/components/ui/DropdownMenu';
+import { ModeToggle } from '@/components/mode-toggle';
 
 export function Header() {
   return (
@@ -15,6 +16,7 @@ export function Header() {
         <SearchBar />
       </div>
       <div className="flex items-center gap-4">
+        <ModeToggle />
         <DropdownMenu trigger={<Avatar />}>
           <DropdownMenuItem href="/bookmarks">
             북마크

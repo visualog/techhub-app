@@ -1,0 +1,9 @@
+{
+	"id": "psRqrsuro99Ou7c",
+	"json": "{\"id\":\"psRqrsuro99Ou7c\",\"url\":\"https://d2.naver.com/news/7477295\",\"loadedUrl\":\"https://d2.naver.com/news/7477295\",\"uniqueKey\":\"https://d2.naver.com/news/7477295\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://d2.naver.com/news/7477295\",\"title\":\"[인턴십] 2026 NAVER AI CHALLENGE를 소개합니다.\",\"pubDate\":\"2025-12-10T19:41:17.000Z\",\"source\":\"D2 Blog\",\"sourceId\":\"feed-8lmxabs\",\"category\":\"ai-trend\",\"tags\":[],\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:49:55.755Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://d2.naver.com/news/7477295",
+	"url": "https://d2.naver.com/news/7477295"
+}

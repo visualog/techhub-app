@@ -4,7 +4,7 @@ import axios from "axios";
 
 // 1. Define the AISummarizerProvider Interface
 interface AISummarizerProvider {
-  summarize(text: string): Promise<string | null>;
+  summarize(text: string, title?: string): Promise<string | null>;
 }
 
 // 2. Implement GeminiSummarizerProvider
@@ -14,16 +14,13 @@ class GeminiSummarizerProvider implements AISummarizerProvider {
 
   constructor(apiKey: string, modelName: string) {
     if (!apiKey) {
-      throw new Error("GEMINI_API_KEY environment variable is not set for GeminiSummarizerProvider.");
+      throw new Error("GEMINI_API_KEY environment variable is not set.");
     }
     this.genAI = new GoogleGenerativeAI(apiKey);
     this.modelName = modelName;
   }
 
-  async summarize(text: string): Promise<string | null> {
-    if (!text) {
-      return null;
-    }
+  async summarize(text: string, title?: string): Promise<string | null> {
 
     const model = this.genAI.getGenerativeModel({ model: this.modelName });
     const prompt = `다음 텍스트를 한국어로 요약해줘. 원문의 핵심 내용을 중심으로 3~4문장의 간결한 요약문을 만들어줘:
@@ -50,16 +47,13 @@ class HuggingFaceSummarizerProvider implements AISummarizerProvider {
 
   constructor(apiKey: string, modelUrl: string) {
     if (!apiKey) {
-      throw new Error("HUGGING_FACE_API_KEY environment variable is not set for HuggingFaceSummarizerProvider.");
+      throw new Error("HUGGING_FACE_API_KEY environment variable is not set.");
     }
     this.apiKey = apiKey;
     this.modelUrl = modelUrl;
   }
 
-  async summarize(text: string): Promise<string | null> {
-    if (!text) {
-      return null;
-    }
+  async summarize(text: string, title?: string): Promise<string | null> {
 
     // Truncate text if it's too long for the model
     let inputText = text;
@@ -117,7 +111,7 @@ class OllamaSummarizerProvider implements AISummarizerProvider {
     this.modelName = modelName;
   }
 
-  async summarize(text: string): Promise<string | null> {
+  async summarize(text: string, title?: string): Promise<string | null> {
     if (!text) {
       return null;
     }
@@ -125,7 +119,7 @@ class OllamaSummarizerProvider implements AISummarizerProvider {
     // NEW: Truncate text if it's too long for the model
     let inputText = text;
     if (inputText.length > this.maxInputLength) {
-      console.warn(`Input text truncated from ${inputText.length} to ${this.maxInputLength} characters for Ollama summarization.`);
+      console.warn(`[OllamaSummarizer] Input text for article (Title: "${title || 'Unknown'}") truncated from ${inputText.length} to ${this.maxInputLength} characters for Ollama summarization.`);
       inputText = inputText.substring(0, this.maxInputLength);
     }
 
@@ -139,7 +133,7 @@ ${inputText}`; // Use truncated inputText
 
     console.log(`- Ollama Input Text Length: ${prompt.length}`); // ADDED LOG
     console.log(`- Ollama Input Text Snippet (first 200 chars): ${prompt.substring(0, 200)}...`); // ADDED LOG
-    
+
     try {
       const response = await axios.post(
         `${this.ollamaApiUrl}/api/generate`,
@@ -152,7 +146,7 @@ ${inputText}`; // Use truncated inputText
           headers: {
             "Content-Type": "application/json",
           },
-          timeout: 120000, // Increased timeout for local LLM inference (2 minutes)
+          timeout: 300000, // Increased timeout to 5 minutes for local LLM inference
         }
       );
 
@@ -196,7 +190,7 @@ export function getAISummarizer(): AISummarizerProvider {
     case "GEMINI":
       // Use gemini-pro-latest by default for Gemini, as it's often more accessible.
       // User can override this by setting GEMINI_MODEL_NAME environment variable if needed.
-      activeSummarizer = new GeminiSummarizerProvider(geminiApiKey!, process.env.GEMINI_MODEL_NAME || "gemini-pro-latest"); 
+      activeSummarizer = new GeminiSummarizerProvider(geminiApiKey!, process.env.GEMINI_MODEL_NAME || "gemini-pro-latest");
       console.log(`Using GeminiSummarizerProvider with model: ${process.env.GEMINI_MODEL_NAME || "gemini-pro-latest"}.`);
       break;
     case "HUGGINGFACE":
@@ -216,6 +210,6 @@ export function getAISummarizer(): AISummarizerProvider {
 }
 
 // Export the summarize function that the rss-parser will call
-export const summarize = (text: string): Promise<string | null> => {
-  return getAISummarizer().summarize(text);
+export const summarize = (text: string, title?: string): Promise<string | null> => {
+  return getAISummarizer().summarize(text, title);
 };

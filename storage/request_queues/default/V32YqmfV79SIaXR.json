@@ -1,0 +1,9 @@
+{
+	"id": "V32YqmfV79SIaXR",
+	"json": "{\"id\":\"V32YqmfV79SIaXR\",\"url\":\"https://research.google/blog/time-series-foundation-models-can-be-few-shot-learners/\",\"loadedUrl\":\"https://research.google/blog/time-series-foundation-models-can-be-few-shot-learners/\",\"uniqueKey\":\"https://research.google/blog/time-series-foundation-models-can-be-few-shot-learners\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/time-series-foundation-models-can-be-few-shot-learners/\",\"title\":\"Time series foundation models can be few-shot learners\",\"pubDate\":\"2025-09-23T18:00:43.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/time-series-foundation-models-can-be-few-shot-learners/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/TimeSeriesFM-2-Separators.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:33.161Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/time-series-foundation-models-can-be-few-shot-learners",
+	"url": "https://research.google/blog/time-series-foundation-models-can-be-few-shot-learners/"
+}

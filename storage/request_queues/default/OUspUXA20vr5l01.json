@@ -1,0 +1,9 @@
+{
+	"id": "OUspUXA20vr5l01",
+	"json": "{\"id\":\"OUspUXA20vr5l01\",\"url\":\"https://app.dalpha.so/blog/inventory-ordering/\",\"loadedUrl\":\"https://app.dalpha.so/blog/inventory-ordering/\",\"uniqueKey\":\"https://app.dalpha.so/blog/inventory-ordering\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://app.dalpha.so/blog/inventory-ordering/\",\"title\":\"우리의 악성재고는 언제 팔릴까? - 문제는 발주 방식입니다\",\"pubDate\":\"2025-12-12T06:28:00.000Z\",\"source\":\"AI 인사이트 블로그 • 달파 블로그\",\"sourceId\":\"feed-fejmicx\",\"category\":\"dev-blog\",\"tags\":[\"AI 트렌드\",\"AI 활용 사례\",\"브랜드 AI 플레이북\"],\"guid\":\"693bb2ad12d0a20086a67844\",\"imageUrlFromRss\":\"https://app.dalpha.so/blog/content/images/2025/12/---------7_-------------.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:44:09.118Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://app.dalpha.so/blog/inventory-ordering",
+	"url": "https://app.dalpha.so/blog/inventory-ordering/"
+}

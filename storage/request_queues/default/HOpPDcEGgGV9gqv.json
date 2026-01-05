@@ -1,0 +1,9 @@
+{
+	"id": "HOpPDcEGgGV9gqv",
+	"json": "{\"id\":\"HOpPDcEGgGV9gqv\",\"url\":\"https://blog.google/intl/ko-kr/company-news/technology/gemini-3-developers/\",\"loadedUrl\":\"https://blog.google/intl/ko-kr/company-news/technology/gemini-3-developers/\",\"uniqueKey\":\"https://blog.google/intl/ko-kr/company-news/technology/gemini-3-developers\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://blog.google/intl/ko-kr/company-news/technology/gemini-3-developers/\",\"title\":\"제미나이 3로 개발을 시작해 보세요\",\"pubDate\":\"2025-11-19T00:01:00.000Z\",\"source\":\"The Keyword Korea\",\"sourceId\":\"feed-frou8n6\",\"category\":\"ai-trend\",\"tags\":[\"AI\"],\"guid\":\"https://blog.google/intl/ko-kr/company-news/technology/gemini-3-developers/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/StartBuildingwithGemini_Header.max-600x600.format-webp.webp\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:44:03.031Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://blog.google/intl/ko-kr/company-news/technology/gemini-3-developers",
+	"url": "https://blog.google/intl/ko-kr/company-news/technology/gemini-3-developers/"
+}

@@ -1,0 +1,9 @@
+{
+	"id": "oE146pjE3d642iC",
+	"json": "{\"id\":\"oE146pjE3d642iC\",\"url\":\"https://toss.tech/article/toss-da-mtvi\",\"loadedUrl\":\"https://toss.tech/article/toss-da-mtvi\",\"uniqueKey\":\"https://toss.tech/article/toss-da-mtvi\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://toss.tech/article/toss-da-mtvi\",\"title\":\"LTV를 넘어 서비스의 가치를 측정하는 새로운 지표, MTVi\",\"pubDate\":\"2025-11-20T01:54:00.000Z\",\"source\":\"토스 기술 블로그, 토스 테크\",\"sourceId\":\"dev-blog-003\",\"category\":\"dev-blog\",\"tags\":[],\"guid\":\"https://toss.tech/article/toss-da-mtvi\",\"imageUrlFromRss\":\"https://static.toss.im/ipd-tcs/toss_core/live/8552fe8b-ea17-4043-ae7e-e4e353d214a5/1118-img-inner-techblog-1_(1).png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:52.963Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://toss.tech/article/toss-da-mtvi",
+	"url": "https://toss.tech/article/toss-da-mtvi"
+}

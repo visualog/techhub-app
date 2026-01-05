@@ -1,0 +1,9 @@
+{
+	"id": "7CYDcWgezqbd2Wp",
+	"json": "{\"id\":\"7CYDcWgezqbd2Wp\",\"url\":\"https://research.google/blog/coral-npu-a-full-stack-platform-for-edge-ai/\",\"loadedUrl\":\"https://research.google/blog/coral-npu-a-full-stack-platform-for-edge-ai/\",\"uniqueKey\":\"https://research.google/blog/coral-npu-a-full-stack-platform-for-edge-ai\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/coral-npu-a-full-stack-platform-for-edge-ai/\",\"title\":\"Coral NPU: A full-stack platform for Edge AI\",\"pubDate\":\"2025-10-15T13:07:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Hardware & Architecture\",\"Product\",\"Security, Privacy and Abuse Prevention\"],\"guid\":\"https://research.google/blog/coral-npu-a-full-stack-platform-for-edge-ai/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/Coral_NPU-hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:25.242Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/coral-npu-a-full-stack-platform-for-edge-ai",
+	"url": "https://research.google/blog/coral-npu-a-full-stack-platform-for-edge-ai/"
+}

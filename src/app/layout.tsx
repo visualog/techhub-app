@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { BookmarksProvider } from "@/context/BookmarksContext";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,19 +19,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body className={`${inter.className} bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100`}>
-        <BookmarksProvider>
-          <Header />
-          <div className="max-w-screen-xl mx-auto flex flex-col">
-            <div className="flex flex-1 flex-col md:flex-row">
-              <Sidebar />
-              <main className="flex-1">
-                {children}
-              </main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <BookmarksProvider>
+            <Header />
+            <div className="max-w-screen-xl mx-auto flex flex-col">
+              <div className="flex flex-1 flex-col md:flex-row">
+                <Sidebar />
+                <main className="flex-1">
+                  {children}
+                </main>
+              </div>
             </div>
-          </div>
-        </BookmarksProvider>
+          </BookmarksProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

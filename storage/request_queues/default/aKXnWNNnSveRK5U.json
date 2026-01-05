@@ -1,0 +1,9 @@
+{
+	"id": "aKXnWNNnSveRK5U",
+	"json": "{\"id\":\"aKXnWNNnSveRK5U\",\"url\":\"https://research.google/blog/speculative-cascades-a-hybrid-approach-for-smarter-faster-llm-inference/\",\"loadedUrl\":\"https://research.google/blog/speculative-cascades-a-hybrid-approach-for-smarter-faster-llm-inference/\",\"uniqueKey\":\"https://research.google/blog/speculative-cascades-a-hybrid-approach-for-smarter-faster-llm-inference\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/speculative-cascades-a-hybrid-approach-for-smarter-faster-llm-inference/\",\"title\":\"Speculative cascades — A hybrid approach for smarter, faster LLM inference\",\"pubDate\":\"2025-09-11T22:01:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Natural Language Processing\",\"Security, Privacy and Abuse Prevention\"],\"guid\":\"https://research.google/blog/speculative-cascades-a-hybrid-approach-for-smarter-faster-llm-inference/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/SpecCascades-0-Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:37.285Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/speculative-cascades-a-hybrid-approach-for-smarter-faster-llm-inference",
+	"url": "https://research.google/blog/speculative-cascades-a-hybrid-approach-for-smarter-faster-llm-inference/"
+}

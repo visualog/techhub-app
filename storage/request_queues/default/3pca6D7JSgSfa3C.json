@@ -1,0 +1,9 @@
+{
+	"id": "3pca6D7JSgSfa3C",
+	"json": "{\"id\":\"3pca6D7JSgSfa3C\",\"url\":\"https://research.google/blog/discovering-new-words-with-confidential-federated-analytics/\",\"loadedUrl\":\"https://research.google/blog/discovering-new-words-with-confidential-federated-analytics/\",\"uniqueKey\":\"https://research.google/blog/discovering-new-words-with-confidential-federated-analytics\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/discovering-new-words-with-confidential-federated-analytics/\",\"title\":\"Discovering new words with confidential federated analytics\",\"pubDate\":\"2025-03-04T10:00:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Mobile Systems\",\"Security, Privacy and Abuse Prevention\",\"Software Systems & Engineering\"],\"guid\":\"https://research.google/blog/discovering-new-words-with-confidential-federated-analytics/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/ConfidentialFederatedAnalytics-0-Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:24.306Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/discovering-new-words-with-confidential-federated-analytics",
+	"url": "https://research.google/blog/discovering-new-words-with-confidential-federated-analytics/"
+}

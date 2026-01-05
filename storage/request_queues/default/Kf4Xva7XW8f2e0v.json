@@ -1,0 +1,9 @@
+{
+	"id": "Kf4Xva7XW8f2e0v",
+	"json": "{\"id\":\"Kf4Xva7XW8f2e0v\",\"url\":\"https://tech.kakao.com/posts/801\",\"loadedUrl\":\"https://tech.kakao.com/posts/801\",\"uniqueKey\":\"https://tech.kakao.com/posts/801\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://tech.kakao.com/posts/801\",\"title\":\"​한국어와 이미지를 한 번에, 카카오의 멀티모달 임베딩 모델 개발기\",\"pubDate\":\"2025-12-11T15:00:00.000Z\",\"source\":\"tech.kakao.com\",\"sourceId\":\"dev-blog-002\",\"category\":\"dev-blog\",\"tags\":[\"blog\"],\"guid\":\"https://tech.kakao.com/posts/801\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:35.158Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://tech.kakao.com/posts/801",
+	"url": "https://tech.kakao.com/posts/801"
+}

@@ -1,0 +1,9 @@
+{
+	"id": "qHWw6opzil1nCGh",
+	"json": "{\"id\":\"qHWw6opzil1nCGh\",\"url\":\"https://research.google/blog/android-earthquake-alerts-a-global-system-for-early-warning/\",\"loadedUrl\":\"https://research.google/blog/android-earthquake-alerts-a-global-system-for-early-warning/\",\"uniqueKey\":\"https://research.google/blog/android-earthquake-alerts-a-global-system-for-early-warning\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/android-earthquake-alerts-a-global-system-for-early-warning/\",\"title\":\"Android Earthquake Alerts: A global system for early warning\",\"pubDate\":\"2025-07-17T09:34:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Data Mining & Modeling\",\"General Science\",\"Mobile Systems\"],\"guid\":\"https://research.google/blog/android-earthquake-alerts-a-global-system-for-early-warning/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/EQdetection1_Map.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:55.325Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/android-earthquake-alerts-a-global-system-for-early-warning",
+	"url": "https://research.google/blog/android-earthquake-alerts-a-global-system-for-early-warning/"
+}

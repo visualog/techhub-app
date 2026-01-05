@@ -1,0 +1,9 @@
+{
+	"id": "LjdGP4gef6oYkHu",
+	"json": "{\"id\":\"LjdGP4gef6oYkHu\",\"url\":\"https://research.google/blog/how-we-are-building-the-personal-health-coach/\",\"loadedUrl\":\"https://research.google/blog/how-we-are-building-the-personal-health-coach/\",\"uniqueKey\":\"https://research.google/blog/how-we-are-building-the-personal-health-coach\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/how-we-are-building-the-personal-health-coach/\",\"title\":\"How we are building the personal health coach\",\"pubDate\":\"2025-10-27T22:36:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Health & Bioscience\"],\"guid\":\"https://research.google/blog/how-we-are-building-the-personal-health-coach/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/PH-coach-hero1.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:20.467Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://research.google/blog/how-we-are-building-the-personal-health-coach",
+	"url": "https://research.google/blog/how-we-are-building-the-personal-health-coach/"
+}

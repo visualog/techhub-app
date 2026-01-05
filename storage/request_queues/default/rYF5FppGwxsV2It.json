@@ -1,0 +1,9 @@
+{
+	"id": "rYF5FppGwxsV2It",
+	"json": "{\"id\":\"rYF5FppGwxsV2It\",\"url\":\"https://story.pxd.co.kr/1865\",\"loadedUrl\":\"https://story.pxd.co.kr/1865\",\"uniqueKey\":\"https://story.pxd.co.kr/1865\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://story.pxd.co.kr/1865\",\"title\":\"기획과 디자인 사이, 개발이 겪는 현실적인 간극\",\"pubDate\":\"2025-12-08T01:18:29.000Z\",\"source\":\"pxd story\",\"sourceId\":\"design-ux-001\",\"category\":\"design-ux\",\"tags\":[\"UX Engineer 이야기\"],\"guid\":\"https://story.pxd.co.kr/1865\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:59.417Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://story.pxd.co.kr/1865",
+	"url": "https://story.pxd.co.kr/1865"
+}

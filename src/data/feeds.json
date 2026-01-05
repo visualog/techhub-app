@@ -1,11 +1,5 @@
 [
   {
-    "id": "dev-blog-001",
-    "name": "NAVER D2",
-    "rssUrl": "https://d2.naver.com/d2.atom",
-    "category": "dev-blog"
-  },
-  {
     "id": "dev-blog-002",
     "name": "Kakao Tech",
     "rssUrl": "https://tech.kakao.com/feed/",
@@ -42,45 +36,9 @@
     "category": "-ux"
   },
   {
-    "id": "feed-ffur47s",
-    "name": "Rightbrain Blog",
-    "rssUrl": "https://brunch.co.kr/@rightbrain/feed",
-    "category": "-ux"
-  },
-  {
-    "id": "feed-4e86az2",
-    "name": "Brunch 모비인사이드",
-    "rssUrl": "https://brunch.co.kr/@mobiinside/feed",
-    "category": "-it-"
-  },
-  {
-    "id": "feed-8n2skn7",
-    "name": "Brunch +X",
-    "rssUrl": "https://brunch.co.kr/@plusx/feed",
-    "category": "-it-"
-  },
-  {
-    "id": "feed-y8ohluz",
-    "name": "Brunch pliossun",
-    "rssUrl": "https://brunch.co.kr/@pliossun/feed",
-    "category": "-it-"
-  },
-  {
-    "id": "feed-k9q19z3",
-    "name": "CLOVA Tech Blog",
-    "rssUrl": "https://clova.ai/tech-blog/feed/",
-    "category": "ai-trend"
-  },
-  {
     "id": "feed-u4a2ftb",
     "name": "VCAT.AI Blog",
     "rssUrl": "https://vcat.ai/blog/rss",
-    "category": "ai-trend"
-  },
-  {
-    "id": "feed-k0o1ks2",
-    "name": "OpenAI Global Affairs",
-    "rssUrl": "https://openai.com/blog/rss",
     "category": "ai-trend"
   },
   {
@@ -100,48 +58,6 @@
     "name": "우아한형제들 기술블로그",
     "rssUrl": "https://techblog.woowahan.com/feed/",
     "category": "dev-blog"
-  },
-  {
-    "id": "feed-t2hzi15",
-    "name": "d2sf.naver",
-    "rssUrl": "https://d2sf.naver.com/atom",
-    "category": "dev-blog"
-  },
-  {
-    "id": "feed-emgpjyx",
-    "name": "TechBlogPosts",
-    "rssUrl": "https://www.techblogposts.com/ko/rss",
-    "category": "dev-blog"
-  },
-  {
-    "id": "feed-kxlh79c",
-    "name": "44BITS",
-    "rssUrl": "https://www.44bits.io/ko/feed",
-    "category": "dev-blog"
-  },
-  {
-    "id": "feed-h2c63q7",
-    "name": "Design Compass Magazine",
-    "rssUrl": "https://designcompass.org/feed/",
-    "category": "design-ux"
-  },
-  {
-    "id": "feed-qsuo0l3",
-    "name": "Rightbrain Archive",
-    "rssUrl": "https://blog.rightbrain.co.kr/feed/",
-    "category": "design-ux"
-  },
-  {
-    "id": "feed-ratb7mu",
-    "name": "Muz.li",
-    "rssUrl": "https://medium.com/feed/muzli",
-    "category": "design-ux"
-  },
-  {
-    "id": "feed-wbvw7dl",
-    "name": "Abduzeedo",
-    "rssUrl": "https://abduzeedo.com/rss",
-    "category": "design-ux"
   },
   {
     "id": "feed-mg72phe",
@@ -168,18 +84,6 @@
     "category": "design-ux"
   },
   {
-    "id": "feed-snnaxza",
-    "name": "It's Nice That",
-    "rssUrl": "https://www.itsnicethat.com/feed",
-    "category": "design-ux"
-  },
-  {
-    "id": "feed-rjgadto",
-    "name": "Motion.dev Blog",
-    "rssUrl": "https://motion.dev/blog/feed",
-    "category": "design-ux"
-  },
-  {
     "id": "feed-3p1eoj2",
     "name": "오픈서베이 트렌드 리포트",
     "rssUrl": "https://blog.opensurvey.co.kr/feed/",
@@ -192,19 +96,91 @@
     "category": "it-trend"
   },
   {
-    "id": "feed-a1jps0l",
-    "name": "6개월치 마케팅 사이클",
-    "rssUrl": "https://blog.effic.biz/feed/",
-    "category": "marketing"
-  },
-  {
     "id": "feed-mgntfkr",
     "name": "소셜마켓 블로그",
     "rssUrl": "https://blog.socialmkt.co.kr/feed/",
     "category": "marketing"
   },
   {
-    "id": "feed-5mzkp9g",
+    "id": "feed-8lmxabs",
+    "name": "CLOVA Tech Blog",
+    "rssUrl": "https://d2.naver.com/d2.atom",
+    "category": "ai-trend"
+  },
+  {
+    "id": "feed-jc3outv",
+    "name": "VCAT.AI Blog",
+    "rssUrl": "https://vcat.ai/blog/rss.xml",
+    "category": "ai-trend"
+  },
+  {
+    "id": "feed-086dw7i",
+    "name": "OpenAI Global Affairs",
+    "rssUrl": "https://openai.com/index/rss.xml",
+    "category": "ai-trend"
+  },
+  {
+    "id": "feed-no1vakp",
+    "name": "d2sf.naver",
+    "rssUrl": "https://d2sf.naver.com/atom",
+    "category": "dev-blog"
+  },
+  {
+    "id": "feed-oa8vpr6",
+    "name": "TechBlogPosts",
+    "rssUrl": "https://www.techblogposts.com/ko/rss",
+    "category": "dev-blog"
+  },
+  {
+    "id": "feed-8h6zcs1",
+    "name": "44BITS",
+    "rssUrl": "https://www.44bits.io/ko/feed",
+    "category": "dev-blog"
+  },
+  {
+    "id": "feed-3t3ahzo",
+    "name": "Design Compass Magazine",
+    "rssUrl": "https://designcompass.org/feed/",
+    "category": "design-ux"
+  },
+  {
+    "id": "feed-xuiyx9o",
+    "name": "Rightbrain Blog",
+    "rssUrl": "https://brunch.co.kr/rss/@rightbrain",
+    "category": "design-ux"
+  },
+  {
+    "id": "feed-0nrrj7w",
+    "name": "Rightbrain Archive",
+    "rssUrl": "https://blog.rightbrain.co.kr/feed/",
+    "category": "design-ux"
+  },
+  {
+    "id": "feed-uy3cxlc",
+    "name": "Brunch 모비인사이드",
+    "rssUrl": "https://brunch.co.kr/rss/@mobiinside",
+    "category": "it-trend"
+  },
+  {
+    "id": "feed-on028yr",
+    "name": "Brunch +X",
+    "rssUrl": "https://brunch.co.kr/rss/@plusx",
+    "category": "it-trend"
+  },
+  {
+    "id": "feed-qqpml06",
+    "name": "Brunch pliossun",
+    "rssUrl": "https://brunch.co.kr/rss/@pliossun",
+    "category": "it-trend"
+  },
+  {
+    "id": "feed-i1lnnkd",
+    "name": "6개월치 마케팅 사이클",
+    "rssUrl": "https://blog.effic.biz/feed/",
+    "category": "marketing"
+  },
+  {
+    "id": "feed-p5jhrk7",
     "name": "kakao ventures blog",
     "rssUrl": "https://www.kakao.vc/blog/feed/",
     "category": "startup-vc"

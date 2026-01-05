@@ -10,5 +10,6 @@ const config: Config = {
     extend: {},
   },
   plugins: [require("@tailwindcss/line-clamp")],
+  darkMode: "class",
 };
 export default config;
