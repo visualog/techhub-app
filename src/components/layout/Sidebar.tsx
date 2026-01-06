@@ -12,10 +12,20 @@ export function Sidebar() {
   const [counts, setCounts] = useState<Record<string, number>>({});
 
   useEffect(() => {
+    // Optional: Skip fetch if on trends page to save resources, but keep hook call?
+    // Actually, just let it fetch or add a check inside useEffect.
+    if (pathname?.startsWith('/trends') || pathname?.startsWith('/admin')) return;
+
     fetch('/api/articles/counts')
       .then(res => res.json())
-      .then(data => setCounts(data));
-  }, []);
+      .then(data => setCounts(data))
+      .catch(err => console.error("Failed to fetch counts", err));
+  }, [pathname]);
+
+  // Hide sidebar on specific pages (Trends, Admin)
+  if (pathname?.startsWith('/trends') || pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   // Only determine category if we are on the homepage
   const currentCategory = pathname === '/' ? (searchParams.get('category') || 'all') : null;

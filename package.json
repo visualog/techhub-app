@@ -11,7 +11,8 @@
     "migrate:categories": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"./serviceAccountKey.json\" node dist/scripts/migrate-categories.js",
     "collect-feeds": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"./serviceAccountKey.json\" AI_SUMMARIZER_PROVIDER=\"OLLAMA\" OLLAMA_MODEL_NAME=\"exaone3.5:2.4b\" node dist/scripts/crawl-and-summarize.js",
     "list-gemini-models": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && node dist/scripts/list-gemini-models.js",
-    "update-feeds-from-bookmarks": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && node dist/scripts/update-feeds-from-bookmarks.js"
+    "update-feeds-from-bookmarks": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && node dist/scripts/update-feeds-from-bookmarks.js",
+    "generate-trend-report": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"./serviceAccountKey.json\" AI_SUMMARIZER_PROVIDER=\"OLLAMA\" OLLAMA_MODEL_NAME=\"exaone3.5:2.4b\" node dist/scripts/generate-trend-report.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
@@ -25,18 +26,22 @@
     "crawlee": "^3.15.3",
     "firebase": "^12.7.0",
     "firebase-admin": "^13.6.0",
+    "framer-motion": "^12.24.0",
     "lucide-react": "^0.562.0",
+    "matter-js": "^0.20.0",
     "next": "16.0.7",
     "next-themes": "^0.4.6",
     "playwright": "^1.57.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "recharts": "^3.6.0",
     "rss-parser": "^3.13.0",
     "tailwind-merge": "^3.4.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/matter-js": "^0.20.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

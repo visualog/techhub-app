@@ -5,6 +5,7 @@ import { UserMenu } from '@/components/ui/user-menu';
 import { Logo } from '@/components/ui/logo';
 import { ModeToggle } from '@/components/ui/mode-toggle';
 import { useAuth } from '@/context/AuthContext';
+import Link from 'next/link';
 
 export function Header() {
   const { user, loginWithGoogle, logout, isAdmin } = useAuth();
@@ -18,10 +19,13 @@ export function Header() {
         <SearchBar />
       </div>
       <div className="flex items-center gap-4">
+        <Link href="/trends" className="text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+          Trends
+        </Link>
         {isAdmin && (
-          <a href="/admin" className="text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+          <Link href="/admin" className="text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
             Admin
-          </a>
+          </Link>
         )}
         <ModeToggle />
         <UserMenu user={user} onLogin={loginWithGoogle} onLogout={logout} />
