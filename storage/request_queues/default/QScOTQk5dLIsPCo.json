@@ -1,9 +1,0 @@
-{
-	"id": "QScOTQk5dLIsPCo",
-	"json": "{\"id\":\"QScOTQk5dLIsPCo\",\"url\":\"https://research.google/blog/real-time-speech-to-speech-translation/\",\"loadedUrl\":\"https://research.google/blog/real-time-speech-to-speech-translation/\",\"uniqueKey\":\"https://research.google/blog/real-time-speech-to-speech-translation\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/real-time-speech-to-speech-translation/\",\"title\":\"Real-time speech-to-speech translation\",\"pubDate\":\"2025-11-19T09:59:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\"],\"guid\":\"https://research.google/blog/real-time-speech-to-speech-translation/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/RTS2ST5.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:10.172Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/real-time-speech-to-speech-translation",
-	"url": "https://research.google/blog/real-time-speech-to-speech-translation/"
-}

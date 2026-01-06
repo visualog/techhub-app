@@ -1,9 +1,0 @@
-{
-	"id": "oYBeQz93xDtH0mL",
-	"json": "{\"id\":\"oYBeQz93xDtH0mL\",\"url\":\"https://story.pxd.co.kr/1864\",\"loadedUrl\":\"https://story.pxd.co.kr/1864\",\"uniqueKey\":\"https://story.pxd.co.kr/1864\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://story.pxd.co.kr/1864\",\"title\":\"자료구조&middot;알고리즘 독서노트\",\"pubDate\":\"2025-11-23T22:50:41.000Z\",\"source\":\"pxd story\",\"sourceId\":\"design-ux-001\",\"category\":\"design-ux\",\"tags\":[\"UX Engineer 이야기\"],\"guid\":\"https://story.pxd.co.kr/1864\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:00.542Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://story.pxd.co.kr/1864",
-	"url": "https://story.pxd.co.kr/1864"
-}

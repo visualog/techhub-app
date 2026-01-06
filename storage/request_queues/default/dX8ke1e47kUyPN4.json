@@ -1,9 +1,0 @@
-{
-	"id": "dX8ke1e47kUyPN4",
-	"json": "{\"id\":\"dX8ke1e47kUyPN4\",\"url\":\"https://app.dalpha.so/blog/ai-decision/\",\"loadedUrl\":\"https://app.dalpha.so/blog/ai-decision/\",\"uniqueKey\":\"https://app.dalpha.so/blog/ai-decision\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://app.dalpha.so/blog/ai-decision/\",\"title\":\"AI로 해결되지 않는 마지막 퍼즐: 의사결정 구조\",\"pubDate\":\"2025-11-21T02:43:43.000Z\",\"source\":\"AI 인사이트 블로그 • 달파 블로그\",\"sourceId\":\"feed-fejmicx\",\"category\":\"dev-blog\",\"tags\":[\"AI 트렌드\",\"AI 인사이트\",\"비즈니스 인사이트\",\"브랜드 AI 플레이북\"],\"guid\":\"691fcb3112d0a20086a676b8\",\"imageUrlFromRss\":\"https://app.dalpha.so/blog/content/images/2025/11/-----4.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:44:11.230Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://app.dalpha.so/blog/ai-decision",
-	"url": "https://app.dalpha.so/blog/ai-decision/"
-}

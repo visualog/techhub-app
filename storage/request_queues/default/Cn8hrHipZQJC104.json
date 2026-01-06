@@ -1,9 +1,0 @@
-{
-	"id": "Cn8hrHipZQJC104",
-	"json": "{\"id\":\"Cn8hrHipZQJC104\",\"url\":\"https://research.google/blog/eclektic-a-novel-benchmark-for-evaluating-cross-lingual-knowledge-transfer-in-llms/\",\"loadedUrl\":\"https://research.google/blog/eclektic-a-novel-benchmark-for-evaluating-cross-lingual-knowledge-transfer-in-llms/\",\"uniqueKey\":\"https://research.google/blog/eclektic-a-novel-benchmark-for-evaluating-cross-lingual-knowledge-transfer-in-llms\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/eclektic-a-novel-benchmark-for-evaluating-cross-lingual-knowledge-transfer-in-llms/\",\"title\":\"ECLeKTic: A novel benchmark for evaluating cross-lingual knowledge transfer in LLMs\",\"pubDate\":\"2025-04-02T11:21:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Natural Language Processing\"],\"guid\":\"https://research.google/blog/eclektic-a-novel-benchmark-for-evaluating-cross-lingual-knowledge-transfer-in-llms/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/ECLEKTIC1_CreationHERO.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:20.026Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/eclektic-a-novel-benchmark-for-evaluating-cross-lingual-knowledge-transfer-in-llms",
-	"url": "https://research.google/blog/eclektic-a-novel-benchmark-for-evaluating-cross-lingual-knowledge-transfer-in-llms/"
-}

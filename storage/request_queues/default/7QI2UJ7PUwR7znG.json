@@ -1,9 +1,0 @@
-{
-	"id": "7QI2UJ7PUwR7znG",
-	"json": "{\"id\":\"7QI2UJ7PUwR7znG\",\"url\":\"https://magazine.cheil.com/57554\",\"loadedUrl\":\"https://n.news.naver.com/mnews/article/011/0004560922?sid=101\",\"uniqueKey\":\"https://magazine.cheil.com/57554\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://magazine.cheil.com/57554\",\"title\":\"제일기획, 정기 임원인사…부사장 1명·상무 4명 승진\",\"pubDate\":\"2025-11-27T06:42:59.000Z\",\"source\":\"제일 매거진\",\"sourceId\":\"feed-60vh01n\",\"category\":\"it-trend\",\"tags\":[\"In the Media\"],\"guid\":\"https://magazine.cheil.com/?p=57554\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:49:36.864Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://magazine.cheil.com/57554",
-	"url": "https://magazine.cheil.com/57554"
-}

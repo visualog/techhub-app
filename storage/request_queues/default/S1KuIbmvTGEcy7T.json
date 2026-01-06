@@ -1,9 +1,0 @@
-{
-	"id": "S1KuIbmvTGEcy7T",
-	"json": "{\"id\":\"S1KuIbmvTGEcy7T\",\"url\":\"https://research.google/blog/ai-as-a-research-partner-advancing-theoretical-computer-science-with-alphaevolve/\",\"loadedUrl\":\"https://research.google/blog/ai-as-a-research-partner-advancing-theoretical-computer-science-with-alphaevolve/\",\"uniqueKey\":\"https://research.google/blog/ai-as-a-research-partner-advancing-theoretical-computer-science-with-alphaevolve\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/ai-as-a-research-partner-advancing-theoretical-computer-science-with-alphaevolve/\",\"title\":\"AI as a research partner: Advancing theoretical computer science with AlphaEvolve\",\"pubDate\":\"2025-09-30T16:57:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Generative AI\"],\"guid\":\"https://research.google/blog/ai-as-a-research-partner-advancing-theoretical-computer-science-with-alphaevolve/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/ReGeCS-1-Lifting.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:30.173Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/ai-as-a-research-partner-advancing-theoretical-computer-science-with-alphaevolve",
-	"url": "https://research.google/blog/ai-as-a-research-partner-advancing-theoretical-computer-science-with-alphaevolve/"
-}

@@ -1,9 +1,0 @@
-{
-	"id": "FG2rjf8htWJ3WKM",
-	"json": "{\"id\":\"FG2rjf8htWJ3WKM\",\"url\":\"https://research.google/blog/a-collaborative-approach-to-image-generation/\",\"loadedUrl\":\"https://research.google/blog/a-collaborative-approach-to-image-generation/\",\"uniqueKey\":\"https://research.google/blog/a-collaborative-approach-to-image-generation\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/a-collaborative-approach-to-image-generation/\",\"title\":\"A collaborative approach to image generation\",\"pubDate\":\"2025-10-02T17:04:05.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Human-Computer Interaction and Visualization\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/a-collaborative-approach-to-image-generation/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/PASTA-hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:28.526Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/a-collaborative-approach-to-image-generation",
-	"url": "https://research.google/blog/a-collaborative-approach-to-image-generation/"
-}

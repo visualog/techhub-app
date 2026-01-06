@@ -13,9 +13,10 @@ type ViewMode = 'grid' | 'masonry';
 interface ArticleListProps {
   onArticleClick: (article: Article) => void;
   viewMode?: ViewMode;
+  onTagClick?: (tag: string) => void;
 }
 
-export function ArticleList({ onArticleClick, viewMode = 'grid' }: ArticleListProps) {
+export function ArticleList({ onArticleClick, onTagClick, viewMode = 'grid' }: ArticleListProps) {
   const searchParams = useSearchParams();
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -83,7 +84,7 @@ export function ArticleList({ onArticleClick, viewMode = 'grid' }: ArticleListPr
     : [];
 
   return (
-    <div className="">
+    <section className="">
       {viewMode === 'grid' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {uniqueArticles.length > 0 ? (
@@ -93,6 +94,7 @@ export function ArticleList({ onArticleClick, viewMode = 'grid' }: ArticleListPr
                 article={article}
                 onArticleClick={onArticleClick}
                 priority={index < 2}
+                onTagClick={onTagClick}
               />
             ))
           ) : (
@@ -109,6 +111,7 @@ export function ArticleList({ onArticleClick, viewMode = 'grid' }: ArticleListPr
                   article={article}
                   onArticleClick={onArticleClick}
                   priority={index < 2}
+                  onTagClick={onTagClick}
                 />
               </div>
             ))
@@ -117,7 +120,7 @@ export function ArticleList({ onArticleClick, viewMode = 'grid' }: ArticleListPr
           )}
         </div>
       )}
-    </div>
+    </section>
   );
 }
 

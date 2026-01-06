@@ -1,9 +1,0 @@
-{
-	"id": "yWHFUp08NI2d6Hc",
-	"json": "{\"id\":\"yWHFUp08NI2d6Hc\",\"url\":\"https://d2.naver.com/helloworld/4571155\",\"loadedUrl\":\"https://d2.naver.com/helloworld/4571155\",\"uniqueKey\":\"https://d2.naver.com/helloworld/4571155\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://d2.naver.com/helloworld/4571155\",\"title\":\"웹툰 창작 생태계 보호를 위한 연구\",\"pubDate\":\"2025-12-02T11:20:27.000Z\",\"source\":\"D2 Blog\",\"sourceId\":\"feed-8lmxabs\",\"category\":\"ai-trend\",\"tags\":[],\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:50:14.639Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://d2.naver.com/helloworld/4571155",
-	"url": "https://d2.naver.com/helloworld/4571155"
-}

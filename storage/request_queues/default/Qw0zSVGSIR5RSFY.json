@@ -1,9 +1,0 @@
-{
-	"id": "Qw0zSVGSIR5RSFY",
-	"json": "{\"id\":\"Qw0zSVGSIR5RSFY\",\"url\":\"https://research.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/\",\"loadedUrl\":\"https://research.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/\",\"uniqueKey\":\"https://research.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/\",\"title\":\"VaultGemma: The world's most capable differentially private LLM\",\"pubDate\":\"2025-09-12T08:14:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Open Source Models & Datasets\",\"Responsible AI\",\"Security, Privacy and Abuse Prevention\"],\"guid\":\"https://research.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/VaultGemma_Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:36.712Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm",
-	"url": "https://research.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/"
-}

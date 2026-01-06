@@ -1,9 +1,0 @@
-{
-	"id": "y0QXk2IU3IthkRz",
-	"json": "{\"id\":\"y0QXk2IU3IthkRz\",\"url\":\"https://research.google/blog/instructpipe-generating-visual-blocks-pipelines-with-human-instructions-and-llms/\",\"loadedUrl\":\"https://research.google/blog/instructpipe-generating-visual-blocks-pipelines-with-human-instructions-and-llms/\",\"uniqueKey\":\"https://research.google/blog/instructpipe-generating-visual-blocks-pipelines-with-human-instructions-and-llms\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/instructpipe-generating-visual-blocks-pipelines-with-human-instructions-and-llms/\",\"title\":\"InstructPipe: Generating Visual Blocks pipelines with human instructions and LLMs\",\"pubDate\":\"2025-04-18T12:12:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Human-Computer Interaction and Visualization\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/instructpipe-generating-visual-blocks-pipelines-with-human-instructions-and-llms/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/InstructPipe2_Overview_copy.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:16.460Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/instructpipe-generating-visual-blocks-pipelines-with-human-instructions-and-llms",
-	"url": "https://research.google/blog/instructpipe-generating-visual-blocks-pipelines-with-human-instructions-and-llms/"
-}

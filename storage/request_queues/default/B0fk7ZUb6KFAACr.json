@@ -1,9 +1,0 @@
-{
-	"id": "B0fk7ZUb6KFAACr",
-	"json": "{\"id\":\"B0fk7ZUb6KFAACr\",\"url\":\"https://research.google/blog/improving-brain-models-with-zapbench/\",\"loadedUrl\":\"https://research.google/blog/improving-brain-models-with-zapbench/\",\"uniqueKey\":\"https://research.google/blog/improving-brain-models-with-zapbench\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/improving-brain-models-with-zapbench/\",\"title\":\"Improving brain models with ZAPBench\",\"pubDate\":\"2025-04-24T17:05:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"General Science\",\"Health & Bioscience\"],\"guid\":\"https://research.google/blog/improving-brain-models-with-zapbench/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/ZAPBench-4-Comparison.gif\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:14.500Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/improving-brain-models-with-zapbench",
-	"url": "https://research.google/blog/improving-brain-models-with-zapbench/"
-}

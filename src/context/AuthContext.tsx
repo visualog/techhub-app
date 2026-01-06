@@ -10,9 +10,17 @@ import {
 } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 
+// TODO: Add your Google account email here to grant admin access
+const ADMIN_EMAILS = [
+    "admin@techhub.com",
+    "visualog@gmail.com",
+    "taikyong@gmail.com",
+];
+
 interface AuthContextType {
     user: User | null;
     loading: boolean;
+    isAdmin: boolean;
     loginWithGoogle: () => Promise<void>;
     logout: () => Promise<void>;
 }
@@ -22,10 +30,16 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            if (currentUser && currentUser.email && ADMIN_EMAILS.includes(currentUser.email)) {
+                setIsAdmin(true);
+            } else {
+                setIsAdmin(false);
+            }
             setLoading(false);
         });
         return () => unsubscribe();
@@ -44,13 +58,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const logout = async () => {
         try {
             await signOut(auth);
+            setIsAdmin(false);
         } catch (error) {
             console.error("Failed to logout", error);
         }
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, loginWithGoogle, logout }}>
+        <AuthContext.Provider value={{ user, loading, isAdmin, loginWithGoogle, logout }}>
             {children}
         </AuthContext.Provider>
     );

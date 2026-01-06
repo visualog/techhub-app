@@ -1,9 +1,0 @@
-{
-	"id": "EQiGB8GD2SMRtc2",
-	"json": "{\"id\":\"EQiGB8GD2SMRtc2\",\"url\":\"https://toss.tech/article/tossplace-qa-manager\",\"loadedUrl\":\"https://toss.tech/article/tossplace-qa-manager\",\"uniqueKey\":\"https://toss.tech/article/tossplace-qa-manager\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://toss.tech/article/tossplace-qa-manager\",\"title\":\"토스플레이스 사일로 QA로 일한다는 것\",\"pubDate\":\"2025-11-04T06:57:00.000Z\",\"source\":\"토스 기술 블로그, 토스 테크\",\"sourceId\":\"dev-blog-003\",\"category\":\"dev-blog\",\"tags\":[],\"guid\":\"https://toss.tech/article/tossplace-qa-manager\",\"imageUrlFromRss\":\"https://static.toss.im/ipd-tcs/toss_core/live/5374a28d-a179-46f5-ba40-815f47bee055/image_1.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:55.580Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://toss.tech/article/tossplace-qa-manager",
-	"url": "https://toss.tech/article/tossplace-qa-manager"
-}

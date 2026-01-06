@@ -1,9 +1,0 @@
-{
-	"id": "PsrcEyJpBYWhmIM",
-	"json": "{\"id\":\"PsrcEyJpBYWhmIM\",\"url\":\"https://research.google/blog/muvera-making-multi-vector-retrieval-as-fast-as-single-vector-search/\",\"loadedUrl\":\"https://research.google/blog/muvera-making-multi-vector-retrieval-as-fast-as-single-vector-search/\",\"uniqueKey\":\"https://research.google/blog/muvera-making-multi-vector-retrieval-as-fast-as-single-vector-search\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/muvera-making-multi-vector-retrieval-as-fast-as-single-vector-search/\",\"title\":\"MUVERA: Making multi-vector retrieval as fast as single-vector search\",\"pubDate\":\"2025-06-25T13:22:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/muvera-making-multi-vector-retrieval-as-fast-as-single-vector-search/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/MUVERA_Cover.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:00.414Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/muvera-making-multi-vector-retrieval-as-fast-as-single-vector-search",
-	"url": "https://research.google/blog/muvera-making-multi-vector-retrieval-as-fast-as-single-vector-search/"
-}

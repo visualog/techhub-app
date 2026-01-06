@@ -1,9 +1,10 @@
+import './env-setup'; // Must be first to load environment variables
 import { PlaywrightCrawler, Configuration } from 'crawlee';
 import { URL } from 'url';
 import Parser from 'rss-parser';
 import axios from 'axios';
-import { db, admin } from '../src/lib/firebaseAdmin'; // Firebase Admin instance
-import { summarize } from '../src/lib/ai-provider'; // AI summarizer
+import { db, admin, bucket } from '../src/lib/firebaseAdmin'; // Firebase Admin instance
+import { summarize, generateText, generateImage } from '../src/lib/ai-provider'; // AI summarizer
 import feedsConfig from '../src/data/feeds.json';
 import { Article } from '../src/data/mock-articles';
 import { generateTags } from '../src/lib/tagger'; // Import tagger
@@ -112,60 +113,157 @@ async function main() {
 
       await page.waitForLoadState('domcontentloaded');
 
-      // --- Start of Improved Image Extraction Logic ---
-      let finalImageUrl = metadata.imageUrlFromRss; // 1. Prioritize image from RSS feed
+      // --- Improved Image Extraction Logic ---
+      let finalImageUrl = metadata.imageUrlFromRss;
 
-      // Helper function to resolve relative URLs
+      // Helper: Resolve relative URLs
       const resolveUrl = (url: string | null) => {
         if (!url) return null;
         try {
           return new URL(url, request.url).href;
         } catch (e) {
-          return null; // Invalid URL
+          return null;
         }
       };
 
+      // 1. Scroll down to trigger lazy loading
+      try {
+        await page.evaluate(async () => {
+          await new Promise<void>((resolve) => {
+            let totalHeight = 0;
+            const distance = 100;
+            const timer = setInterval(() => {
+              const scrollHeight = document.body.scrollHeight;
+              window.scrollBy(0, distance);
+              totalHeight += distance;
+              if (totalHeight >= scrollHeight || totalHeight > 3000) { // Limit scroll depth
+                clearInterval(timer);
+                resolve();
+              }
+            }, 100);
+          });
+        });
+        await page.waitForTimeout(1000); // Wait for images to render
+      } catch (e) {
+        log.warning(`Failed to scroll page: ${e}`);
+      }
+
+      // 2. Site-Specific Selectors (Priority)
+      const domain = new URL(request.url).hostname;
+      const siteSelectors: Record<string, string> = {
+        'velog.io': 'img[alt="post-thumbnail"]',
+        'medium.com': 'meta[property="og:image"]',
+        'brunch.co.kr': '.cover_image, .wrap_img_float img',
+        'tech.kakao.com': '.cover-image img',
+        'toss.tech': 'img[alt="thumbnail"]',
+        'yozm.wishket.com': '.news-cover-image img'
+      };
+
+      // Check site specific first
+      for (const [key, selector] of Object.entries(siteSelectors)) {
+        if (domain.includes(key)) {
+          const el = await page.locator(selector).first();
+          const attr = (await el.getAttribute('src')) || (await el.getAttribute('content'));
+          if (attr) {
+            finalImageUrl = resolveUrl(attr);
+            log.info(`  - Found image via site selector (${key}): ${finalImageUrl}`);
+            break;
+          }
+        }
+      }
+
+      // 3. Fallback to Meta Tags (OG/Twitter)
       if (!finalImageUrl) {
-        // 2. Fallback to various meta tags if not found in RSS
         const metaSelectors = [
           'meta[property="og:image"]',
           'meta[property="twitter:image"]',
           'meta[property="og:image:secure_url"]',
         ];
         for (const selector of metaSelectors) {
-          const img = await page.locator(selector).getAttribute('content', { timeout: 2000 }).catch(() => null);
+          const img = await page.locator(selector).getAttribute('content', { timeout: 1000 }).catch(() => null);
           if (img) {
             finalImageUrl = resolveUrl(img);
-            if (finalImageUrl) break;
+            break;
           }
         }
       }
 
+      // 4. Fallback to Content Images with strict filtering
       if (!finalImageUrl) {
-        // 3. Fallback to the first image in a list of common main content areas
-        const contentSelectors = [
-          'article', 'main', '[role="main"]', '[role="article"]',
-          '.post-content', '.entry-content', '.article-body', '.td-post-content' // Added common blog content classes
-        ];
-        for (const selector of contentSelectors) {
-          const mainContent = page.locator(selector).first();
-          if (await mainContent.count() > 0) {
-            // Wait for a potential lazy-loaded image to appear
-            const firstImage = mainContent.locator('img').first();
-            try {
-              await firstImage.waitFor({ state: 'visible', timeout: 3000 });
-              const firstImageSrc = await firstImage.getAttribute('src');
-              if (firstImageSrc) {
-                finalImageUrl = resolveUrl(firstImageSrc);
-                if (finalImageUrl) break;
+        // Evaluate in browser context to check natural dimensions
+        finalImageUrl = await page.evaluate(() => {
+          const content = document.querySelector('article') || document.querySelector('main') || document.body;
+          const images = Array.from(content.querySelectorAll('img'));
+
+          for (const img of images) {
+            const src = img.getAttribute('src') || img.getAttribute('data-src') || img.getAttribute('data-original');
+            if (!src) continue;
+
+            // Filter out SVG, data URIs, or obviously small/icon paths if possible
+            if (src.startsWith('data:') || src.includes('display:none')) continue;
+
+            // Size Check
+            const width = img.naturalWidth || img.width;
+            const height = img.naturalHeight || img.height;
+
+            // Must be reasonably large (>200px) and not typically square icon/profile ratio (unless very large)
+            if (width > 200 && height > 150) {
+              // Basic Aspect Ratio check: exclude extreme banners or tall skyscraper ads if needed
+              const aspect = width / height;
+              if (aspect > 0.3 && aspect < 3.5) {
+                return src; // Return the first valid large image
               }
-            } catch (e) {
-              // Image did not become visible in time, or other error, continue
             }
           }
-        }
+          return null;
+        });
+        if (finalImageUrl) finalImageUrl = resolveUrl(finalImageUrl);
       }
       // --- End of Improved Image Extraction Logic ---
+
+      // 5. Last Resort: AI Image Generation
+      if (!finalImageUrl) {
+        try {
+          console.log(`  - No image found. Attempting AI generation for "${metadata.title}"...`);
+
+          // A. Ask AI for an English prompt
+          const promptForAI = `[System]
+You are an art director. Create a detailed English image generation prompt for an article titled: "${metadata.title}".
+The prompt should describe a modern, clean, 3D render or minimal illustration suitable for a tech blog thumbnail. 
+No text in the image. Aspect ratio 4:3.
+OUTPUT ONLY THE PROMPT IN ENGLISH.`;
+
+          const imagePrompt = await generateText(promptForAI);
+
+          if (imagePrompt) {
+            console.log(`    > Generated Prompt: ${imagePrompt.substring(0, 60)}...`);
+
+            // B. Generate Image
+            const imageBuffer = await generateImage(imagePrompt);
+
+            if (imageBuffer && bucket) {
+              const imageFileName = `thumbnails/${createDocId(metadata.url)}.png`;
+              const file = bucket.file(imageFileName);
+
+              await file.save(imageBuffer, {
+                metadata: { contentType: 'image/png' },
+                public: true
+              });
+
+              // Construct Public URL (using download URL or public URL format)
+              // For Firebase Storage, public URL is usually:
+              finalImageUrl = `https://storage.googleapis.com/${bucket.name}/${imageFileName}`;
+              // Or make it signed if private, but we made it public.
+
+              console.log(`    > AI Image Generated & Uploaded: ${finalImageUrl}`);
+            } else {
+              console.warn("    > Failed to generate image buffer or bucket not configured.");
+            }
+          }
+        } catch (e) {
+          console.error(`    > AI Image Generation Failed:`, e);
+        }
+      }
 
       let articleText = '';
       const mainContent = page.locator('article, main, [role="main"], [role="article"]');
@@ -180,7 +278,17 @@ async function main() {
 
       // Generate summary
       let summary = '';
-
+      if (articleText.length > 200) {
+        try {
+          console.log(`  - Generating summary for "${metadata.title}"...`);
+          summary = await summarize(articleText) || '';
+        } catch (error) {
+          console.error(`  - Failed to generate summary:`, error);
+        }
+      } else {
+        console.log(`  - Skipping summary (text too short: ${articleText.length} chars)`);
+        summary = articleText; // Fallback to full text if very short
+      }
       // Generate tags
       const autoTags = generateTags(metadata.title, summary || articleText.substring(0, 200));
       // Merge auto tags with existing RSS tags, deduplicating
@@ -199,6 +307,7 @@ async function main() {
         tags: mergedTags, // Use merged tags
         bookmarked: false,
         isVideo: false,
+        status: 'pending',
         // createdAt will be handled by Firestore server timestamp or client
       };
 

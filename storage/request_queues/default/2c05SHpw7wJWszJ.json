@@ -1,9 +1,0 @@
-{
-	"id": "2c05SHpw7wJWszJ",
-	"json": "{\"id\":\"2c05SHpw7wJWszJ\",\"url\":\"https://research.google/blog/graph-foundation-models-for-relational-data/\",\"loadedUrl\":\"https://research.google/blog/graph-foundation-models-for-relational-data/\",\"uniqueKey\":\"https://research.google/blog/graph-foundation-models-for-relational-data\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/graph-foundation-models-for-relational-data/\",\"title\":\"Graph foundation models for relational data\",\"pubDate\":\"2025-07-10T03:14:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/graph-foundation-models-for-relational-data/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/GFM4RelationalData-3.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:54.875Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/graph-foundation-models-for-relational-data",
-	"url": "https://research.google/blog/graph-foundation-models-for-relational-data/"
-}

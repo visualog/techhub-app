@@ -1,9 +1,0 @@
-{
-	"id": "5j73GGkw1Fdsdsn",
-	"json": "{\"id\":\"5j73GGkw1Fdsdsn\",\"url\":\"https://d2.naver.com/helloworld/0004394\",\"loadedUrl\":\"https://d2.naver.com/helloworld/0004394\",\"uniqueKey\":\"https://d2.naver.com/helloworld/0004394\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://d2.naver.com/helloworld/0004394\",\"title\":\"비용, 성능, 안정성을 목표로 한 지능형 로그 파이프라인 도입\",\"pubDate\":\"2025-12-17T17:34:06.000Z\",\"source\":\"D2 Blog\",\"sourceId\":\"feed-8lmxabs\",\"category\":\"ai-trend\",\"tags\":[],\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:49:54.587Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://d2.naver.com/helloworld/0004394",
-	"url": "https://d2.naver.com/helloworld/0004394"
-}

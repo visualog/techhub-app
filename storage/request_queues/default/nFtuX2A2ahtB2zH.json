@@ -1,9 +1,0 @@
-{
-	"id": "nFtuX2A2ahtB2zH",
-	"json": "{\"id\":\"nFtuX2A2ahtB2zH\",\"url\":\"https://d2.naver.com/helloworld/9036125\",\"loadedUrl\":\"https://d2.naver.com/helloworld/9036125\",\"uniqueKey\":\"https://d2.naver.com/helloworld/9036125\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://d2.naver.com/helloworld/9036125\",\"title\":\"LLM이지만 PDF는 읽고 싶어: 복잡한 PDF를 LLM이 이해하는 방법\",\"pubDate\":\"2025-12-04T17:26:22.000Z\",\"source\":\"D2 Blog\",\"sourceId\":\"feed-8lmxabs\",\"category\":\"ai-trend\",\"tags\":[],\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:50:02.023Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://d2.naver.com/helloworld/9036125",
-	"url": "https://d2.naver.com/helloworld/9036125"
-}

@@ -1,9 +1,0 @@
-{
-	"id": "MG3IE42jdIx2dHB",
-	"json": "{\"id\":\"MG3IE42jdIx2dHB\",\"url\":\"https://toss.tech/article/business-customer-data\",\"loadedUrl\":\"https://toss.tech/article/business-customer-data\",\"uniqueKey\":\"https://toss.tech/article/business-customer-data\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://toss.tech/article/business-customer-data\",\"title\":\"사업자 데이터 리터러시 높이기: BC Monthly Report 발행기\",\"pubDate\":\"2025-12-09T07:53:00.000Z\",\"source\":\"토스 기술 블로그, 토스 테크\",\"sourceId\":\"dev-blog-003\",\"category\":\"dev-blog\",\"tags\":[],\"guid\":\"https://toss.tech/article/business-customer-data\",\"imageUrlFromRss\":\"https://static.toss.im/ipd-tcs/toss_core/live/f49879cf-74bb-4873-8dc9-a94c84197fe5/1205-img-inner-techblog-1.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:47.447Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://toss.tech/article/business-customer-data",
-	"url": "https://toss.tech/article/business-customer-data"
-}

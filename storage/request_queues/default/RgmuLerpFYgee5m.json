@@ -1,9 +1,0 @@
-{
-	"id": "RgmuLerpFYgee5m",
-	"json": "{\"id\":\"RgmuLerpFYgee5m\",\"url\":\"https://research.google/blog/generating-synthetic-data-with-differentially-private-llm-inference/\",\"loadedUrl\":\"https://research.google/blog/generating-synthetic-data-with-differentially-private-llm-inference/\",\"uniqueKey\":\"https://research.google/blog/generating-synthetic-data-with-differentially-private-llm-inference\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/generating-synthetic-data-with-differentially-private-llm-inference/\",\"title\":\"Generating synthetic data with differentially private LLM inference\",\"pubDate\":\"2025-03-18T17:00:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Machine Intelligence\",\"Natural Language Processing\",\"Security, Privacy and Abuse Prevention\"],\"guid\":\"https://research.google/blog/generating-synthetic-data-with-differentially-private-llm-inference/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/SynthData-0-Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:23.360Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/generating-synthetic-data-with-differentially-private-llm-inference",
-	"url": "https://research.google/blog/generating-synthetic-data-with-differentially-private-llm-inference/"
-}

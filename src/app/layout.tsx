@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { BookmarksProvider } from "@/context/BookmarksContext";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/context/AuthContext";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "TechHub",
@@ -21,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`${inter.className} bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100`}>
+      <body className={`bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100`} style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -34,7 +31,7 @@ export default function RootLayout({
               <div className="max-w-screen-xl mx-auto flex flex-col">
                 <div className="flex flex-1 flex-col md:flex-row">
                   <Sidebar />
-                  <main className="flex-1">
+                  <main className="flex-1 min-w-0">
                     {children}
                   </main>
                 </div>

@@ -1,9 +1,0 @@
-{
-	"id": "4wzyrqembWGeIQ8",
-	"json": "{\"id\":\"4wzyrqembWGeIQ8\",\"url\":\"https://toss.tech/article/payments-legacy-5\",\"loadedUrl\":\"https://toss.tech/article/payments-legacy-5\",\"uniqueKey\":\"https://toss.tech/article/payments-legacy-5\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://toss.tech/article/payments-legacy-5\",\"title\":\"레거시 결제 원장을 확장 가능한 시스템으로\",\"pubDate\":\"2025-12-01T09:01:00.000Z\",\"source\":\"토스 기술 블로그, 토스 테크\",\"sourceId\":\"dev-blog-003\",\"category\":\"dev-blog\",\"tags\":[],\"guid\":\"https://toss.tech/article/payments-legacy-5\",\"imageUrlFromRss\":\"https://static.toss.im/ipd-tcs/toss_core/live/e09115ca-8646-4dd4-8a43-09eedca91170/image.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:50.418Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://toss.tech/article/payments-legacy-5",
-	"url": "https://toss.tech/article/payments-legacy-5"
-}

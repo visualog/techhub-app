@@ -1,9 +1,0 @@
-{
-	"id": "nNb3DS1rBCLplCj",
-	"json": "{\"id\":\"nNb3DS1rBCLplCj\",\"url\":\"https://tech.kakao.com/posts/796\",\"loadedUrl\":\"https://tech.kakao.com/posts/796\",\"uniqueKey\":\"https://tech.kakao.com/posts/796\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://tech.kakao.com/posts/796\",\"title\":\"우리가 진짜 문제를 풀고 있었을까? — POPM 과정이 남긴 질문\",\"pubDate\":\"2025-11-19T15:00:00.000Z\",\"source\":\"tech.kakao.com\",\"sourceId\":\"dev-blog-002\",\"category\":\"dev-blog\",\"tags\":[\"blog\"],\"guid\":\"https://tech.kakao.com/posts/796\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:39.853Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://tech.kakao.com/posts/796",
-	"url": "https://tech.kakao.com/posts/796"
-}

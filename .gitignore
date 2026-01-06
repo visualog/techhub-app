@@ -43,3 +43,6 @@ serviceAccountKey.json
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# crawler storage
+storage/

@@ -1,9 +1,0 @@
-{
-	"id": "P4kMNXJgQQwtUoS",
-	"json": "{\"id\":\"P4kMNXJgQQwtUoS\",\"url\":\"https://toss.tech/article/43061\",\"loadedUrl\":\"https://toss.tech/article/43061\",\"uniqueKey\":\"https://toss.tech/article/43061\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://toss.tech/article/43061\",\"title\":\"토스의 브랜드 심볼을 찾아서\",\"pubDate\":\"2025-12-01T03:01:00.000Z\",\"source\":\"토스 기술 블로그, 토스 테크\",\"sourceId\":\"dev-blog-003\",\"category\":\"dev-blog\",\"tags\":[],\"guid\":\"https://toss.tech/article/43061\",\"imageUrlFromRss\":\"https://static.toss.im/ipd-tcs/toss_core/live/31571faf-3c77-453f-adfa-3086e245d070/inner-techblog-1.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:49.966Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://toss.tech/article/43061",
-	"url": "https://toss.tech/article/43061"
-}

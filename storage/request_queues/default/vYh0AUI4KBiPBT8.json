@@ -1,9 +1,0 @@
-{
-	"id": "vYh0AUI4KBiPBT8",
-	"json": "{\"id\":\"vYh0AUI4KBiPBT8\",\"url\":\"https://tech.kakao.com/posts/798\",\"loadedUrl\":\"https://tech.kakao.com/posts/798\",\"uniqueKey\":\"https://tech.kakao.com/posts/798\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://tech.kakao.com/posts/798\",\"title\":\"YEYE가 지켜보고 있다–카카오의 공격 표면 관리 이야기\",\"pubDate\":\"2025-11-30T15:00:00.000Z\",\"source\":\"tech.kakao.com\",\"sourceId\":\"dev-blog-002\",\"category\":\"dev-blog\",\"tags\":[\"blog\"],\"guid\":\"https://tech.kakao.com/posts/798\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:39.339Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://tech.kakao.com/posts/798",
-	"url": "https://tech.kakao.com/posts/798"
-}

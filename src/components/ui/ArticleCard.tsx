@@ -29,7 +29,7 @@ export function ArticleCard({ article, onArticleClick, priority = false, onTagCl
 
   return (
     <>
-      <div
+      <article
         className="relative block h-full group cursor-pointer"
         onClick={() => onArticleClick(article)}
       >
@@ -46,7 +46,7 @@ export function ArticleCard({ article, onArticleClick, priority = false, onTagCl
 
             <ArticleMeta source={article.source} date={article.pubDate} />
 
-            <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-white leading-tight">
+            <h3 className="text-base font-semibold mb-2 text-neutral-900 dark:text-white leading-[24px]">
               {article.title}
             </h3>
 
@@ -55,7 +55,7 @@ export function ArticleCard({ article, onArticleClick, priority = false, onTagCl
                 label={article.category}
                 variant="primary"
               />
-              {article.tags.map((tag) => (
+              {article.tags.slice(0, 3).map((tag) => (
                 <TagChip
                   key={tag}
                   label={tag}
@@ -63,6 +63,13 @@ export function ArticleCard({ article, onArticleClick, priority = false, onTagCl
                   onClick={onTagClick}
                 />
               ))}
+              {article.tags.length > 3 && (
+                <TagChip
+                  label={`+${article.tags.length - 3}`}
+                  variant="default"
+                  className="bg-gray-50 dark:bg-neutral-900 text-gray-500 dark:text-gray-500"
+                />
+              )}
             </div>
           </div>
 
@@ -72,7 +79,7 @@ export function ArticleCard({ article, onArticleClick, priority = false, onTagCl
             className="absolute top-4 right-4 z-10"
           />
         </div>
-      </div>
+      </article>
     </>
   );
 }

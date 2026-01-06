@@ -1,9 +1,0 @@
-{
-	"id": "v3jERAQtLX0FoAo",
-	"json": "{\"id\":\"v3jERAQtLX0FoAo\",\"url\":\"https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/\",\"loadedUrl\":\"https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/\",\"uniqueKey\":\"https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/\",\"title\":\"Introducing Nested Learning: A new ML paradigm for continual learning\",\"pubDate\":\"2025-11-07T17:37:22.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Generative AI\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/NestedLearning-0-Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:15.186Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning",
-	"url": "https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/"
-}

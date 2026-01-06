@@ -30,6 +30,7 @@ if (!admin.apps.length) {
   if (serviceAccount) {
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET || process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET, // Add storage bucket with fallback
     });
     // Apply settings only once, right after initialization
     admin.firestore().settings({
@@ -43,5 +44,16 @@ if (!admin.apps.length) {
 }
 
 const db = admin.apps.length ? admin.firestore() : null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let bucket: any = null;
 
-export { db, admin };
+if (admin.apps.length) {
+  try {
+    bucket = admin.storage().bucket();
+  } catch (error) {
+    console.warn("Firebase Storage bucket initialization failed. Images might not save.", error);
+    bucket = null;
+  }
+}
+
+export { db, bucket, admin };

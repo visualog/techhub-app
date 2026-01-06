@@ -1,9 +1,0 @@
-{
-	"id": "6qJ7pcexn2wXiwY",
-	"json": "{\"id\":\"6qJ7pcexn2wXiwY\",\"url\":\"https://d2.naver.com/helloworld/9290684\",\"loadedUrl\":\"https://d2.naver.com/helloworld/9290684\",\"uniqueKey\":\"https://d2.naver.com/helloworld/9290684\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://d2.naver.com/helloworld/9290684\",\"title\":\"Iceberg Low-Latency Queries with Materialized Views  (feat. 실시간 거래 리포트)\",\"pubDate\":\"2025-12-01T15:26:47.000Z\",\"source\":\"D2 Blog\",\"sourceId\":\"feed-8lmxabs\",\"category\":\"ai-trend\",\"tags\":[],\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:50:19.762Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://d2.naver.com/helloworld/9290684",
-	"url": "https://d2.naver.com/helloworld/9290684"
-}

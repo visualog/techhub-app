@@ -18,14 +18,13 @@ interface ArticleImageProps {
 export const ArticleImage = ({ src, alt, isVideo = false, priority = false }: ArticleImageProps) => {
     if (src) {
         return (
-            <div className="relative w-full overflow-hidden rounded-3xl transition-shadow duration-300 group-hover:shadow-xl">
+            <div className="relative w-full overflow-hidden rounded-3xl transition-shadow duration-300 group-hover:shadow-xl aspect-[297/210]">
                 <Image
                     src={src}
                     alt={alt}
-                    width={500}
-                    height={300}
-                    className="w-full h-auto transition-transform duration-300"
-                    style={{ objectFit: "contain" }}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300"
                     priority={priority}
                     unoptimized={true}
                 />
@@ -35,7 +34,7 @@ export const ArticleImage = ({ src, alt, isVideo = false, priority = false }: Ar
     }
 
     return (
-        <div className="relative w-full overflow-hidden bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center aspect-video rounded-3xl group-hover:shadow-xl transition-shadow duration-300">
+        <div className="relative w-full overflow-hidden bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center aspect-[297/210] rounded-3xl group-hover:shadow-xl transition-shadow duration-300">
             <span className="text-neutral-500 dark:text-neutral-400 text-sm">No Image</span>
         </div>
     );

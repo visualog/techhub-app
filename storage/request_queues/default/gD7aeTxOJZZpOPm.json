@@ -1,9 +1,0 @@
-{
-	"id": "gD7aeTxOJZZpOPm",
-	"json": "{\"id\":\"gD7aeTxOJZZpOPm\",\"url\":\"https://research.google/blog/securing-private-data-at-scale-with-differentially-private-partition-selection/\",\"loadedUrl\":\"https://research.google/blog/securing-private-data-at-scale-with-differentially-private-partition-selection/\",\"uniqueKey\":\"https://research.google/blog/securing-private-data-at-scale-with-differentially-private-partition-selection\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/securing-private-data-at-scale-with-differentially-private-partition-selection/\",\"title\":\"Securing private data at scale with differentially private partition selection\",\"pubDate\":\"2025-08-20T19:24:05.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Responsible AI\",\"Security, Privacy and Abuse Prevention\"],\"guid\":\"https://research.google/blog/securing-private-data-at-scale-with-differentially-private-partition-selection/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/DPPS-0-Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:42.522Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/securing-private-data-at-scale-with-differentially-private-partition-selection",
-	"url": "https://research.google/blog/securing-private-data-at-scale-with-differentially-private-partition-selection/"
-}

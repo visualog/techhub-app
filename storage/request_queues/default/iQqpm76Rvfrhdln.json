@@ -1,9 +1,0 @@
-{
-	"id": "iQqpm76Rvfrhdln",
-	"json": "{\"id\":\"iQqpm76Rvfrhdln\",\"url\":\"https://tech.kakao.com/posts/805\",\"loadedUrl\":\"https://tech.kakao.com/posts/805\",\"uniqueKey\":\"https://tech.kakao.com/posts/805\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://tech.kakao.com/posts/805\",\"title\":\"초경량 클래식 형태소 분석기 개발기\",\"pubDate\":\"2025-12-21T15:00:00.000Z\",\"source\":\"tech.kakao.com\",\"sourceId\":\"dev-blog-002\",\"category\":\"dev-blog\",\"tags\":[\"blog\"],\"guid\":\"https://tech.kakao.com/posts/805\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:19.122Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://tech.kakao.com/posts/805",
-	"url": "https://tech.kakao.com/posts/805"
-}

@@ -1,9 +1,0 @@
-{
-	"id": "fr4p61N5nsFOuvs",
-	"json": "{\"id\":\"fr4p61N5nsFOuvs\",\"url\":\"https://research.google/blog/a-colorful-quantum-future/\",\"loadedUrl\":\"https://research.google/blog/a-colorful-quantum-future/\",\"uniqueKey\":\"https://research.google/blog/a-colorful-quantum-future\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/a-colorful-quantum-future/\",\"title\":\"A colorful quantum future\",\"pubDate\":\"2025-06-23T12:22:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Quantum\"],\"guid\":\"https://research.google/blog/a-colorful-quantum-future/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/ColorCode1_Comparison.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:03.325Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/a-colorful-quantum-future",
-	"url": "https://research.google/blog/a-colorful-quantum-future/"
-}

@@ -30,11 +30,13 @@ export async function GET(request: NextRequest) {
       query = query.where("category", "==", category);
     }
 
-    // Order by pubDate desc
-    query = query.orderBy("pubDate", "desc");
+    // Order by pubDate desc is moved to memory to avoid creating composite indexes for every combination of filters
+    // query = query.orderBy("pubDate", "desc");
 
-    // Limit relative huge amount to prevent reading too many docs, 
-    // but in Phase 1 we might want to fetch enough to allow client search/server memory search
+    // OPTIMIZATION: Limit to 30 most recent items to prevent Quota Exceeded errors
+    // Note: Creating composite indexes might be required for some tag/category combinations
+    query = query.orderBy("pubDate", "desc").limit(30);
+
     const snapshot = await query.get();
 
     let articles: Article[] = snapshot.docs.map((doc) => {
@@ -53,6 +55,12 @@ export async function GET(request: NextRequest) {
     if (search) {
       const lowerSearch = search.toLowerCase();
       articles = articles.filter((article) => {
+        // Filter out non-published articles (admin moderation)
+        // Treat undefined status as 'published' for backward compatibility
+        if (article.status === 'pending' || article.status === 'rejected') {
+          return false;
+        }
+
         return (
           article.title.toLowerCase().includes(lowerSearch) ||
           (article.summary && article.summary.toLowerCase().includes(lowerSearch)) ||
@@ -60,7 +68,13 @@ export async function GET(request: NextRequest) {
           article.source.toLowerCase().includes(lowerSearch)
         );
       });
+    } else {
+      // Even without search term, apply status filter
+      articles = articles.filter(article => article.status !== 'pending' && article.status !== 'rejected');
     }
+
+    // Sort is now handled by Firestore query
+    // articles.sort((a, b) => { ... });
 
     return NextResponse.json(articles);
   } catch (error: unknown) {

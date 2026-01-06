@@ -1,9 +1,0 @@
-{
-	"id": "2lhnqsIVaeX7agw",
-	"json": "{\"id\":\"2lhnqsIVaeX7agw\",\"url\":\"https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context/\",\"loadedUrl\":\"https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context/\",\"uniqueKey\":\"https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context/\",\"title\":\"Deeper insights into retrieval augmented generation: The role of sufficient context\",\"pubDate\":\"2025-05-14T13:23:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Data Mining & Modeling\",\"Generative AI\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/SufficientContext1_Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:07.111Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context",
-	"url": "https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context/"
-}

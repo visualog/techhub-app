@@ -1,9 +1,0 @@
-{
-	"id": "GaANDQpynxJP5bL",
-	"json": "{\"id\":\"GaANDQpynxJP5bL\",\"url\":\"https://research.google/blog/mechanism-design-for-large-language-models/\",\"loadedUrl\":\"https://research.google/blog/mechanism-design-for-large-language-models/\",\"uniqueKey\":\"https://research.google/blog/mechanism-design-for-large-language-models\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/mechanism-design-for-large-language-models/\",\"title\":\"Mechanism design for large language models\",\"pubDate\":\"2025-02-13T14:00:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Economics & Electronic Commerce\",\"Generative AI\"],\"guid\":\"https://research.google/blog/mechanism-design-for-large-language-models/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/MechanismDesign-0-Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:27.855Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/mechanism-design-for-large-language-models",
-	"url": "https://research.google/blog/mechanism-design-for-large-language-models/"
-}

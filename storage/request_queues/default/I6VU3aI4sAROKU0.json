@@ -1,9 +1,0 @@
-{
-	"id": "I6VU3aI4sAROKU0",
-	"json": "{\"id\":\"I6VU3aI4sAROKU0\",\"url\":\"https://story.pxd.co.kr/1861\",\"loadedUrl\":\"https://story.pxd.co.kr/1861\",\"uniqueKey\":\"https://story.pxd.co.kr/1861\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://story.pxd.co.kr/1861\",\"title\":\"성능은 개발자만의 몫일까?\",\"pubDate\":\"2025-11-12T22:50:12.000Z\",\"source\":\"pxd story\",\"sourceId\":\"design-ux-001\",\"category\":\"design-ux\",\"tags\":[\"UX Engineer 이야기\"],\"guid\":\"https://story.pxd.co.kr/1861\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:02.067Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://story.pxd.co.kr/1861",
-	"url": "https://story.pxd.co.kr/1861"
-}

@@ -1,9 +1,0 @@
-{
-	"id": "uYpkjvXQ5a3e0Wk",
-	"json": "{\"id\":\"uYpkjvXQ5a3e0Wk\",\"url\":\"https://research.google/blog/optimizing-llm-based-trip-planning/\",\"loadedUrl\":\"https://research.google/blog/optimizing-llm-based-trip-planning/\",\"uniqueKey\":\"https://research.google/blog/optimizing-llm-based-trip-planning\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/optimizing-llm-based-trip-planning/\",\"title\":\"Optimizing LLM-based trip planning\",\"pubDate\":\"2025-06-06T10:23:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Generative AI\"],\"guid\":\"https://research.google/blog/optimizing-llm-based-trip-planning/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/AlgoLLMs1_Preview.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:03.219Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/optimizing-llm-based-trip-planning",
-	"url": "https://research.google/blog/optimizing-llm-based-trip-planning/"
-}

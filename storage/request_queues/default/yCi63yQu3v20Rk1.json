@@ -1,9 +1,0 @@
-{
-	"id": "yCi63yQu3v20Rk1",
-	"json": "{\"id\":\"yCi63yQu3v20Rk1\",\"url\":\"https://research.google/blog/the-evolution-of-graph-learning/\",\"loadedUrl\":\"https://research.google/blog/the-evolution-of-graph-learning/\",\"uniqueKey\":\"https://research.google/blog/the-evolution-of-graph-learning\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/the-evolution-of-graph-learning/\",\"title\":\"The evolution of graph learning\",\"pubDate\":\"2025-03-31T12:29:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/the-evolution-of-graph-learning/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/GraphLearningHERO.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:21.118Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/the-evolution-of-graph-learning",
-	"url": "https://research.google/blog/the-evolution-of-graph-learning/"
-}

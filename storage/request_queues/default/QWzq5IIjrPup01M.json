@@ -1,9 +1,0 @@
-{
-	"id": "QWzq5IIjrPup01M",
-	"json": "{\"id\":\"QWzq5IIjrPup01M\",\"url\":\"https://research.google/blog/differentially-private-machine-learning-at-scale-with-jax-privacy/\",\"loadedUrl\":\"https://research.google/blog/differentially-private-machine-learning-at-scale-with-jax-privacy/\",\"uniqueKey\":\"https://research.google/blog/differentially-private-machine-learning-at-scale-with-jax-privacy\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/differentially-private-machine-learning-at-scale-with-jax-privacy/\",\"title\":\"Differentially private machine learning at scale with JAX-Privacy\",\"pubDate\":\"2025-11-12T15:32:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Algorithms & Theory\",\"Responsible AI\",\"Security, Privacy and Abuse Prevention\"],\"guid\":\"https://research.google/blog/differentially-private-machine-learning-at-scale-with-jax-privacy/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/JAXPrivacy1_Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:13.834Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/differentially-private-machine-learning-at-scale-with-jax-privacy",
-	"url": "https://research.google/blog/differentially-private-machine-learning-at-scale-with-jax-privacy/"
-}

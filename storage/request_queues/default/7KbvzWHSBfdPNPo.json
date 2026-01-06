@@ -1,9 +1,0 @@
-{
-	"id": "7KbvzWHSBfdPNPo",
-	"json": "{\"id\":\"7KbvzWHSBfdPNPo\",\"url\":\"https://app.dalpha.so/blog/brand-palantir/\",\"loadedUrl\":\"https://app.dalpha.so/blog/brand-palantir/\",\"uniqueKey\":\"https://app.dalpha.so/blog/brand-palantir\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://app.dalpha.so/blog/brand-palantir/\",\"title\":\"우리 브랜드에 팔란티어를 도입하면 어떻게 될까?\",\"pubDate\":\"2025-11-28T02:13:05.000Z\",\"source\":\"AI 인사이트 블로그 • 달파 블로그\",\"sourceId\":\"feed-fejmicx\",\"category\":\"dev-blog\",\"tags\":[\"브랜드 AI 플레이북\",\"AI 트렌드\",\"AI 인사이트\"],\"guid\":\"6928fa2c12d0a20086a67770\",\"imageUrlFromRss\":\"https://app.dalpha.so/blog/content/images/2025/11/-----5-1.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:44:10.256Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://app.dalpha.so/blog/brand-palantir",
-	"url": "https://app.dalpha.so/blog/brand-palantir/"
-}

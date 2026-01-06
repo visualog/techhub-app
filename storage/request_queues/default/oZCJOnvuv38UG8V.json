@@ -1,9 +1,0 @@
-{
-	"id": "oZCJOnvuv38UG8V",
-	"json": "{\"id\":\"oZCJOnvuv38UG8V\",\"url\":\"https://research.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/\",\"loadedUrl\":\"https://research.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/\",\"uniqueKey\":\"https://research.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/\",\"title\":\"MedGemma: Our most capable open models for health AI development\",\"pubDate\":\"2025-07-09T17:00:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Generative AI\",\"Health & Bioscience\",\"Machine Intelligence\"],\"guid\":\"https://research.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/MedGemma-0a-Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:57.065Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development",
-	"url": "https://research.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"
-}

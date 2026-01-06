@@ -11,6 +11,7 @@ export interface Article {
   tags: string[];
   bookmarked?: boolean;
   isVideo?: boolean;
+  status?: 'pending' | 'published' | 'rejected';
 }
 
 export const mockArticles: Article[] = [

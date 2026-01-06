@@ -1,9 +1,0 @@
-{
-	"id": "dxPnoBQRfiEv0zQ",
-	"json": "{\"id\":\"dxPnoBQRfiEv0zQ\",\"url\":\"https://tech.kakao.com/posts/802\",\"loadedUrl\":\"https://tech.kakao.com/posts/802\",\"uniqueKey\":\"https://tech.kakao.com/posts/802\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://tech.kakao.com/posts/802\",\"title\":\"더욱 똑똑하게 답하며, 더욱 풍부한 감정표현을 향한 Kanana-o의 진화 과정\",\"pubDate\":\"2025-12-11T15:00:00.000Z\",\"source\":\"tech.kakao.com\",\"sourceId\":\"dev-blog-002\",\"category\":\"dev-blog\",\"tags\":[\"blog\"],\"guid\":\"https://tech.kakao.com/posts/802\",\"imageUrlFromRss\":null,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:34.366Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://tech.kakao.com/posts/802",
-	"url": "https://tech.kakao.com/posts/802"
-}

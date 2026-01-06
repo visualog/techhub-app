@@ -1,9 +1,0 @@
-{
-	"id": "qsi3DaaHC4yEmbk",
-	"json": "{\"id\":\"qsi3DaaHC4yEmbk\",\"url\":\"https://research.google/blog/speech-to-retrieval-s2r-a-new-approach-to-voice-search/\",\"loadedUrl\":\"https://research.google/blog/speech-to-retrieval-s2r-a-new-approach-to-voice-search/\",\"uniqueKey\":\"https://research.google/blog/speech-to-retrieval-s2r-a-new-approach-to-voice-search\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/speech-to-retrieval-s2r-a-new-approach-to-voice-search/\",\"title\":\"​​Speech-to-Retrieval (S2R): A new approach to voice search\",\"pubDate\":\"2025-10-07T15:22:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"Machine Intelligence\",\"Natural Language Processing\",\"Product\",\"Speech Processing\"],\"guid\":\"https://research.google/blog/speech-to-retrieval-s2r-a-new-approach-to-voice-search/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/SpeechToRetrieval1_Hero.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:39:26.784Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/speech-to-retrieval-s2r-a-new-approach-to-voice-search",
-	"url": "https://research.google/blog/speech-to-retrieval-s2r-a-new-approach-to-voice-search/"
-}

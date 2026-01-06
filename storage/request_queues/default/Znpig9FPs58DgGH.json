@@ -1,9 +1,0 @@
-{
-	"id": "Znpig9FPs58DgGH",
-	"json": "{\"id\":\"Znpig9FPs58DgGH\",\"url\":\"https://toss.tech/article/tosspeople-jhko\",\"loadedUrl\":\"https://toss.tech/article/tosspeople-jhko\",\"uniqueKey\":\"https://toss.tech/article/tosspeople-jhko\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://toss.tech/article/tosspeople-jhko\",\"title\":\"토스 피플 : 데이터를 ‘이해하는’ 구조를 설계합니다\",\"pubDate\":\"2025-10-31T01:35:00.000Z\",\"source\":\"토스 기술 블로그, 토스 테크\",\"sourceId\":\"dev-blog-003\",\"category\":\"dev-blog\",\"tags\":[],\"guid\":\"https://toss.tech/article/tosspeople-jhko\",\"imageUrlFromRss\":\"https://static.toss.im/ipd-tcs/toss_core/live/b514634d-b400-4fc9-913d-adc34b6d56c3/1031-img-inner-techblog1.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:38:55.663Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://toss.tech/article/tosspeople-jhko",
-	"url": "https://toss.tech/article/tosspeople-jhko"
-}

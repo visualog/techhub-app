@@ -1,9 +1,0 @@
-{
-	"id": "lqVjA6WihcrjwaW",
-	"json": "{\"id\":\"lqVjA6WihcrjwaW\",\"url\":\"https://research.google/blog/evaluating-progress-of-llms-on-scientific-problem-solving/\",\"loadedUrl\":\"https://research.google/blog/evaluating-progress-of-llms-on-scientific-problem-solving/\",\"uniqueKey\":\"https://research.google/blog/evaluating-progress-of-llms-on-scientific-problem-solving\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"url\":\"https://research.google/blog/evaluating-progress-of-llms-on-scientific-problem-solving/\",\"title\":\"Evaluating progress of LLMs on scientific problem-solving\",\"pubDate\":\"2025-04-03T21:43:00.000Z\",\"source\":\"The latest research from Google\",\"sourceId\":\"ai-trend-002\",\"category\":\"ai-trend\",\"tags\":[\"General Science\",\"Generative AI\",\"Natural Language Processing\"],\"guid\":\"https://research.google/blog/evaluating-progress-of-llms-on-scientific-problem-solving/\",\"imageUrlFromRss\":\"https://storage.googleapis.com/gweb-research2023-media/original_images/curie-1.png\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-05T00:40:19.230Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://research.google/blog/evaluating-progress-of-llms-on-scientific-problem-solving",
-	"url": "https://research.google/blog/evaluating-progress-of-llms-on-scientific-problem-solving/"
-}

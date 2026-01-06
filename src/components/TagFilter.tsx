@@ -5,18 +5,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-const POPULAR_TAGS = [
-    "AI",
-    "LLM",
-    "Cloud",
-    "Conference",
-    "Toss",
-    "Backend",
-    "Frontend",
-    "Dev",
-    "React",
-    "Next.js"
-];
+import { POPULAR_TAGS_BY_CATEGORY } from '@/data/popular-tags';
 
 interface TagFilterProps {
     className?: string;
@@ -26,6 +15,10 @@ export function TagFilter({ className }: TagFilterProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
     const selectedTag = searchParams.get('tag');
+    const currentCategory = searchParams.get('category') || 'all';
+
+    // Select tags for the current category, or fallback to 'all' list
+    const tagsToDisplay = POPULAR_TAGS_BY_CATEGORY[currentCategory] || POPULAR_TAGS_BY_CATEGORY['all'];
 
     const handleTagClick = (tag: string) => {
         const params = new URLSearchParams(searchParams.toString());
@@ -39,31 +32,57 @@ export function TagFilter({ className }: TagFilterProps) {
         router.push(`/?${params.toString()}`);
     };
 
-    return (
-        <div className={cn("w-full overflow-hidden", className)}>
-            <div className="flex items-center gap-2 overflow-x-auto pb-4 pt-2 px-1 scrollbar-hide mask-fade-sides">
-                <Button
-                    variant={selectedTag ? "outline" : "default"}
-                    size="sm"
-                    className={cn(
-                        "rounded-full whitespace-nowrap transition-all",
-                        !selectedTag ? "bg-black text-white dark:bg-white dark:text-black" : "text-muted-foreground border-transparent bg-muted/50 hover:bg-muted"
-                    )}
-                    onClick={() => router.push('/')}
-                >
-                    All
-                </Button>
+    const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+    const [showLeftMask, setShowLeftMask] = React.useState(false);
+    const [showRightMask, setShowRightMask] = React.useState(false);
 
-                {POPULAR_TAGS.map((tag) => (
+    const checkScroll = () => {
+        if (scrollContainerRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+            setShowLeftMask(scrollLeft > 0);
+            setShowRightMask(scrollLeft < scrollWidth - clientWidth - 1); // -1 buffer for precision issues
+        }
+    };
+
+    React.useEffect(() => {
+        checkScroll();
+        window.addEventListener('resize', checkScroll);
+        return () => window.removeEventListener('resize', checkScroll);
+    }, [tagsToDisplay]);
+
+    return (
+        <div className={cn("w-full min-w-0 flex items-center gap-2 mb-2", className)}>
+            <Button
+                variant={selectedTag ? "outline" : "default"}
+                size="sm"
+                className={cn(
+                    "rounded-full whitespace-nowrap transition-all h-6 text-xs font-normal flex-shrink-0",
+                    !selectedTag ? "bg-black text-white dark:bg-white dark:text-black" : "text-muted-foreground border-transparent bg-muted/50 hover:bg-muted"
+                )}
+                onClick={() => router.push('/')}
+            >
+                All
+            </Button>
+
+            <div
+                ref={scrollContainerRef}
+                onScroll={checkScroll}
+                className="flex-1 overflow-x-auto flex items-center gap-2 py-2 px-1 scrollbar-hide"
+                style={{
+                    maskImage: `linear-gradient(to right, ${showLeftMask ? 'transparent, black 20px' : 'black 0%'}, ${showRightMask ? 'black calc(100% - 20px), transparent 100%' : 'black 100%'})`,
+                    WebkitMaskImage: `linear-gradient(to right, ${showLeftMask ? 'transparent, black 20px' : 'black 0%'}, ${showRightMask ? 'black calc(100% - 20px), transparent 100%' : 'black 100%'})`
+                }}
+            >
+                {tagsToDisplay.map((tag) => (
                     <Button
                         key={tag}
                         variant="ghost"
                         size="sm"
                         onClick={() => handleTagClick(tag)}
                         className={cn(
-                            "rounded-full whitespace-nowrap transition-all border-0 shadow-none",
+                            "rounded-full whitespace-nowrap transition-all border-0 shadow-none h-6 text-xs font-normal flex-shrink-0",
                             selectedTag === tag
-                                ? "bg-indigo-500 hover:bg-indigo-600 text-white font-medium"
+                                ? "bg-indigo-500 hover:bg-indigo-600 text-white"
                                 : "text-gray-700 dark:text-gray-300 bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-800 dark:hover:bg-neutral-700"
                         )}
                     >
