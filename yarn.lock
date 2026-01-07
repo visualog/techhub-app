@@ -11906,6 +11906,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"simplex-noise@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "simplex-noise@npm:4.0.3"
+  checksum: 10c0/117b7f85abd90f3dc63817ed790705ff0fb50cb0bf396a8fc8fa1443265e4b2529429bb34992e43e7b27d6cacb9059f37fa52a37e59c52f51698ad0d3038d0f3
+  languageName: node
+  linkType: hard
+
 "skin-tone@npm:^2.0.0":
   version: 2.0.0
   resolution: "skin-tone@npm:2.0.0"
@@ -12492,6 +12499,7 @@ __metadata:
     react-dom: "npm:19.2.0"
     recharts: "npm:^3.6.0"
     rss-parser: "npm:^3.13.0"
+    simplex-noise: "npm:^4.0.3"
     tailwind-merge: "npm:^3.4.0"
     tailwindcss: "npm:^4"
     tailwindcss-animate: "npm:^1.0.7"

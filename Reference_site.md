@@ -2,6 +2,7 @@
 
 ## 1. Google Antigravity (Frontend Use Cases)
 **URL**: https://antigravity.google/use-cases/frontend
+*(Note: Analysis focused on the Frontend category as main page access was limited)*
 
 ### 🎨 UX/UI 강점
 *   **Minimalism & Trust**: 극도로 절제된 레이아웃과 넉넉한 여백(White Space)을 통해 콘텐츠 집중도를 극대화했습니다. "High-end Corporate Tech" 감성을 전달합니다.

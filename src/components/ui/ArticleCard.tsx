@@ -46,7 +46,7 @@ export function ArticleCard({ article, onArticleClick, priority = false, onTagCl
 
             <ArticleMeta source={article.source} date={article.pubDate} />
 
-            <h3 className="text-base font-semibold mb-2 text-neutral-900 dark:text-white leading-[24px]">
+            <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-white leading-[24px] tracking-tight">
               {article.title}
             </h3>
 

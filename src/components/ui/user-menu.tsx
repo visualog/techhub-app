@@ -15,9 +15,10 @@ interface UserMenuProps {
     user: User | null;
     onLogin: () => void;
     onLogout: () => void;
+    isAdmin?: boolean;
 }
 
-export function UserMenu({ user, onLogin, onLogout }: UserMenuProps) {
+export function UserMenu({ user, onLogin, onLogout, isAdmin }: UserMenuProps) {
     if (!user) {
         return (
             <Button onClick={onLogin} size="sm" variant="outline">
@@ -50,8 +51,20 @@ export function UserMenu({ user, onLogin, onLogout }: UserMenuProps) {
             <DropdownMenuItem href="/bookmarks">
                 북마크
             </DropdownMenuItem>
+
+            {isAdmin && (
+                <>
+                    <DropdownMenuItem href="/trends">
+                        트렌드 분석
+                    </DropdownMenuItem>
+                    <DropdownMenuItem href="/admin">
+                        관리자
+                    </DropdownMenuItem>
+                </>
+            )}
+
             <div
-                className="block w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
+                className="block w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer border-t dark:border-gray-700"
                 onClick={onLogout}
             >
                 로그아웃
