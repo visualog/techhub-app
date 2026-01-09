@@ -109,6 +109,16 @@ async function main() {
     requestHandler: async ({ page, request, log }) => {
       const metadata = request.userData;
 
+      // 0. Deduplication Check
+      const docId = createDocId(metadata.url);
+      const docRef = db!.collection('articles').doc(docId);
+      const docSnapshot = await docRef.get();
+
+      if (docSnapshot.exists) {
+        log.info(`Skipping existing article: ${metadata.title}`);
+        return; // Skip processing
+      }
+
       log.info(`Crawling: ${request.url}`);
 
       await page.waitForLoadState('domcontentloaded');
@@ -312,8 +322,7 @@ OUTPUT ONLY THE PROMPT IN ENGLISH.`;
       };
 
       // Save to Firestore
-      const docId = createDocId(article.link);
-      const docRef = db!.collection('articles').doc(docId);
+      // docId and docRef are already defined at the start of requestHandler
 
       const dataToSave = {
         ...article,

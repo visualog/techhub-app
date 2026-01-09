@@ -33,9 +33,9 @@ export async function GET(request: NextRequest) {
     // Order by pubDate desc is moved to memory to avoid creating composite indexes for every combination of filters
     // query = query.orderBy("pubDate", "desc");
 
-    // OPTIMIZATION: Limit to 30 most recent items to prevent Quota Exceeded errors
+    // OPTIMIZATION: Limit to 100 items to find published articles buried under pending ones
     // Note: Creating composite indexes might be required for some tag/category combinations
-    query = query.orderBy("pubDate", "desc").limit(30);
+    query = query.orderBy("pubDate", "desc").limit(100);
 
     const snapshot = await query.get();
 

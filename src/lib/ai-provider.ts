@@ -161,17 +161,22 @@ class OllamaSummarizerProvider implements AISummarizerProvider {
     let inputText = text;
     if (inputText.length > this.maxInputLength) inputText = inputText.substring(0, this.maxInputLength);
 
-    // REFINED PROMPT
+    // REFINED PROMPT (Stronger Korean enforcement)
     const prompt = `[System]
-You are a professional editor. Your task is to summarize the following text into Korean.
-Rules:
-1. If the text is in English, translate it to Korean first, then summarize.
-2. The summary must be 3-4 concise sentences (around 200-300 characters).
-3. OUTPUT ONLY THE SUMMARY TEXT. Do not include labels like "Summary:", "요약:", or "Here is the summary".
-4. Do not include any introductory or concluding remarks.
+You are a professional translator and editor. 
+Your task is to summarize the provided text INTO KOREAN.
+
+Instructions:
+1. Regardless of the input language (English or Korean), the OUTPUT MUST BE IN KOREAN.
+2. Summarize the key points in 3-4 concise sentences.
+3. Use a professional, formal Korean tone (해요체 or 하십시오체).
+4. DO NOT output any English text in the summary.
 
 [Input Text]
-${inputText}`;
+${inputText}
+
+[Output (Korean)]
+`;
 
     return this.generateText(prompt); // Re-use generateText
   }
