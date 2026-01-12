@@ -12,7 +12,8 @@
     "collect-feeds": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"./serviceAccountKey.json\" AI_SUMMARIZER_PROVIDER=\"OLLAMA\" OLLAMA_MODEL_NAME=\"exaone3.5:2.4b\" node dist/scripts/crawl-and-summarize.js",
     "list-gemini-models": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && node dist/scripts/list-gemini-models.js",
     "update-feeds-from-bookmarks": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && node dist/scripts/update-feeds-from-bookmarks.js",
-    "generate-trend-report": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"./serviceAccountKey.json\" AI_SUMMARIZER_PROVIDER=\"OLLAMA\" OLLAMA_MODEL_NAME=\"exaone3.5:2.4b\" node dist/scripts/generate-trend-report.js"
+    "generate-trend-report": "tsc --project tsconfig.script.json && tsc-alias -p tsconfig.script.json && FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"./serviceAccountKey.json\" AI_SUMMARIZER_PROVIDER=\"OLLAMA\" OLLAMA_MODEL_NAME=\"exaone3.5:2.4b\" node dist/scripts/generate-trend-report.js",
+    "fix-summaries": "FIREBASE_SERVICE_ACCOUNT_KEY_PATH=\"./serviceAccountKey.json\" AI_SUMMARIZER_PROVIDER=\"OLLAMA\" OLLAMA_MODEL_NAME=\"exaone3.5:2.4b\" npx tsx scripts/resummarize-english-articles.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

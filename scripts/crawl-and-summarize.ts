@@ -276,12 +276,52 @@ OUTPUT ONLY THE PROMPT IN ENGLISH.`;
       }
 
       let articleText = '';
-      const mainContent = page.locator('article, main, [role="main"], [role="article"]');
-      if (await mainContent.count() > 0) {
-        articleText = await mainContent.first().textContent() || '';
-      } else {
-        articleText = await page.locator('body').textContent() || '';
+
+      // Improved Content Extraction with Site-Specific Selectors
+      const contentSelectors: Record<string, string> = {
+        'tympanus.net': '.ct-post-content', // Codrops
+        'medium.com': 'article section',    // Medium standard
+        'uxplanet.org': 'article section',  // UX Planet (Medium pub)
+        'protopie.io': '.w-richtext',       // Protopie blog (Webflow)
+        'design.google': '.article-content' // Google Design
+      };
+
+      let specificSelector = '';
+      for (const [domain, selector] of Object.entries(contentSelectors)) {
+        if (metadata.url.includes(domain)) {
+          specificSelector = selector;
+          break;
+        }
       }
+
+      if (specificSelector) {
+        try {
+          const element = await page.locator(specificSelector).first();
+          if (await element.count() > 0) {
+            articleText = await element.innerText();
+          }
+        } catch (e) {
+          log.warning(`  - Specific selector ${specificSelector} failed, falling back.`);
+        }
+      }
+
+      // Fallback: Generic semantic selectors
+      if (!articleText || articleText.length < 100) {
+        const contentElement = await page.locator('article, main, [role="main"], [role="article"], .post-content, .entry-content, .content').first();
+        if (await contentElement.count() > 0) {
+          articleText = await contentElement.innerText();
+        } else {
+          // Absolute fallback: body text (likely messy)
+          articleText = await page.evaluate(() => document.body.innerText);
+        }
+      }
+
+      // Clean up common noise
+      articleText = articleText
+        .replace(/Share this article/gi, '')
+        .replace(/Follow us/gi, '')
+        .replace(/Advertisement/gi, '')
+        .trim();
       articleText = articleText.replace(/\s\s+/g, ' ').trim();
 
       log.info(`- Processed article: ${metadata.title} (Pub Date: ${metadata.pubDate})`);
