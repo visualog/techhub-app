@@ -4,6 +4,9 @@ import { categories } from '@/data/categories';
 
 export async function GET() {
   try {
+    if (!db) {
+      return NextResponse.json({ error: "Database not initialized" }, { status: 500 });
+    }
     const articlesCollection = db.collection('articles');
     const counts: Record<string, number> = {};
 

@@ -6,9 +6,30 @@ interface ArticleMetaProps {
 }
 
 // 날짜 포매팅 헬퍼 함수 (Moved from ArticleCard)
-function formatRelativeDate(dateString: string): string {
+// 날짜 포매팅 헬퍼 함수 (Moved from ArticleCard)
+function formatRelativeDate(dateString: any): string {
+    if (!dateString) return "";
+
+    let pubDate: Date;
+
+    // Handle Firestore Timestamp
+    if (typeof dateString === 'object' && dateString.toDate) {
+        pubDate = dateString.toDate();
+    } else if (typeof dateString === 'string') {
+        pubDate = new Date(dateString);
+    } else if (dateString instanceof Date) {
+        pubDate = dateString;
+    } else {
+        // Fallback for unknown types
+        return String(dateString);
+    }
+
+    // Check for Invalid Date
+    if (isNaN(pubDate.getTime())) {
+        return ""; // Or fallback to raw string if possible?
+    }
+
     const now = new Date();
-    const pubDate = new Date(dateString);
     const diffInSeconds = Math.floor((now.getTime() - pubDate.getTime()) / 1000);
 
     const secondsInMinute = 60;

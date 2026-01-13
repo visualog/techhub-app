@@ -8,12 +8,14 @@ import { db } from "@/lib/firebase";
 import { Article } from "@/data/mock-articles";
 import { ArticleCard } from "@/components/ui/ArticleCard";
 import { Button } from "@/components/ui/button";
+import { ArticleDetailModal } from "@/components/ui/ArticleDetailModal";
 
 export default function AdminPage() {
     const { user, isAdmin, loading } = useAuth();
     const router = useRouter();
     const [pendingArticles, setPendingArticles] = useState<Article[]>([]);
     const [isLoadingArticles, setIsLoadingArticles] = useState(true);
+    const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
     useEffect(() => {
         if (!loading) {
@@ -51,6 +53,7 @@ export default function AdminPage() {
             const articleRef = doc(db, "articles", articleId);
             await updateDoc(articleRef, { status: "published" });
             setPendingArticles((prev) => prev.filter((a) => a.id !== articleId));
+            if (selectedArticle?.id === articleId) setSelectedArticle(null);
         } catch (error) {
             console.error("Error approving article:", error);
         }
@@ -62,6 +65,7 @@ export default function AdminPage() {
             const articleRef = doc(db, "articles", articleId);
             await updateDoc(articleRef, { status: "rejected" });
             setPendingArticles((prev) => prev.filter((a) => a.id !== articleId));
+            if (selectedArticle?.id === articleId) setSelectedArticle(null);
         } catch (error) {
             console.error("Error rejecting article:", error);
         }
@@ -76,8 +80,8 @@ export default function AdminPage() {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <h1 className="text-3xl font-bold mb-8">Admin Dashboard - Pending Articles</h1>
+        <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <h1 className="text-3xl font-bold mb-8">승인 대기 게시물</h1>
 
             {pendingArticles.length === 0 ? (
                 <div className="text-center py-12 text-gray-500">
@@ -87,16 +91,18 @@ export default function AdminPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {pendingArticles.map((article) => (
                         <div key={article.id} className="flex flex-col gap-4">
-                            {/* Reuse ArticleCard for preview, but disable click nav if needed */}
-                            <div className="pointer-events-none">
-                                <ArticleCard article={article} onArticleClick={() => { }} />
+                            <div
+                                className="cursor-pointer"
+                                onClick={() => setSelectedArticle(article)}
+                            >
+                                <ArticleCard article={article} onArticleClick={() => setSelectedArticle(article)} />
                             </div>
                             <div className="flex gap-2">
                                 <Button
                                     className="flex-1 bg-green-600 hover:bg-green-700 text-white"
                                     onClick={() => handleApprove(article.id)}
                                 >
-                                    Approve (Publish)
+                                    Approve
                                 </Button>
                                 <Button
                                     className="flex-1 bg-red-600 hover:bg-red-700 text-white"
@@ -108,6 +114,14 @@ export default function AdminPage() {
                         </div>
                     ))}
                 </div>
+            )}
+
+            {selectedArticle && (
+                <ArticleDetailModal
+                    article={selectedArticle}
+                    onClose={() => setSelectedArticle(null)}
+                    isAdmin={true}
+                />
             )}
         </div>
     );

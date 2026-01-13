@@ -283,7 +283,11 @@ OUTPUT ONLY THE PROMPT IN ENGLISH.`;
         'medium.com': 'article section',    // Medium standard
         'uxplanet.org': 'article section',  // UX Planet (Medium pub)
         'protopie.io': '.w-richtext',       // Protopie blog (Webflow)
-        'design.google': '.article-content' // Google Design
+        'design.google': '.article-content', // Google Design
+        'toss.tech': 'article', // Toss Tech wrapper
+        'tech.kakao.com': '.post-content', // Kakao Tech
+        'yozm.wishket.com': '.next-news-contents', // Wishket
+        'velog.io': '.sc-bkbkJK', // Generative but usually sc-*
       };
 
       let specificSelector = '';
@@ -332,8 +336,18 @@ OUTPUT ONLY THE PROMPT IN ENGLISH.`;
         try {
           console.log(`  - Generating summary for "${metadata.title}"...`);
           summary = await summarize(articleText) || '';
+
+          // TRANSLATE TITLE
+          console.log(`  - Translating title...`);
+          const koreanTitle = await import('../src/lib/ai-provider').then(m => m.translateTitle(metadata.title));
+          if (koreanTitle) {
+            console.log(`    > Original: ${metadata.title}`);
+            console.log(`    > Korean: ${koreanTitle}`);
+            metadata.title = koreanTitle; // Update title to Korean
+          }
+
         } catch (error) {
-          console.error(`  - Failed to generate summary:`, error);
+          console.error(`  - Failed to generate summary/translation:`, error);
         }
       } else {
         console.log(`  - Skipping summary (text too short: ${articleText.length} chars)`);
