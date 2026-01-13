@@ -7,6 +7,9 @@ import { ArticleMeta } from "./article-meta";
 import { TagChip } from "./tag-chip";
 import { BookmarkButton } from "./bookmark-button";
 
+import { useUI } from "@/context/UIContext";
+import { Loader2 } from "lucide-react";
+
 interface ArticleCardProps {
   article: Article;
   onArticleClick: (article: Article) => void;
@@ -16,7 +19,12 @@ interface ArticleCardProps {
 
 export function ArticleCard({ article, onArticleClick, priority = false, onTagClick }: ArticleCardProps) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarksContext();
+  const { isProcessing } = useUI();
   const bookmarked = isBookmarked(article.id);
+
+  const isGeneratingThumbnail = isProcessing(article.id, 'thumbnail');
+  const isTranslating = isProcessing(article.id, 'translate');
+  const isBusy = isGeneratingThumbnail || isTranslating;
 
   const handleBookmarkToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -34,6 +42,14 @@ export function ArticleCard({ article, onArticleClick, priority = false, onTagCl
         onClick={() => onArticleClick(article)}
       >
         <div className="relative flex flex-col h-full rounded-3xl transition-shadow duration-300 transition-transform duration-300 group-hover:-translate-y-2">
+
+          {/* Busy Overlay */}
+          {isBusy && (
+            <div className="absolute inset-0 z-50 bg-white/60 dark:bg-black/60 backdrop-blur-[2px] rounded-3xl flex flex-col items-center justify-center text-indigo-600 dark:text-indigo-400 font-medium animate-in fade-in duration-300">
+              <Loader2 className="w-8 h-8 animate-spin mb-2" />
+              <span>{isGeneratingThumbnail ? '썸네일 생성 중...' : '번역 중...'}</span>
+            </div>
+          )}
 
           <ArticleImage
             src={article.image}

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { X, ExternalLink, Calendar, BookOpen, Wand2, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { useUI } from '@/context/UIContext';
 
 interface ArticleDetailModalProps {
   article: Article;
@@ -24,8 +25,10 @@ function cleanSummary(text?: string): string {
 
 export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailModalProps) {
   const summary = cleanSummary(article.summary);
-  const [displayImage, setDisplayImage] = useState(article.image);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const { generateThumbnail, isProcessing, translateArticle } = useUI();
+
+  const isGeneratingThumbnail = isProcessing(article.id, 'thumbnail');
+  const isTranslating = isProcessing(article.id, 'translate');
 
   // Robust Date Parsing
   let pubDate: Date | null = null;
@@ -40,29 +43,6 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
     ? pubDate.toLocaleDateString('ko-KR')
     : String(article.pubDate || '');
 
-
-  const handleGenerateThumbnail = async () => {
-    if (!confirm("AI로 썸네일을 생성하시겠습니까? 시간이 걸릴 수 있습니다.")) return;
-    setIsGenerating(true);
-    try {
-      const res = await fetch('/api/admin/generate-thumbnail', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ articleId: article.id })
-      });
-      const data = await res.json();
-      if (data.success && data.imageUrl) {
-        setDisplayImage(data.imageUrl);
-      } else {
-        alert(`실패: ${data.error}`);
-      }
-    } catch (e) {
-      console.error(e);
-      alert("오류가 발생했습니다.");
-    } finally {
-      setIsGenerating(false);
-    }
-  };
 
   return (
     <div
@@ -80,16 +60,26 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
           <X className="w-5 h-5" />
         </button>
 
-        {displayImage && (
+        {article.image && (
           <div className="relative w-full aspect-video">
             <Image
-              src={displayImage}
+              src={article.image}
               alt={article.title}
               fill
               className="object-cover"
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+
+            {/* Generating Indicator Overlay */}
+            {isGeneratingThumbnail && (
+              <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex flex-col items-center justify-center text-white z-20">
+                <Loader2 className="w-10 h-10 animate-spin mb-3 text-indigo-400" />
+                <span className="font-semibold text-lg">AI 썸네일 생성 중...</span>
+                <span className="text-sm opacity-80 mt-1">창을 닫아도 작업은 계속됩니다.</span>
+              </div>
+            )}
+
             <div className="absolute bottom-4 left-6 right-6">
               <span className="inline-block px-2 py-1 mb-2 text-xs font-semibold text-white bg-indigo-500/80 backdrop-blur-md rounded-md">
                 {article.category || 'Tech'}
@@ -102,8 +92,15 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
         )}
 
         <div className="p-6 md:p-8">
-          {!displayImage && (
-            <div className="mb-6">
+          {!article.image && (
+            <div className="mb-6 relative">
+              {/* Generating Indicator Overlay for No-Image State */}
+              {isGeneratingThumbnail && (
+                <div className="absolute inset-0 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm flex flex-col items-center justify-center text-indigo-600 z-20 py-10">
+                  <Loader2 className="w-8 h-8 animate-spin mb-2" />
+                  <span className="font-semibold">썸네일 생성 중...</span>
+                </div>
+              )}
               <span className="inline-block px-2 py-1 mb-2 text-xs font-semibold text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 dark:text-indigo-300 rounded-md">
                 {article.category || 'Tech'}
               </span>
@@ -127,11 +124,6 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
           </div>
 
           <div className="space-y-4">
-            <div className="flex items-center gap-2 mb-2">
-              <BookOpen className="w-5 h-5 text-indigo-500" />
-              <h3 className="text-lg font-bold text-zinc-900 dark:text-white">AI 요약</h3>
-            </div>
-
             <div className="p-5 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl leading-relaxed text-zinc-700 dark:text-zinc-300 border border-zinc-100 dark:border-zinc-800">
               {summary || "요약 내용이 없습니다."}
             </div>
@@ -139,18 +131,28 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
 
           <div className="mt-8 flex justify-end gap-3 sticky bottom-0 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-4 -mx-6 -mb-6 md:-mx-8 md:-mb-8 border-t border-zinc-100 dark:border-zinc-800">
             {isAdmin && (
-              <div className="flex flex-col items-end gap-2 w-full md:w-auto">
+              <div className="flex items-center gap-2">
                 <Button
-                  variant={isGenerating ? "secondary" : "outline"}
-                  disabled={isGenerating}
-                  onClick={handleGenerateThumbnail}
-                  className={`gap-2 transition-all duration-300 ${isGenerating
-                      ? "w-full md:w-48 bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-900/40 dark:text-indigo-300 dark:border-indigo-800"
+                  variant="outline"
+                  disabled={isTranslating}
+                  onClick={() => translateArticle(article.id)}
+                  className="gap-2 border-zinc-200 text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                >
+                  {isTranslating ? <Loader2 className="w-4 h-4 animate-spin" /> : "A→가"}
+                  {isTranslating ? '번역 중...' : '한글로 번역'}
+                </Button>
+
+                <Button
+                  variant={isGeneratingThumbnail ? "secondary" : "outline"}
+                  disabled={isGeneratingThumbnail}
+                  onClick={() => generateThumbnail(article.id)}
+                  className={`gap-2 transition-all duration-300 ${isGeneratingThumbnail
+                      ? "bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-900/40 dark:text-indigo-300 dark:border-indigo-800"
                       : "border-indigo-200 text-indigo-700 hover:text-indigo-800 hover:bg-indigo-50 dark:border-indigo-800 dark:text-indigo-300 dark:hover:bg-indigo-900/50"
                     }`}
                 >
-                  {isGenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />}
-                  {isGenerating ? 'AI가 썸네일 생성 중...' : 'AI 썸네일 생성'}
+                  {isGeneratingThumbnail ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />}
+                  {isGeneratingThumbnail ? '생성 중...' : 'AI 썸네일 생성'}
                 </Button>
               </div>
             )}

@@ -5,6 +5,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { BookmarksProvider } from "@/context/BookmarksContext";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/context/AuthContext";
+import { UIProvider } from "@/context/UIContext";
 
 export const metadata: Metadata = {
   title: "TechHub",
@@ -26,17 +27,19 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <BookmarksProvider>
-              <Header />
-              <div className="max-w-screen-xl mx-auto flex flex-col">
-                <div className="flex flex-1 flex-col md:flex-row">
-                  <Sidebar />
-                  <main className="flex-1 min-w-0">
-                    {children}
-                  </main>
+            <UIProvider>
+              <BookmarksProvider>
+                <Header />
+                <div className="max-w-screen-xl mx-auto flex flex-col">
+                  <div className="flex flex-1 flex-col md:flex-row">
+                    <Sidebar />
+                    <main className="flex-1 min-w-0">
+                      {children}
+                    </main>
+                  </div>
                 </div>
-              </div>
-            </BookmarksProvider>
+              </BookmarksProvider>
+            </UIProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
