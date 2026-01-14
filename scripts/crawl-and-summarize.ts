@@ -16,6 +16,14 @@ function createDocId(link: string): string {
     .replace(/\//g, '_'); // Replace '/' with '_'
 }
 
+// Helper to sanitize XML content before parsing
+// Fixes 'Invalid character in entity name' errors caused by unescaped '&'
+function sanitizeXml(xml: string): string {
+  // Replace unescaped '&' that are not part of valid entities
+  // Valid entities: &amp; &lt; &gt; &quot; &apos; &#...;
+  return xml.replace(/&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)/g, '&amp;');
+}
+
 const browserHeaders = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -48,7 +56,13 @@ async function main() {
         const browser = await chromium.launch();
         const page = await browser.newPage();
         await page.goto(feedConfig.rssUrl, { waitUntil: 'domcontentloaded' });
-        feedXml = await page.content();
+        // Extract raw XML text instead of HTML-wrapped page.content()
+        feedXml = await page.evaluate(() => {
+          const pre = document.querySelector('pre');
+          if (pre) return pre.textContent || '';
+          // Fallback: if displayed as raw text, body might contain it
+          return document.body.innerText || '';
+        });
         await browser.close();
       } else {
         const { data } = await axios.get(feedConfig.rssUrl, {
@@ -58,7 +72,9 @@ async function main() {
         feedXml = data;
       }
 
-      const feed = await rssParser.parseString(feedXml);
+      // Sanitize XML to fix unescaped ampersands before parsing
+      const sanitizedXml = sanitizeXml(feedXml);
+      const feed = await rssParser.parseString(sanitizedXml);
       for (const item of feed.items) {
         if (item.link) {
           // --- Start of Image Extraction Logic from RSS item ---

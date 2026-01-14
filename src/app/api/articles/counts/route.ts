@@ -10,15 +10,19 @@ export async function GET() {
     const articlesCollection = db.collection('articles');
     const counts: Record<string, number> = {};
 
+    // Only count approved articles (matching /api/articles behavior)
+    // Note: 'approved' status filter - articles with status='pending' or 'rejected' are excluded
+    const baseQuery = articlesCollection.where('status', '==', 'approved');
+
     // Parallelize all count queries
     const countPromises = [
-      // 1. Total count
-      articlesCollection.count().get().then(snap => ({ id: 'all', count: snap.data().count })),
-      // 2. Category counts
+      // 1. Total count (approved only)
+      baseQuery.count().get().then(snap => ({ id: 'all', count: snap.data().count })),
+      // 2. Category counts (approved only)
       ...categories
         .filter(c => c.id !== 'all')
         .map(c =>
-          articlesCollection.where('category', '==', c.id).count().get()
+          baseQuery.where('category', '==', c.id).count().get()
             .then(snap => ({ id: c.id, count: snap.data().count }))
         )
     ];

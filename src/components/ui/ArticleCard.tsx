@@ -18,6 +18,7 @@ interface ArticleCardProps {
 }
 
 export function ArticleCard({ article, onArticleClick, priority = false, onTagClick }: ArticleCardProps) {
+  console.log("ArticleCard: Rendering", article.id);
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarksContext();
   const { isProcessing } = useUI();
   const bookmarked = isBookmarked(article.id);

@@ -29,6 +29,7 @@ export function ArticleList({ onArticleClick, onTagClick, viewMode = 'grid' }: A
   const fetchArticles = useCallback(async () => {
     setLoading(true);
     setError(null);
+    console.log("ArticleList: Fetching articles...");
     try {
       const query = new URLSearchParams();
       if (currentCategory !== 'all') {
@@ -41,13 +42,17 @@ export function ArticleList({ onArticleClick, onTagClick, viewMode = 'grid' }: A
         query.set('search', searchTerm);
       }
 
+      console.log("ArticleList: Query:", query.toString());
       const res = await fetch(`/api/articles?${query.toString()}`);
       if (!res.ok) {
+        console.error("ArticleList: Fetch failed", res.status);
         throw new Error(`HTTP error! status: ${res.status}`);
       }
       const data: Article[] = await res.json();
+      console.log("ArticleList: Data received", data.length, data[0]);
       setArticles(data);
     } catch (error: unknown) {
+      console.error("ArticleList: Error", error);
       setError((error as Error).message);
       setArticles([]);
     } finally {

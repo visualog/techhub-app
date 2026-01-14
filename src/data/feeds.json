@@ -114,18 +114,6 @@
     "category": "ai-trend"
   },
   {
-    "id": "feed-086dw7i",
-    "name": "OpenAI Global Affairs",
-    "rssUrl": "https://openai.com/index/rss.xml",
-    "category": "ai-trend"
-  },
-  {
-    "id": "feed-no1vakp",
-    "name": "d2sf.naver",
-    "rssUrl": "https://d2sf.naver.com/atom",
-    "category": "dev-blog"
-  },
-  {
     "id": "feed-oa8vpr6",
     "name": "TechBlogPosts",
     "rssUrl": "https://www.techblogposts.com/ko/rss",

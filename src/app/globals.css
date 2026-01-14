@@ -158,6 +158,13 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Hide Naver Dictionary Extension element to prevent layout shift */
+  #__endic_crx__ {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
 }
 
 @utility scrollbar-hide {

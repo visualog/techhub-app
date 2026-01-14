@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100`} style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+      <body className={`bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100`} style={{ fontFamily: "'Google Sans Flex', sans-serif" }} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
