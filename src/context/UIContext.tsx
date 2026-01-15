@@ -3,11 +3,17 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 import { Toast, ToastType } from '@/components/ui/Toast';
 
-type JobType = 'thumbnail' | 'translate';
+type JobType = 'thumbnail' | 'translate' | 'summarize';
 
 interface processingJob {
     articleId: string;
     type: JobType;
+}
+
+interface ToastMessage {
+    id: string;
+    message: string;
+    type: ToastType;
 }
 
 interface UIContextType {
@@ -19,12 +25,7 @@ interface UIContextType {
     isProcessing: (articleId: string, type?: JobType) => boolean;
     generateThumbnail: (articleId: string) => Promise<void>;
     translateArticle: (articleId: string) => Promise<void>;
-}
-
-interface ToastMessage {
-    id: string;
-    message: string;
-    type: ToastType;
+    summarizeArticle: (articleId: string) => Promise<void>;
 }
 
 const UIContext = createContext<UIContextType | undefined>(undefined);
@@ -38,7 +39,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
         setToasts((prev) => [...prev, { id, message, type }]);
         setTimeout(() => {
             setToasts((prev) => prev.filter((t) => t.id !== id));
-        }, 3000); // 3 seconds (as requested 1-2s, slightly longer for readability)
+        }, 3000);
     }, []);
 
     const startJob = useCallback((articleId: string, type: JobType) => {
@@ -91,7 +92,6 @@ export function UIProvider({ children }: { children: ReactNode }) {
         addToast('한글 번역 작업을 시작했습니다.', 'info');
 
         try {
-            // Need to implement this API endpoint next
             const res = await fetch('/api/admin/translate-article', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -112,10 +112,39 @@ export function UIProvider({ children }: { children: ReactNode }) {
         }
     };
 
+    // API ACTION: Summarize Article
+    const summarizeArticle = async (articleId: string) => {
+        if (isProcessing(articleId, 'summarize')) return;
+
+        startJob(articleId, 'summarize');
+        addToast('AI 요약 생성을 시작했습니다.', 'info');
+
+        try {
+            const res = await fetch('/api/admin/summarize', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ articleId })
+            });
+            const data = await res.json();
+
+            if (res.ok && data.summary) {
+                addToast('AI 요약 생성이 완료되었습니다!', 'success');
+                window.location.reload();
+            } else {
+                addToast(`요약 실패: ${data.error || 'Unknown error'}`, 'error');
+            }
+        } catch (error) {
+            console.error(error);
+            addToast('요약 생성 중 오류가 발생했습니다.', 'error');
+        } finally {
+            endJob(articleId, 'summarize');
+        }
+    };
+
     return (
         <UIContext.Provider value={{
             toasts, processingJobs, addToast, startJob, endJob, isProcessing,
-            generateThumbnail, translateArticle
+            generateThumbnail, translateArticle, summarizeArticle
         }}>
             {children}
             {/* Toast Container */}

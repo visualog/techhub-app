@@ -25,7 +25,7 @@ function cleanSummary(text?: string): string {
 
 export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailModalProps) {
   const summary = cleanSummary(article.summary);
-  const { generateThumbnail, isProcessing, translateArticle } = useUI();
+  const { generateThumbnail, isProcessing, translateArticle, summarizeArticle } = useUI();
 
   const isGeneratingThumbnail = isProcessing(article.id, 'thumbnail');
   const isTranslating = isProcessing(article.id, 'translate');
@@ -134,6 +134,16 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
               <div className="flex items-center gap-2">
                 <Button
                   variant="outline"
+                  disabled={isProcessing(article.id, 'summarize')}
+                  onClick={() => summarizeArticle(article.id)}
+                  className="gap-2 border-zinc-200 text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                >
+                  {isProcessing(article.id, 'summarize') ? <Loader2 className="w-4 h-4 animate-spin" /> : <BookOpen className="w-4 h-4" />}
+                  {isProcessing(article.id, 'summarize') ? '요약 중...' : 'AI 요약 생성'}
+                </Button>
+
+                <Button
+                  variant="outline"
                   disabled={isTranslating}
                   onClick={() => translateArticle(article.id)}
                   className="gap-2 border-zinc-200 text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
@@ -147,8 +157,8 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
                   disabled={isGeneratingThumbnail}
                   onClick={() => generateThumbnail(article.id)}
                   className={`gap-2 transition-all duration-300 ${isGeneratingThumbnail
-                      ? "bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-900/40 dark:text-indigo-300 dark:border-indigo-800"
-                      : "border-indigo-200 text-indigo-700 hover:text-indigo-800 hover:bg-indigo-50 dark:border-indigo-800 dark:text-indigo-300 dark:hover:bg-indigo-900/50"
+                    ? "bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-900/40 dark:text-indigo-300 dark:border-indigo-800"
+                    : "border-indigo-200 text-indigo-700 hover:text-indigo-800 hover:bg-indigo-50 dark:border-indigo-800 dark:text-indigo-300 dark:hover:bg-indigo-900/50"
                     }`}
                 >
                   {isGeneratingThumbnail ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />}
