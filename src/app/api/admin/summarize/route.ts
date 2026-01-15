@@ -1,9 +1,17 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebaseAdmin';
-import { summarize } from '@/lib/ai-provider';
+import { summarize, translateTitle } from '@/lib/ai-provider';
 import * as cheerio from 'cheerio';
 import axios from 'axios';
+
+// Helper function to detect if text is primarily English
+function isEnglishText(text: string): boolean {
+    // Check if text contains mostly ASCII letters
+    const englishChars = text.match(/[a-zA-Z]/g) || [];
+    const koreanChars = text.match(/[\uAC00-\uD7AF]/g) || [];
+    return englishChars.length > koreanChars.length;
+}
 
 export async function POST(req: NextRequest) {
     try {
@@ -15,6 +23,7 @@ export async function POST(req: NextRequest) {
 
         let targetUrl = url;
         let articleRef = null;
+        let originalTitle = '';
 
         // If articleId is provided, fetch URL from Firestore
         if (articleId && db) {
@@ -23,7 +32,9 @@ export async function POST(req: NextRequest) {
             if (!doc.exists) {
                 return NextResponse.json({ error: 'Article not found' }, { status: 404 });
             }
-            targetUrl = doc.data()?.link || doc.data()?.url;
+            const data = doc.data();
+            targetUrl = data?.link || data?.url;
+            originalTitle = data?.title || '';
         }
 
         if (!targetUrl) {
@@ -69,12 +80,28 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Failed to generate summary' }, { status: 500 });
         }
 
-        // Update Firestore if articleId was provided
-        if (articleId && articleRef) {
-            await articleRef.update({ summary });
+        // Translate title if it's in English
+        let translatedTitle: string | null = null;
+        if (originalTitle && isEnglishText(originalTitle)) {
+            console.log(`Translating English title: ${originalTitle}`);
+            translatedTitle = await translateTitle(originalTitle);
         }
 
-        return NextResponse.json({ summary });
+        // Update Firestore if articleId was provided
+        if (articleId && articleRef) {
+            const updateData: Record<string, string> = { summary };
+            if (translatedTitle) {
+                updateData.title = translatedTitle;
+                updateData.originalTitle = originalTitle; // Keep original for reference
+            }
+            await articleRef.update(updateData);
+        }
+
+        return NextResponse.json({
+            summary,
+            translatedTitle: translatedTitle || null,
+            originalTitle: translatedTitle ? originalTitle : null
+        });
 
     } catch (error: any) {
         console.error('Summarization API Error:', error);

@@ -140,7 +140,14 @@ export default function AdminPage() {
 
     return (
         <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <h1 className="text-2xl font-bold mb-8">승인 대기 게시물</h1>
+            <h1 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                승인 대기 게시물
+                {pendingArticles.length > 0 && (
+                    <span className="inline-flex items-center justify-center px-3 py-1 text-sm font-medium bg-orange-100 text-orange-800 rounded-full">
+                        {pendingArticles.length}
+                    </span>
+                )}
+            </h1>
 
             {pendingArticles.length === 0 ? (
                 <div className="text-center py-12 text-gray-500">
@@ -158,18 +165,20 @@ export default function AdminPage() {
                             </div>
                             <div className="flex gap-2">
                                 <Button
-                                    className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                                    variant="outline"
+                                    className="flex-1 border-green-600 text-green-600 hover:bg-green-50"
                                     disabled={processingId === article.id}
                                     onClick={(e) => handleApprove(e, article.id)}
                                 >
-                                    {processingId === article.id ? "Processing..." : "Approve"}
+                                    {processingId === article.id ? "처리 중..." : "승인"}
                                 </Button>
                                 <Button
-                                    className="flex-1 bg-red-600 hover:bg-red-700 text-white"
+                                    variant="outline"
+                                    className="flex-1 border-red-500 text-red-500 hover:bg-red-50"
                                     disabled={processingId === article.id}
                                     onClick={(e) => handleReject(e, article.id)}
                                 >
-                                    Reject
+                                    거절
                                 </Button>
                             </div>
                         </div>

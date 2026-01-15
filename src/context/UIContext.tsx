@@ -128,7 +128,11 @@ export function UIProvider({ children }: { children: ReactNode }) {
             const data = await res.json();
 
             if (res.ok && data.summary) {
-                addToast('AI 요약 생성이 완료되었습니다!', 'success');
+                if (data.translatedTitle) {
+                    addToast('AI 요약 및 제목 번역이 완료되었습니다!', 'success');
+                } else {
+                    addToast('AI 요약 생성이 완료되었습니다!', 'success');
+                }
                 window.location.reload();
             } else {
                 addToast(`요약 실패: ${data.error || 'Unknown error'}`, 'error');
