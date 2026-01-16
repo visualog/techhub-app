@@ -181,7 +181,7 @@ async function main() {
         'medium.com': 'meta[property="og:image"]',
         'brunch.co.kr': '.cover_image, .wrap_img_float img',
         'tech.kakao.com': '.cover-image img',
-        'toss.tech': 'img[alt="thumbnail"]',
+        'toss.tech': 'meta[property="og:image"]',
         'yozm.wishket.com': '.news-cover-image img'
       };
 
