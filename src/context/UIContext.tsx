@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 import { Toast, ToastType } from '@/components/ui/Toast';
 
-type JobType = 'thumbnail' | 'translate' | 'summarize';
+type JobType = 'thumbnail' | 'translate' | 'summarize' | 'extract';
 
 interface processingJob {
     articleId: string;
@@ -26,6 +26,8 @@ interface UIContextType {
     generateThumbnail: (articleId: string) => Promise<void>;
     translateArticle: (articleId: string) => Promise<void>;
     summarizeArticle: (articleId: string) => Promise<void>;
+    updateThumbnail: (articleId: string, imageUrl: string) => Promise<void>;
+    extractThumbnail: (articleId: string) => Promise<void>;
 }
 
 const UIContext = createContext<UIContextType | undefined>(undefined);
@@ -145,10 +147,68 @@ export function UIProvider({ children }: { children: ReactNode }) {
         }
     };
 
+    // API ACTION: Update Thumbnail with URL
+    const updateThumbnail = async (articleId: string, imageUrl: string) => {
+        if (isProcessing(articleId, 'thumbnail')) return;
+
+        startJob(articleId, 'thumbnail');
+        addToast('썸네일 업데이트 중...', 'info');
+
+        try {
+            const res = await fetch('/api/admin/update-thumbnail', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ articleId, action: 'url', imageUrl })
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                addToast('썸네일이 업데이트되었습니다!', 'success');
+                window.location.reload();
+            } else {
+                addToast(`썸네일 업데이트 실패: ${data.error}`, 'error');
+            }
+        } catch (error) {
+            console.error(error);
+            addToast('썸네일 업데이트 중 오류가 발생했습니다.', 'error');
+        } finally {
+            endJob(articleId, 'thumbnail');
+        }
+    };
+
+    // API ACTION: Extract Thumbnail from Original
+    const extractThumbnail = async (articleId: string) => {
+        if (isProcessing(articleId, 'extract')) return;
+
+        startJob(articleId, 'extract');
+        addToast('원본에서 이미지 추출 중...', 'info');
+
+        try {
+            const res = await fetch('/api/admin/update-thumbnail', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ articleId, action: 'extract' })
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                addToast('원본에서 이미지를 추출했습니다!', 'success');
+                window.location.reload();
+            } else {
+                addToast(`이미지 추출 실패: ${data.error}`, 'error');
+            }
+        } catch (error) {
+            console.error(error);
+            addToast('이미지 추출 중 오류가 발생했습니다.', 'error');
+        } finally {
+            endJob(articleId, 'extract');
+        }
+    };
+
     return (
         <UIContext.Provider value={{
             toasts, processingJobs, addToast, startJob, endJob, isProcessing,
-            generateThumbnail, translateArticle, summarizeArticle
+            generateThumbnail, translateArticle, summarizeArticle, updateThumbnail, extractThumbnail
         }}>
             {children}
             {/* Toast Container */}
