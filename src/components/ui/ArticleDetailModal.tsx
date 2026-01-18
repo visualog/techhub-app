@@ -3,7 +3,7 @@
 import { Article } from '@/data/mock-articles';
 import Image from 'next/image';
 import Link from 'next/link';
-import { X, ExternalLink, Calendar, BookOpen, Wand2, Loader2, ImagePlus, Link2, Search, ChevronDown } from 'lucide-react';
+import { X, ExternalLink, Calendar, BookOpen, Wand2, Loader2, ImagePlus, Link2, Search, ChevronDown, Languages } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useRef, useEffect } from 'react';
 import { useUI } from '@/context/UIContext';
@@ -28,9 +28,11 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
   const { generateThumbnail, isProcessing, translateArticle, summarizeArticle, updateThumbnail, extractThumbnail } = useUI();
 
   const [showThumbnailMenu, setShowThumbnailMenu] = useState(false);
+  const [showTranslateMenu, setShowTranslateMenu] = useState(false);
   const [showUrlInput, setShowUrlInput] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
   const menuRef = useRef<HTMLDivElement>(null);
+  const translateMenuRef = useRef<HTMLDivElement>(null);
 
   const isGeneratingThumbnail = isProcessing(article.id, 'thumbnail');
   const isTranslating = isProcessing(article.id, 'translate');
@@ -42,6 +44,9 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setShowThumbnailMenu(false);
         setShowUrlInput(false);
+      }
+      if (translateMenuRef.current && !translateMenuRef.current.contains(event.target as Node)) {
+        setShowTranslateMenu(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -155,25 +160,56 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
           <div className="mt-8 flex justify-end gap-3 sticky bottom-0 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-4 -mx-6 -mb-6 md:-mx-8 md:-mb-8 border-t border-zinc-100 dark:border-zinc-800">
             {isAdmin && (
               <div className="flex items-center gap-2 flex-wrap">
-                <Button
-                  variant="outline"
-                  disabled={isProcessing(article.id, 'summarize')}
-                  onClick={() => summarizeArticle(article.id)}
-                  className="gap-2 border-zinc-200 text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
-                >
-                  {isProcessing(article.id, 'summarize') ? <Loader2 className="w-4 h-4 animate-spin" /> : <BookOpen className="w-4 h-4" />}
-                  {isProcessing(article.id, 'summarize') ? '요약 중...' : 'AI 요약'}
-                </Button>
+                {/* Translate & Summarize Dropdown */}
+                <div className="relative" ref={translateMenuRef}>
+                  <Button
+                    variant="outline"
+                    disabled={isProcessing(article.id, 'summarize') || isTranslating}
+                    onClick={() => setShowTranslateMenu(!showTranslateMenu)}
+                    className="gap-2 border-zinc-200 text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                  >
+                    {(isProcessing(article.id, 'summarize') || isTranslating) ? <Loader2 className="w-4 h-4 animate-spin" /> : <Languages className="w-4 h-4" />}
+                    AI 번역/요약
+                    <ChevronDown className="w-3 h-3" />
+                  </Button>
 
-                <Button
-                  variant="outline"
-                  disabled={isTranslating}
-                  onClick={() => translateArticle(article.id)}
-                  className="gap-2 border-zinc-200 text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
-                >
-                  {isTranslating ? <Loader2 className="w-4 h-4 animate-spin" /> : "A→가"}
-                  {isTranslating ? '번역 중...' : '번역'}
-                </Button>
+                  {showTranslateMenu && (
+                    <div className="absolute bottom-full mb-2 left-0 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg shadow-xl py-1 min-w-[200px] z-30">
+                      <button
+                        onClick={() => {
+                          translateArticle(article.id);
+                          setShowTranslateMenu(false);
+                        }}
+                        className="w-full flex items-center gap-2 px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-left"
+                      >
+                        <span className="font-medium">제목만 번역</span>
+                        <span className="text-xs text-zinc-400 ml-auto">A→가</span>
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          summarizeArticle(article.id, false);
+                          setShowTranslateMenu(false);
+                        }}
+                        className="w-full flex items-center gap-2 px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-left"
+                      >
+                        <span className="font-medium">내용(요약)만 번역</span>
+                        <span className="text-xs text-zinc-400 ml-auto">제목 유지</span>
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          summarizeArticle(article.id, true);
+                          setShowTranslateMenu(false);
+                        }}
+                        className="w-full flex items-center gap-2 px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-left"
+                      >
+                        <span className="font-medium">둘 다 번역</span>
+                        <span className="text-xs text-zinc-400 ml-auto">전체</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
 
                 {/* Thumbnail Dropdown */}
                 <div className="relative" ref={menuRef}>

@@ -15,7 +15,7 @@ function isEnglishText(text: string): boolean {
 
 export async function POST(req: NextRequest) {
     try {
-        const { articleId, url } = await req.json();
+        const { articleId, url, translateTitle: translateTitleOption } = await req.json();
 
         if (!articleId && !url) {
             return NextResponse.json({ error: 'articleId or url is required' }, { status: 400 });
@@ -36,6 +36,8 @@ export async function POST(req: NextRequest) {
             targetUrl = data?.link || data?.url;
             originalTitle = data?.title || '';
         }
+
+
 
         if (!targetUrl) {
             return NextResponse.json({ error: 'Target URL not found' }, { status: 400 });
@@ -80,10 +82,19 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Failed to generate summary' }, { status: 500 });
         }
 
-        // Translate title if it's in English
+        // Translate title logic
         let translatedTitle: string | null = null;
-        if (originalTitle && isEnglishText(originalTitle)) {
-            console.log(`Translating English title: ${originalTitle}`);
+        let shouldTranslateTitle = false;
+
+        if (typeof translateTitleOption === 'boolean') {
+            shouldTranslateTitle = translateTitleOption;
+        } else {
+            // 'auto' or undefined
+            shouldTranslateTitle = originalTitle && isEnglishText(originalTitle);
+        }
+
+        if (shouldTranslateTitle && originalTitle) {
+            console.log(`Translating title: ${originalTitle}`);
             translatedTitle = await translateTitle(originalTitle);
         }
 

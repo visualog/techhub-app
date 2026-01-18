@@ -25,7 +25,7 @@ interface UIContextType {
     isProcessing: (articleId: string, type?: JobType) => boolean;
     generateThumbnail: (articleId: string) => Promise<void>;
     translateArticle: (articleId: string) => Promise<void>;
-    summarizeArticle: (articleId: string) => Promise<void>;
+    summarizeArticle: (articleId: string, translateTitle?: boolean | 'auto') => Promise<void>;
     updateThumbnail: (articleId: string, imageUrl: string) => Promise<void>;
     extractThumbnail: (articleId: string) => Promise<void>;
 }
@@ -115,17 +115,21 @@ export function UIProvider({ children }: { children: ReactNode }) {
     };
 
     // API ACTION: Summarize Article
-    const summarizeArticle = async (articleId: string) => {
+    const summarizeArticle = async (articleId: string, translateTitle: boolean | 'auto' = 'auto') => {
         if (isProcessing(articleId, 'summarize')) return;
 
         startJob(articleId, 'summarize');
-        addToast('AI 요약 생성을 시작했습니다.', 'info');
+        // Toast message varies based on action
+        let msg = 'AI 요약 생성을 시작했습니다.';
+        if (translateTitle === true) msg = 'AI 요약 및 제목 번역을 시작했습니다.';
+        if (translateTitle === false) msg = 'AI 요약(제목 유지)을 시작했습니다.';
+        addToast(msg, 'info');
 
         try {
             const res = await fetch('/api/admin/summarize', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ articleId })
+                body: JSON.stringify({ articleId, translateTitle })
             });
             const data = await res.json();
 
