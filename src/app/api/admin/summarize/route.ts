@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
             shouldTranslateTitle = translateTitleOption;
         } else {
             // 'auto' or undefined
-            shouldTranslateTitle = originalTitle && isEnglishText(originalTitle);
+            shouldTranslateTitle = !!originalTitle && isEnglishText(originalTitle);
         }
 
         if (shouldTranslateTitle && originalTitle) {
@@ -100,7 +100,10 @@ export async function POST(req: NextRequest) {
 
         // Update Firestore if articleId was provided
         if (articleId && articleRef) {
-            const updateData: Record<string, string> = { summary };
+            const updateData: Record<string, any> = {
+                summary,
+                hasSummary: true
+            };
             if (translatedTitle) {
                 updateData.title = translatedTitle;
                 updateData.originalTitle = originalTitle; // Keep original for reference

@@ -11,8 +11,8 @@ export async function GET() {
     const counts: Record<string, number> = {};
 
     // Only count approved articles (matching /api/articles behavior)
-    // Note: 'approved' status filter - articles with status='pending' or 'rejected' are excluded
-    const baseQuery = articlesCollection.where('status', '==', 'approved');
+    // Note: 'published' status filter - articles with status='pending' or 'rejected' are excluded
+    const baseQuery = articlesCollection.where('status', '==', 'published');
 
     // Parallelize all count queries
     const countPromises = [

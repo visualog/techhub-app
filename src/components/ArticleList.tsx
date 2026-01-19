@@ -11,77 +11,16 @@ import { ArticleListSkeleton } from "@/components/ui/ArticleListSkeleton";
 type ViewMode = 'grid' | 'masonry';
 
 interface ArticleListProps {
+  articles: Article[];
   onArticleClick: (article: Article) => void;
   viewMode?: ViewMode;
   onTagClick?: (tag: string) => void;
 }
 
-export function ArticleList({ onArticleClick, onTagClick, viewMode = 'grid' }: ArticleListProps) {
+export function ArticleList({ articles, onArticleClick, onTagClick, viewMode = 'grid' }: ArticleListProps) {
   const searchParams = useSearchParams();
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const currentCategory = searchParams.get('category') || 'all';
   const currentTag = searchParams.get('tag');
   const searchTerm = searchParams.get('search') || '';
-
-  const fetchArticles = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    console.log("ArticleList: Fetching articles...");
-    try {
-      const query = new URLSearchParams();
-      if (currentCategory !== 'all') {
-        query.set('category', currentCategory);
-      }
-      if (currentTag) {
-        query.set('tag', currentTag);
-      }
-      if (searchTerm) {
-        query.set('search', searchTerm);
-      }
-
-      console.log("ArticleList: Query:", query.toString());
-      const res = await fetch(`/api/articles?${query.toString()}`);
-      if (!res.ok) {
-        console.error("ArticleList: Fetch failed", res.status);
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      const data: Article[] = await res.json();
-      console.log("ArticleList: Data received", data.length, data[0]);
-      setArticles(data);
-    } catch (error: unknown) {
-      console.error("ArticleList: Error", error);
-      setError((error as Error).message);
-      setArticles([]);
-    } finally {
-      setLoading(false);
-    }
-  }, [currentCategory, currentTag, searchTerm]);
-
-  useEffect(() => {
-    fetchArticles();
-  }, [fetchArticles]);
-
-  if (loading) {
-    return <ArticleListSkeleton />;
-  }
-
-  if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center p-8 text-center min-h-[300px]">
-        <div className="text-red-500 mb-4 font-medium">오류가 발생했습니다</div>
-        <p className="text-gray-500 mb-6 text-sm">{error}</p>
-        <button
-          onClick={() => fetchArticles()}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
-        >
-          다시 시도
-        </button>
-      </div>
-    );
-  }
 
   /* Create unique list */
   const uniqueArticles = articles.length > 0
