@@ -12,6 +12,7 @@ interface ArticleDetailModalProps {
   article: Article;
   onClose: () => void;
   isAdmin?: boolean;
+  onUpdate?: (article: Partial<Article>) => void;
 }
 
 function cleanSummary(text?: string): string {
@@ -23,9 +24,9 @@ function cleanSummary(text?: string): string {
     .trim();
 }
 
-export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailModalProps) {
+export function ArticleDetailModal({ article, onClose, isAdmin, onUpdate }: ArticleDetailModalProps) {
   const summary = cleanSummary(article.summary);
-  const { generateThumbnail, isProcessing, translateArticle, summarizeArticle, updateThumbnail, extractThumbnail } = useUI();
+  const { generateThumbnail, isProcessing, translateArticle, revertTitle, summarizeArticle, updateThumbnail, extractThumbnail } = useUI();
 
   const [showThumbnailMenu, setShowThumbnailMenu] = useState(false);
   const [showTranslateMenu, setShowTranslateMenu] = useState(false);
@@ -66,12 +67,58 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
     ? pubDate.toLocaleDateString('ko-KR')
     : String(article.pubDate || '');
 
-  const handleUrlSubmit = () => {
+  const handleUrlSubmit = async () => {
     if (imageUrl.trim()) {
-      updateThumbnail(article.id, imageUrl.trim());
+      const result = await updateThumbnail(article.id, imageUrl.trim());
+      if (result && onUpdate) onUpdate({ image: result.image });
       setShowUrlInput(false);
       setImageUrl('');
     }
+  };
+
+  const handleTranslate = async () => {
+    const result = await translateArticle(article.id);
+    if (result && onUpdate && result.translatedTitle) {
+      const updates: Partial<Article> = { title: result.translatedTitle };
+      if (!article.originalTitle) {
+        updates.originalTitle = article.title;
+      }
+      onUpdate(updates);
+    }
+    setShowTranslateMenu(false);
+  };
+
+  const handleRevertTitle = async () => {
+    const result = await revertTitle(article.id);
+    if (result && onUpdate && result.title) onUpdate({ title: result.title });
+    setShowTranslateMenu(false);
+  };
+
+  const handleSummarize = async (translateTitle: boolean | 'auto') => {
+    const result = await summarizeArticle(article.id, translateTitle);
+    if (result && onUpdate) {
+      const updates: Partial<Article> = { summary: result.summary };
+      if (result.title) {
+        updates.title = result.title;
+        if (!article.originalTitle) {
+          updates.originalTitle = article.title;
+        }
+      }
+      onUpdate(updates);
+    }
+    setShowTranslateMenu(false);
+  };
+
+  const handleExtract = async () => {
+    const result = await extractThumbnail(article.id);
+    if (result && onUpdate) onUpdate({ image: result.image });
+    setShowThumbnailMenu(false);
+  };
+
+  const handleGenerateThumbnail = async () => {
+    const result = await generateThumbnail(article.id);
+    if (result && onUpdate) onUpdate({ image: result.image });
+    setShowThumbnailMenu(false);
   };
 
   return (
@@ -176,10 +223,7 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
                   {showTranslateMenu && (
                     <div className="absolute bottom-full mb-2 left-0 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg shadow-xl py-1 min-w-[200px] z-30">
                       <button
-                        onClick={() => {
-                          translateArticle(article.id);
-                          setShowTranslateMenu(false);
-                        }}
+                        onClick={handleTranslate}
                         className="w-full flex items-center gap-2 px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-left"
                       >
                         <span className="font-medium">제목만 번역</span>
@@ -187,10 +231,7 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
                       </button>
 
                       <button
-                        onClick={() => {
-                          summarizeArticle(article.id, false);
-                          setShowTranslateMenu(false);
-                        }}
+                        onClick={() => handleSummarize(false)}
                         className="w-full flex items-center gap-2 px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-left"
                       >
                         <span className="font-medium">내용(요약)만 번역</span>
@@ -198,15 +239,25 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
                       </button>
 
                       <button
-                        onClick={() => {
-                          summarizeArticle(article.id, true);
-                          setShowTranslateMenu(false);
-                        }}
+                        onClick={() => handleSummarize(true)}
                         className="w-full flex items-center gap-2 px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-left"
                       >
                         <span className="font-medium">둘 다 번역</span>
                         <span className="text-xs text-zinc-400 ml-auto">전체</span>
                       </button>
+
+                      {(article.originalTitle && article.title !== article.originalTitle) && (
+                        <>
+                          <div className="h-px bg-zinc-100 dark:bg-zinc-700 my-1" />
+                          <button
+                            onClick={handleRevertTitle}
+                            className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-left"
+                          >
+                            <span className="font-medium">원문으로 복원</span>
+                            <span className="text-xs ml-auto">Reset</span>
+                          </button>
+                        </>
+                      )}
                     </div>
                   )}
                 </div>
@@ -256,20 +307,14 @@ export function ArticleDetailModal({ article, onClose, isAdmin }: ArticleDetailM
                             URL 직접 입력
                           </button>
                           <button
-                            onClick={() => {
-                              extractThumbnail(article.id);
-                              setShowThumbnailMenu(false);
-                            }}
+                            onClick={handleExtract}
                             className="w-full flex items-center gap-2 px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
                           >
                             <Search className="w-4 h-4" />
                             원본에서 추출
                           </button>
                           <button
-                            onClick={() => {
-                              generateThumbnail(article.id);
-                              setShowThumbnailMenu(false);
-                            }}
+                            onClick={handleGenerateThumbnail}
                             className="w-full flex items-center gap-2 px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
                           >
                             <Wand2 className="w-4 h-4" />

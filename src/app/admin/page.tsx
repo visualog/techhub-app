@@ -132,6 +132,19 @@ export default function AdminPage() {
         }
     };
 
+    const handleArticleUpdate = (updatedFields: Partial<Article>) => {
+        if (!selectedArticle) return;
+
+        // Update selected article
+        const newSelected = { ...selectedArticle, ...updatedFields };
+        setSelectedArticle(newSelected);
+
+        // Update list
+        setPendingArticles(prev => prev.map(a =>
+            a.id === selectedArticle.id ? { ...a, ...updatedFields } : a
+        ));
+    };
+
     if (!mounted || loading || isLoadingArticles) {
         return <div className="p-8 text-center">Loading admin dashboard...</div>;
     }
@@ -191,6 +204,7 @@ export default function AdminPage() {
                     article={selectedArticle}
                     onClose={() => setSelectedArticle(null)}
                     isAdmin={true}
+                    onUpdate={handleArticleUpdate}
                 />
             )}
         </div>

@@ -12,6 +12,7 @@ export interface Article {
   bookmarked?: boolean;
   isVideo?: boolean;
   status?: 'pending' | 'published' | 'rejected';
+  originalTitle?: string;
 }
 
 export const mockArticles: Article[] = [
