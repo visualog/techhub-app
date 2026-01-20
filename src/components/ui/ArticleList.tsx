@@ -50,7 +50,7 @@ export function ArticleList({ articles, onArticleClick, onTagClick, viewMode = '
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
           {uniqueArticles.length > 0 ? (
             uniqueArticles.map((article, index) => (
-              <div key={article.link} className="break-inside-avoid mb-6">
+              <div key={article.link} className="break-inside-avoid">
                 <ArticleCard
                   article={article}
                   onArticleClick={onArticleClick}

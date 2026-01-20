@@ -1,4 +1,5 @@
 import React from 'react';
+import { Typography } from './Typography';
 
 interface ArticleMetaProps {
     source: string;
@@ -64,10 +65,14 @@ export const ArticleMeta = ({ source, date }: ArticleMetaProps) => {
     const formattedDate = formatRelativeDate(date);
 
     return (
-        <div className="flex justify-start items-center text-xs font-normal text-neutral-500 dark:text-neutral-400 mb-2">
-            <span>{source}</span>
-            <span className="mx-2 opacity-50">|</span>
-            <span suppressHydrationWarning>{formattedDate}</span>
+        <div className="flex justify-start items-center">
+            <Typography variant="label-sm" as="span" className="text-zinc-500 dark:text-zinc-400">
+                {source}
+            </Typography>
+            <span className="mx-2 opacity-50 text-zinc-500 dark:text-zinc-400">|</span>
+            <Typography variant="caption" as="span" className="text-zinc-500 dark:text-zinc-400" suppressHydrationWarning>
+                {formattedDate}
+            </Typography>
         </div>
     );
 };

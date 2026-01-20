@@ -18,7 +18,7 @@ export const TagChip = ({ label, onClick, variant = 'default', className }: TagC
 
     const variants = {
         primary: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-        default: `bg-gray-100 text-gray-600 dark:bg-neutral-800 dark:text-gray-400 ${onClick
+        default: `bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400 ${onClick
             ? 'cursor-pointer hover:bg-blue-100 hover:text-blue-700 dark:hover:bg-blue-900/30 dark:hover:text-blue-300'
             : ''
             }`

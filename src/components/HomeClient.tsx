@@ -7,6 +7,7 @@ import { ViewToggle, ViewMode } from '@/components/ui/ViewToggle';
 import { useRouter, useSearchParams } from "next/navigation";
 import { Article } from '@/data/mock-articles';
 import { ArticleDetailModal } from '@/components/ui/ArticleDetailModal';
+import { Typography } from '@/components/ui/Typography';
 
 interface HomeClientProps {
     articles: Article[];
@@ -43,9 +44,9 @@ export function HomeClient({ articles, categoryName }: HomeClientProps) {
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-2">
                         <div className="flex items-center justify-between">
-                            <h1 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">
+                            <Typography variant="heading-xl" as="h1" className="text-zinc-900 dark:text-white">
                                 {categoryName === "전체 보기" ? "Latest Articles" : categoryName}
-                            </h1>
+                            </Typography>
                             <ViewToggle viewMode={viewMode} onViewModeChange={setViewMode} />
                         </div>
                     </div>

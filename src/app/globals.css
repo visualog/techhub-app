@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -37,8 +38,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --font-sans-display: "SF Pro Display", system-ui, -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", sans-serif;
+  --font-sans-text: "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", sans-serif;
 
   @keyframes accordion-down {
     from {
@@ -165,6 +166,97 @@
     visibility: hidden !important;
     pointer-events: none !important;
   }
+}
+
+@utility display-xl {
+  font-size: 64px;
+  line-height: 1.1;
+  font-weight: 600;
+  font-family: var(--font-sans-display);
+}
+
+@utility display-lg {
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 600;
+  font-family: var(--font-sans-display);
+}
+
+@utility heading-xl {
+  font-size: 32px;
+  line-height: 1.25;
+  font-weight: 600;
+  font-family: var(--font-sans-display);
+}
+
+@utility heading-lg {
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 600;
+  font-family: var(--font-sans-display);
+}
+
+@utility heading-md {
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 600;
+  font-family: var(--font-sans-display);
+}
+
+@utility heading-sm {
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 600;
+  font-family: var(--font-sans-display);
+}
+
+@utility body-lg {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: var(--font-sans-text);
+}
+
+@utility body-md {
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: var(--font-sans-text);
+}
+
+@utility body-sm {
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: var(--font-sans-text);
+}
+
+@utility label-md {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 600;
+  font-family: var(--font-sans-text);
+}
+
+@utility label-sm {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  font-family: var(--font-sans-text);
+}
+
+@utility caption {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+  font-family: var(--font-sans-text);
+}
+
+@utility micro {
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 400;
+  font-family: var(--font-sans-text);
 }
 
 @utility scrollbar-hide {

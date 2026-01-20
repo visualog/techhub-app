@@ -18,21 +18,23 @@ export function AdminSidebar() {
     ];
 
     return (
-        <aside className="w-full md:w-64 p-8 border-b md:border-b-0 border-neutral-200 dark:border-neutral-800 md:sticky md:top-16 md:h-[calc(100vh-4rem)]">
-            <h2 className="hidden">Admin Menu</h2>
-            <nav>
-                <ul className="flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible space-y-0 md:space-y-0">
-                    {menuItems.map((item) => (
-                        <li key={item.href} className="flex-shrink-0">
-                            <NavItem
-                                href={item.href}
-                                label={item.name}
-                                isActive={pathname === item.href}
-                            />
-                        </li>
-                    ))}
-                </ul>
-            </nav>
+        <aside className="w-64 border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col">
+            <div className="p-6 border-b border-zinc-100 dark:border-zinc-800">
+                <h2 className="hidden">Admin Menu</h2>
+                <nav>
+                    <ul className="flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible space-y-0 md:space-y-0">
+                        {menuItems.map((item) => (
+                            <li key={item.href} className="flex-shrink-0">
+                                <NavItem
+                                    href={item.href}
+                                    label={item.name}
+                                    isActive={pathname === item.href}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
         </aside>
     );
 }

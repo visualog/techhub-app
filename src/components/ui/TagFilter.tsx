@@ -51,7 +51,7 @@ export function TagFilter({ className }: TagFilterProps) {
     }, [tagsToDisplay]);
 
     return (
-        <div className={cn("w-full min-w-0 flex items-center gap-2 mb-2", className)}>
+        <div className={cn("w-full min-w-0 flex items-center gap-2", className)}>
             <Button
                 variant={selectedTag ? "outline" : "default"}
                 size="sm"
@@ -83,7 +83,7 @@ export function TagFilter({ className }: TagFilterProps) {
                             "rounded-full whitespace-nowrap transition-all border-0 shadow-none h-6 text-xs font-normal flex-shrink-0",
                             selectedTag === tag
                                 ? "bg-blue-500 hover:bg-blue-600 text-white"
-                                : "text-gray-700 dark:text-gray-300 bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                                : "text-zinc-700 dark:text-zinc-300 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700"
                         )}
                     >
                         {tag}

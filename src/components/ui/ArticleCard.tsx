@@ -9,6 +9,7 @@ import { BookmarkButton } from "./bookmark-button";
 
 import { useUI } from "@/context/UIContext";
 import { Loader2 } from "lucide-react";
+import { Typography } from "./Typography";
 
 interface ArticleCardProps {
   article: Article;
@@ -65,15 +66,15 @@ export function ArticleCard({ article, onArticleClick, priority = false, onTagCl
             priority={priority}
           />
 
-          <div className="p-4 flex flex-col flex-grow">
+          <div className="p-4 flex flex-col flex-grow gap-2">
 
             <ArticleMeta source={article.source} date={article.pubDate} />
 
-            <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-white leading-[24px] tracking-tight">
+            <Typography variant="heading-sm" as="h3" className="text-zinc-900 dark:text-white">
               {article.title}
-            </h3>
+            </Typography>
 
-            <div className="flex flex-wrap gap-2 mt-4 relative z-20">
+            <div className="flex flex-wrap gap-1 mt-auto relative z-20">
               <TagChip
                 label={article.category}
                 variant="primary"

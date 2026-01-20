@@ -31,7 +31,7 @@ export function Sidebar() {
   const currentCategory = pathname === '/' ? (searchParams.get('category') || 'all') : null;
 
   return (
-    <aside className="w-full md:w-64 p-8 border-b md:border-b-0 border-neutral-200 dark:border-neutral-800 md:sticky md:top-16 md:h-[calc(100vh-4rem)]">
+    <aside className="w-full md:w-64 p-8 border-b md:border-b-0 border-zinc-200 dark:border-zinc-800 md:sticky md:top-16 md:h-[calc(100vh-4rem)]">
       <h2 className="hidden">Categories</h2>
       <nav>
         <ul className="flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible">
