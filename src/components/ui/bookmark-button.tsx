@@ -16,8 +16,8 @@ export const BookmarkButton = ({ isBookmarked, onClick, className }: BookmarkBut
         <button
             onClick={onClick}
             className={`p-2 rounded-full bg-white/50 dark:bg-neutral-700/50 backdrop-blur-md transition-all duration-200 cursor-pointer ${isBookmarked
-                    ? 'text-indigo-500 opacity-100'
-                    : 'text-neutral-400 hover:text-indigo-400 opacity-0 group-hover:opacity-100'
+                    ? 'text-blue-500 opacity-100'
+                    : 'text-neutral-400 hover:text-blue-400 opacity-0 group-hover:opacity-100'
                 } ${className || ''}`}
             aria-label={isBookmarked ? "북마크 해제" : "북마크 추가"}
         >

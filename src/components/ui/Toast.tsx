@@ -13,13 +13,13 @@ export function Toast({ message, type, onClose }: ToastProps) {
     const styles = {
         success: 'bg-white dark:bg-zinc-800 border-l-4 border-green-500 text-zinc-900 dark:text-zinc-100',
         error: 'bg-white dark:bg-zinc-800 border-l-4 border-red-500 text-zinc-900 dark:text-zinc-100',
-        info: 'bg-white dark:bg-zinc-800 border-l-4 border-indigo-500 text-zinc-900 dark:text-zinc-100',
+        info: 'bg-white dark:bg-zinc-800 border-l-4 border-blue-500 text-zinc-900 dark:text-zinc-100',
     };
 
     const icons = {
         success: <CheckCircle className="w-5 h-5 text-green-500" />,
         error: <AlertCircle className="w-5 h-5 text-red-500" />,
-        info: <Info className="w-5 h-5 text-indigo-500" />,
+        info: <Info className="w-5 h-5 text-blue-500" />,
     };
 
     return (

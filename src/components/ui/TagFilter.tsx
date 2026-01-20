@@ -82,7 +82,7 @@ export function TagFilter({ className }: TagFilterProps) {
                         className={cn(
                             "rounded-full whitespace-nowrap transition-all border-0 shadow-none h-6 text-xs font-normal flex-shrink-0",
                             selectedTag === tag
-                                ? "bg-indigo-500 hover:bg-indigo-600 text-white"
+                                ? "bg-blue-500 hover:bg-blue-600 text-white"
                                 : "text-gray-700 dark:text-gray-300 bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-800 dark:hover:bg-neutral-700"
                         )}
                     >

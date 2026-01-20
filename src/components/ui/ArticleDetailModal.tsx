@@ -150,14 +150,14 @@ export function ArticleDetailModal({ article, onClose, isAdmin, onUpdate }: Arti
 
             {(isGeneratingThumbnail || isExtracting) && (
               <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex flex-col items-center justify-center text-white z-20">
-                <Loader2 className="w-10 h-10 animate-spin mb-3 text-indigo-400" />
+                <Loader2 className="w-10 h-10 animate-spin mb-3 text-blue-400" />
                 <span className="font-semibold text-lg">{isExtracting ? '이미지 추출 중...' : 'AI 썸네일 생성 중...'}</span>
                 <span className="text-sm opacity-80 mt-1">창을 닫아도 작업은 계속됩니다.</span>
               </div>
             )}
 
             <div className="absolute bottom-4 left-6 right-6">
-              <span className="inline-block px-2 py-1 mb-2 text-xs font-semibold text-white bg-indigo-500/80 backdrop-blur-md rounded-md">
+              <span className="inline-block px-2 py-1 mb-2 text-xs font-semibold text-white bg-blue-500/80 backdrop-blur-md rounded-md">
                 {article.category || 'Tech'}
               </span>
               <h2 className="text-2xl md:text-3xl font-bold text-white shadow-sm leading-tight">
@@ -171,12 +171,12 @@ export function ArticleDetailModal({ article, onClose, isAdmin, onUpdate }: Arti
           {!article.image && (
             <div className="mb-6 relative">
               {(isGeneratingThumbnail || isExtracting) && (
-                <div className="absolute inset-0 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm flex flex-col items-center justify-center text-indigo-600 z-20 py-10">
+                <div className="absolute inset-0 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm flex flex-col items-center justify-center text-blue-600 z-20 py-10">
                   <Loader2 className="w-8 h-8 animate-spin mb-2" />
                   <span className="font-semibold">{isExtracting ? '이미지 추출 중...' : '썸네일 생성 중...'}</span>
                 </div>
               )}
-              <span className="inline-block px-2 py-1 mb-2 text-xs font-semibold text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 dark:text-indigo-300 rounded-md">
+              <span className="inline-block px-2 py-1 mb-2 text-xs font-semibold text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-300 rounded-md">
                 {article.category || 'Tech'}
               </span>
               <h2 className="text-2xl font-bold mb-4 text-zinc-900 dark:text-white leading-tight">
@@ -268,7 +268,7 @@ export function ArticleDetailModal({ article, onClose, isAdmin, onUpdate }: Arti
                     variant="outline"
                     disabled={isGeneratingThumbnail || isExtracting}
                     onClick={() => setShowThumbnailMenu(!showThumbnailMenu)}
-                    className="gap-2 border-indigo-200 text-indigo-700 hover:bg-indigo-50 dark:border-indigo-800 dark:text-indigo-300 dark:hover:bg-indigo-900/50"
+                    className="gap-2 border-blue-200 text-blue-700 hover:bg-blue-50 dark:border-blue-800 dark:text-blue-300 dark:hover:bg-blue-900/50"
                   >
                     {(isGeneratingThumbnail || isExtracting) ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImagePlus className="w-4 h-4" />}
                     썸네일
@@ -284,7 +284,7 @@ export function ArticleDetailModal({ article, onClose, isAdmin, onUpdate }: Arti
                             placeholder="이미지 URL 입력"
                             value={imageUrl}
                             onChange={(e) => setImageUrl(e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-md bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-md bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                             autoFocus
                             onKeyDown={(e) => e.key === 'Enter' && handleUrlSubmit()}
                           />
@@ -336,7 +336,7 @@ export function ArticleDetailModal({ article, onClose, isAdmin, onUpdate }: Arti
               닫기
             </Button>
             <Button
-              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20"
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20"
               asChild
             >
               <Link href={article.link} target="_blank" rel="noopener noreferrer">

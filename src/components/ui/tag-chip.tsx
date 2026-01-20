@@ -17,9 +17,9 @@ export const TagChip = ({ label, onClick, variant = 'default', className }: TagC
     const baseStyles = "inline-flex items-center px-2.5 rounded-full text-xs font-normal transition-colors h-6";
 
     const variants = {
-        primary: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
+        primary: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
         default: `bg-gray-100 text-gray-600 dark:bg-neutral-800 dark:text-gray-400 ${onClick
-            ? 'cursor-pointer hover:bg-indigo-100 hover:text-indigo-700 dark:hover:bg-indigo-900/30 dark:hover:text-indigo-300'
+            ? 'cursor-pointer hover:bg-blue-100 hover:text-blue-700 dark:hover:bg-blue-900/30 dark:hover:text-blue-300'
             : ''
             }`
     };

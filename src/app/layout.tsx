@@ -8,7 +8,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { UIProvider } from "@/context/UIContext";
 
 export const metadata: Metadata = {
-  title: "TechHub",
+  title: "TechBird",
   description: "국내 기술·디자인·트렌드 커뮤니티 콘텐츠 통합 큐레이션 플랫폼",
 };
 

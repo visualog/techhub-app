@@ -9,9 +9,15 @@ export function Logo({ className }: LogoProps) {
     return (
         <Link
             href="/"
-            className={cn("text-xl font-bold text-neutral-900 dark:text-white", className)}
+            className={cn("flex items-center gap-1 font-bold text-neutral-900 dark:text-white", className)}
+            style={{ fontSize: '8px' }}
         >
-            TechHub
+            <img
+                src="/TechBird.svg"
+                alt="TechBird"
+                style={{ height: '32px' }}
+                className="dark:invert"
+            />
         </Link>
     );
 }

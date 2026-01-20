@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { ArticleList } from "@/components/ArticleList";
-import { TagFilter } from '@/components/TagFilter';
-import { ViewToggle, ViewMode } from '@/components/ViewToggle';
+import { ArticleList } from "@/components/ui/ArticleList";
+import { TagFilter } from '@/components/ui/TagFilter';
+import { ViewToggle, ViewMode } from '@/components/ui/ViewToggle';
 import { useRouter, useSearchParams } from "next/navigation";
 import { Article } from '@/data/mock-articles';
 import { ArticleDetailModal } from '@/components/ui/ArticleDetailModal';

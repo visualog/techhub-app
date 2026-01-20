@@ -23,7 +23,7 @@ export function FluidBackground({ className }: { className?: string }) {
             <div className="w-full h-full relative" style={{ filter: 'url(#goo)' }}>
                 {/* Moving Blobs */}
                 <motion.div
-                    className="absolute top-[-10%] left-[-10%] w-[40%] h-[60%] bg-purple-400/30 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+                    className="absolute top-[-10%] left-[-10%] w-[40%] h-[60%] bg-cyan-400/20 rounded-full mix-blend-multiply filter blur-xl opacity-70"
                     animate={{
                         x: [0, 100, -50, 0],
                         y: [0, 50, 100, 0],

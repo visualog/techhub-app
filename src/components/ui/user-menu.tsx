@@ -30,7 +30,7 @@ export function UserMenu({ user, onLogin, onLogout, isAdmin }: UserMenuProps) {
     return (
         <DropdownMenu
             trigger={
-                <button className="flex items-center justify-center w-10 h-10 rounded-full overflow-hidden border border-transparent hover:border-neutral-200 dark:hover:border-neutral-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <button className="flex items-center justify-center w-10 h-10 rounded-full overflow-hidden border border-transparent hover:border-neutral-200 dark:hover:border-neutral-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     {user.photoURL ? (
                         <Image
                             src={user.photoURL}

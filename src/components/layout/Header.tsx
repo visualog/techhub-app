@@ -46,7 +46,7 @@ export function Header() {
       {/* Scroll Progress Bar */}
       <div
         ref={progressRef}
-        className="absolute bottom-0 left-0 right-0 h-[2px] bg-indigo-600 dark:bg-indigo-400 origin-left"
+        className="absolute bottom-0 left-0 right-0 h-[2px] bg-blue-600 dark:bg-blue-400 origin-left"
         style={{ transform: 'scaleX(0)' }}
       />
     </header>

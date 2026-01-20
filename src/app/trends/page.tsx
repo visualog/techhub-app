@@ -61,8 +61,8 @@ export default function TrendPage() {
 
                     <div className="relative z-10">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="p-2 bg-indigo-500/10 rounded-lg">
-                                <Zap className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                            <div className="p-2 bg-blue-500/10 rounded-lg">
+                                <Zap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                             </div>
                             <h2 className="text-xl font-bold text-neutral-800 dark:text-white">AI 트렌드 브리핑</h2>
                         </div>

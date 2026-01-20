@@ -192,7 +192,7 @@ export default function AdminPage() {
                 <button
                     onClick={() => setActiveTab('pending')}
                     className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'pending'
-                            ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
+                            ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                             : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
                         }`}
                 >
@@ -206,7 +206,7 @@ export default function AdminPage() {
                 <button
                     onClick={() => setActiveTab('no-summary')}
                     className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'no-summary'
-                            ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
+                            ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                             : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
                         }`}
                 >
@@ -234,7 +234,7 @@ export default function AdminPage() {
                     <Button
                         onClick={handleBulkSummarize}
                         disabled={isBulkProcessing}
-                        className="bg-indigo-600 hover:bg-indigo-700 text-white"
+                        className="bg-blue-600 hover:bg-blue-700 text-white"
                     >
                         {isBulkProcessing ? (
                             <>

@@ -8,12 +8,12 @@ export default function NotFound() {
     return (
         <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-white dark:bg-black">
             {/* Background Gradients */}
-            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-pulse" />
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-pulse delay-1000" />
+            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-pulse" />
+            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-pulse delay-1000" />
 
             {/* Glassmorphism Card */}
             <div className="relative z-10 flex flex-col items-center max-w-md w-full p-8 mx-4 text-center rounded-3xl border border-white/20 bg-white/10 dark:bg-black/10 backdrop-blur-xl shadow-2xl">
-                <div className="w-24 h-24 mb-6 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-lg transform -rotate-6">
+                <div className="w-24 h-24 mb-6 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg transform -rotate-6">
                     <span className="text-4xl font-bold text-white">404</span>
                 </div>
 
