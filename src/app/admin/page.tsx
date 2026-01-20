@@ -186,19 +186,21 @@ export default function AdminPage() {
     }
 
     return (
-        <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="w-full">
+            <h1 className="text-2xl font-bold mb-6">수집 게시물</h1>
+
             {/* Tab Navigation */}
-            <div className="flex gap-2 mb-6 border-b border-gray-200 dark:border-gray-700">
+            <div className="flex gap-2 mb-6 border-b border-zinc-200 dark:border-zinc-800">
                 <button
                     onClick={() => setActiveTab('pending')}
                     className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'pending'
-                            ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                            : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+                        ? 'border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100'
+                        : 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
                         }`}
                 >
                     승인 대기
                     {pendingArticles.length > 0 && (
-                        <span className="ml-2 px-2 py-0.5 text-xs bg-orange-100 text-orange-800 rounded-full">
+                        <span className="ml-2 px-2 py-0.5 text-xs bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200 rounded-full font-normal">
                             {pendingArticles.length}
                         </span>
                     )}
@@ -206,30 +208,21 @@ export default function AdminPage() {
                 <button
                     onClick={() => setActiveTab('no-summary')}
                     className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'no-summary'
-                            ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                            : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+                        ? 'border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100'
+                        : 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
                         }`}
                 >
                     요약 없음
                     {noSummaryArticles.length > 0 && (
-                        <span className="ml-2 px-2 py-0.5 text-xs bg-yellow-100 text-yellow-800 rounded-full">
+                        <span className="ml-2 px-2 py-0.5 text-xs bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200 rounded-full font-normal">
                             {noSummaryArticles.length}
                         </span>
                     )}
                 </button>
             </div>
 
-            {/* Header with Bulk Action */}
-            <div className="flex items-center justify-between mb-6">
-                <h1 className="text-2xl font-bold flex items-center gap-3">
-                    {activeTab === 'pending' ? '승인 대기 게시물' : '요약 없는 게시물'}
-                    {currentArticles.length > 0 && (
-                        <span className="inline-flex items-center justify-center px-3 py-1 text-sm font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 rounded-full">
-                            {currentArticles.length}
-                        </span>
-                    )}
-                </h1>
-
+            {/* Bulk Action Button (only if no title) */}
+            <div className="flex justify-end mb-6">
                 {activeTab === 'no-summary' && noSummaryArticles.length > 0 && (
                     <Button
                         onClick={handleBulkSummarize}
