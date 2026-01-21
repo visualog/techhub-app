@@ -8,6 +8,8 @@ import { ArticleCard } from "@/components/ui/ArticleCard";
 import { Button } from "@/components/ui/button";
 // import { ArticleDetailModal } from "@/components/ui/ArticleDetailModal";
 import { Loader2, Sparkles } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ArticleListSkeleton } from "@/components/ui/ArticleListSkeleton";
 import dynamic from "next/dynamic";
 import useSWR from 'swr';
 
@@ -257,8 +259,29 @@ export default function AdminPage() {
 
     const currentArticles = activeTab === 'pending' ? pendingArticles : noSummaryArticles;
 
-    if (!mounted || loading || isLoadingArticles) {
-        return <div className="p-8 text-center">Loading admin dashboard...</div>;
+    // Initial Loading / Auth Check Skeleton
+    if (!mounted || loading) {
+        return (
+            <div className="w-full space-y-8 animate-pulse">
+                {/* Header Skeleton */}
+                <div className="flex justify-between items-center mb-10">
+                    <Skeleton className="h-8 w-32 " />
+                    <Skeleton className="h-10 w-28 " />
+                </div>
+
+                {/* Info Text Skeleton */}
+                <div className="h-4 w-64 mb-6 rounded" />
+
+                {/* Tabs Skeleton */}
+                <div className="flex gap-4 mb-6 border-b border-zinc-200 dark:border-zinc-800 pb-2">
+                    <Skeleton className="h-8 w-24 " />
+                    <Skeleton className="h-8 w-24 " />
+                </div>
+
+                {/* Articles Grid Skeleton */}
+                <ArticleListSkeleton />
+            </div>
+        );
     }
 
     return (
@@ -371,7 +394,9 @@ export default function AdminPage() {
             </div>
 
             {/* Articles Grid */}
-            {currentArticles.length === 0 ? (
+            {isLoadingArticles ? (
+                <ArticleListSkeleton />
+            ) : currentArticles.length === 0 ? (
                 <div className="text-center py-12 text-gray-500">
                     <p>{activeTab === 'pending' ? '현재 승인 대기 중인 게시물이 없습니다.' : '요약이 없는 게시물이 없습니다.'}</p>
                 </div>
