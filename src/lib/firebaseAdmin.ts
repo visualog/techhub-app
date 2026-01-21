@@ -49,7 +49,14 @@ let bucket: any = null;
 
 if (admin.apps.length) {
   try {
-    bucket = admin.storage().bucket();
+    const bucketName = process.env.FIREBASE_STORAGE_BUCKET || process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET;
+    if (bucketName) {
+      bucket = admin.storage().bucket(bucketName);
+    } else {
+      // Fallback to default bucket only if it might exist, otherwise avoid calling to prevent throw
+      // In some environments, admin.storage().bucket() with no args throws if default bucket is not set.
+      bucket = admin.storage().bucket();
+    }
   } catch (error) {
     console.warn("Firebase Storage bucket initialization failed. Images might not save.", error);
     bucket = null;

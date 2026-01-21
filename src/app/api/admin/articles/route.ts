@@ -17,6 +17,7 @@ export async function GET() {
         // but sort in memory to be safe.
         const snapshot = await db.collection("articles")
             .where("status", "==", "pending")
+            .limit(100)
             .get();
 
         const articles: Article[] = snapshot.docs.map((doc) => {

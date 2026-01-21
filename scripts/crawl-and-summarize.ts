@@ -37,6 +37,19 @@ async function main() {
     process.exit(1);
   }
   console.log('Starting crawl and summarize process...');
+  const startTime = Date.now();
+  let successCount = 0;
+  let failCount = 0;
+
+  // Set status to running
+  try {
+    await db!.collection('metadata').doc('collection').set({
+      status: 'running',
+      startedAt: admin.firestore.Timestamp.now(),
+    }, { merge: true });
+  } catch (e) {
+    console.error('Failed to set running status:', e);
+  }
 
   const rssParser = new Parser({
     customFields: {
@@ -401,9 +414,11 @@ OUTPUT ONLY THE PROMPT IN ENGLISH.`;
       };
 
       await docRef.set(dataToSave, { merge: true });
+      successCount++;
       log.info(`- Successfully saved article: ${article.title}`);
     },
     failedRequestHandler({ request, log }) {
+      failCount++;
       log.error(`Request failed: ${request.url}`);
     },
   });
@@ -411,10 +426,36 @@ OUTPUT ONLY THE PROMPT IN ENGLISH.`;
   console.log(`--- CRAWLER RUNNING WITH ${articleMetadatas.length} URLs ---`);
   await crawler.run(articleMetadatas.map(meta => ({ url: meta.url, userData: meta })));
 
-  console.log('Crawl and summarize process finished.');
+  // Save collection metadata
+  try {
+    const durationMs = Date.now() - startTime;
+    console.log('Saving collection metadata...');
+    await db!.collection('metadata').doc('collection').set({
+      lastRunAt: admin.firestore.Timestamp.now(),
+      articlesFound: articleMetadatas.length,
+      successCount,
+      failCount,
+      durationMs,
+      status: 'success'
+    }, { merge: true });
+    console.log('Collection metadata saved successfully.');
+  } catch (error) {
+    console.error('Failed to save collection metadata:', error);
+  }
 }
 
-main().catch((err) => {
+main().catch(async (err) => {
   console.error(err);
+  try {
+    if (db) {
+      await db.collection('metadata').doc('collection').set({
+        status: 'error',
+        lastError: err.message || String(err),
+        failedAt: admin.firestore.Timestamp.now(),
+      }, { merge: true });
+    }
+  } catch (e) {
+    console.error('Failed to save error status:', e);
+  }
   process.exit(1);
 });

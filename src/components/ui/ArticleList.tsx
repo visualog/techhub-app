@@ -33,13 +33,17 @@ export function ArticleList({ articles, onArticleClick, onTagClick, viewMode = '
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {uniqueArticles.length > 0 ? (
             uniqueArticles.map((article, index) => (
-              <ArticleCard
+              <div
                 key={article.link}
-                article={article}
-                onArticleClick={onArticleClick}
-                priority={index < 2}
-                onTagClick={onTagClick}
-              />
+                className="[content-visibility:auto] [contain-intrinsic-size:500px]"
+              >
+                <ArticleCard
+                  article={article}
+                  onArticleClick={onArticleClick}
+                  priority={index < 2}
+                  onTagClick={onTagClick}
+                />
+              </div>
             ))
           ) : (
             <EmptyState searchTerm={searchTerm} currentTag={currentTag} />
@@ -50,7 +54,10 @@ export function ArticleList({ articles, onArticleClick, onTagClick, viewMode = '
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
           {uniqueArticles.length > 0 ? (
             uniqueArticles.map((article, index) => (
-              <div key={article.link} className="break-inside-avoid">
+              <div
+                key={article.link}
+                className="break-inside-avoid [content-visibility:auto] [contain-intrinsic-size:500px]"
+              >
                 <ArticleCard
                   article={article}
                   onArticleClick={onArticleClick}

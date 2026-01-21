@@ -1,13 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { Article } from "@/data/mock-articles";
 import { ArticleCard } from "@/components/ui/ArticleCard";
 import { Button } from "@/components/ui/button";
-import { ArticleDetailModal } from "@/components/ui/ArticleDetailModal";
+// import { ArticleDetailModal } from "@/components/ui/ArticleDetailModal";
 import { Loader2, Sparkles } from "lucide-react";
+import dynamic from "next/dynamic";
+import useSWR from 'swr';
+
+const ArticleDetailModal = dynamic(() => import("@/components/ui/ArticleDetailModal").then(mod => mod.ArticleDetailModal), {
+    loading: () => null,
+    ssr: false
+});
 
 type TabType = 'pending' | 'no-summary';
 
@@ -21,6 +28,23 @@ export default function AdminPage() {
     const [processingId, setProcessingId] = useState<string | null>(null);
     const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
     const [mounted, setMounted] = useState(false);
+    const [isCollecting, setIsCollecting] = useState(false);
+
+    // SWR Fetcher
+    const fetcher = (url: string) => fetch(url).then(res => res.json());
+
+    // SWR Hook for Collection Status
+    const { data: collectionStatus, mutate: mutateCollectionStatus } = useSWR<{
+        lastRunAt: string | null;
+        articlesFound?: number;
+        successCount?: number;
+        failCount?: number;
+        durationMs?: number;
+        status: string
+    }>('/api/admin/collection-status', fetcher, {
+        refreshInterval: (data) => (data?.status === 'running' ? 5000 : 30000), // Poll faster when running, slower when idle
+        revalidateOnFocus: true
+    });
 
     // Bulk summarize state
     const [isBulkProcessing, setIsBulkProcessing] = useState(false);
@@ -36,9 +60,61 @@ export default function AdminPage() {
                 // router.push("/");
             } else {
                 fetchArticles();
+                // fetchCollectionStatus(); // Handle by SWR automatically
             }
         }
     }, [user, isAdmin, loading, mounted, activeTab]);
+
+    // Refresh articles once when collection finishes (Watch status change)
+    // We use a ref to track previous status to detect edge 'running' -> 'success'
+    const prevStatusRef = useState<string | undefined>(undefined);
+    // Actually simpler: just typical effect with check
+    useEffect(() => {
+        if (collectionStatus?.status === 'success') {
+            // Check if it was running recently or just refreshing? 
+            // For now, simple check is fine, usage is low.
+            // But to avoid double fetch on initial load if already success:
+            // Let's rely on manual refresh mostly, but auto-refresh is nice.
+            // A simple refinement: check if lastRunAt changed? 
+            // Minimal: just fetch if success. 
+            // fetchArticles(); 
+            // IMPORTANT: If we fetch every time SWR validates 'success', we loop if we aren't careful.
+            // But SWR validates every 30s. Fetching articles every 30s is acceptable if status is success.
+            // However, better to only fetch if status transitions from 'running' -> 'success'.
+        }
+    }, [collectionStatus?.status]);
+
+    // Better Approach for Auto-Refresh on Finish: 
+    // Store previous status in a ref
+    const prevStatus = useRef<string>(collectionStatus?.status || '');
+    useEffect(() => {
+        if (prevStatus.current === 'running' && collectionStatus?.status === 'success') {
+            fetchArticles();
+            alert("수집이 완료되었습니다!");
+        }
+        prevStatus.current = collectionStatus?.status || '';
+    }, [collectionStatus?.status]);
+
+    const handleCollect = async () => {
+        if (isCollecting || collectionStatus?.status === 'running') return;
+
+        setIsCollecting(true);
+        try {
+            // Optimistic update or just wait
+            const res = await fetch('/api/admin/collect', { method: 'POST' });
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.error || 'Failed to start collection');
+            }
+            alert("수집을 시작했습니다. 잠시 후 데이터가 자동으로 업데이트됩니다.");
+            mutateCollectionStatus(); // Trigger immediate re-fetch
+        } catch (error) {
+            console.error("Error starting collection:", error);
+            alert("수집 실패: " + (error as Error).message);
+        } finally {
+            setIsCollecting(false);
+        }
+    };
 
     const fetchArticles = async () => {
         setIsLoadingArticles(true);
@@ -187,7 +263,57 @@ export default function AdminPage() {
 
     return (
         <div className="w-full">
-            <h1 className="text-2xl font-bold mb-6">수집 게시물</h1>
+            <div className="mb-10">
+                <div className="flex items-center justify-between mb-4">
+                    <h1 className="text-2xl font-bold">수집 게시물</h1>
+                    <Button
+                        onClick={handleCollect}
+                        disabled={isCollecting || collectionStatus?.status === 'running'}
+                        className="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200"
+                    >
+                        {collectionStatus?.status === 'running' ? (
+                            <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                수집 중...
+                            </>
+                        ) : (
+                            '수집 시작'
+                        )}
+                    </Button>
+                </div>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-zinc-500 min-h-[1.5rem]">
+                    {collectionStatus?.lastRunAt ? (
+                        <>
+                            <span className="flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                최근 수집: {new Date(collectionStatus.lastRunAt).toLocaleString('ko-KR', {
+                                    year: 'numeric',
+                                    month: '2-digit',
+                                    day: '2-digit',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                })}
+                            </span>
+                            <span className="flex items-center gap-2 border-l border-zinc-200 dark:border-zinc-800 pl-4">
+                                총 <strong className="text-zinc-900 dark:text-zinc-100 font-medium">{collectionStatus.articlesFound || 0}</strong>개 발견
+                                {collectionStatus.successCount !== undefined && (
+                                    <span className="text-zinc-400">
+                                        (성공: <span className="text-zinc-700 dark:text-zinc-300">{collectionStatus.successCount}</span>,
+                                        실패: <span className="text-red-500/80">{collectionStatus.failCount || 0}</span>)
+                                    </span>
+                                )}
+                            </span>
+                            {collectionStatus.durationMs !== undefined && (
+                                <span className="flex items-center gap-2 border-l border-zinc-200 dark:border-zinc-800 pl-4">
+                                    소요 시간: <strong className="text-zinc-900 dark:text-zinc-100 font-medium">{(collectionStatus.durationMs / 1000).toFixed(1)}</strong>초
+                                </span>
+                            )}
+                        </>
+                    ) : (
+                        <span className="text-zinc-400 italic">표시할 수집 정보가 없습니다. (스크레이퍼 실행 대기 중)</span>
+                    )}
+                </div>
+            </div>
 
             {/* Tab Navigation */}
             <div className="flex gap-2 mb-6 border-b border-zinc-200 dark:border-zinc-800">
